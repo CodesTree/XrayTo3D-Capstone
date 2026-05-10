@@ -28,7 +28,7 @@ Do NOT create standalone `.py` scripts for pipeline steps — always use noteboo
 
 - **Spatial resampling**: 0.5mm isotropic
 - **HU bone window**: [-450, 1050]
-- **Orientation**: LAS (Left-Anterior-Superior)
+- **Orientation**: RAS (Right-Anterior-Superior)
 - **Target volume**: Config-driven — 128³ (local) / 512³ (HPC)
 - **DRR method**: DiffDRR (unified for healthy + fractured)
 - **Project layout**: Cookiecutter Data Science (`testproject/` package)
