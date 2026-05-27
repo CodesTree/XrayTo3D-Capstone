@@ -8,6 +8,7 @@ Capstone 2 — Chan Zheng Shao, Sunway University. Supervised by Assoc. Prof. Ts
 ### Goal
 
 Reconstruct 3D knee anatomy from bi-planar X-ray images. Compare two decoder approaches:
+
 1. **3D U-Net** — baseline from Lai's senior project (code in `references/01–10`)
 2. **INR** — novel contribution (approach TBD: NeRF-based, occupancy networks, SDF, etc.)
 
@@ -15,11 +16,11 @@ Both share the same encoder (ConvNeXtV2 + cross-attention fusion from Lai's pipe
 
 ### Evaluation Strategy
 
-| Dataset | Type | Evaluation | How |
-|---------|------|------------|-----|
-| VSD (healthy) | CT → DRR | Quantitative | Reconstruct from DRRs, compare against ground-truth CT |
-| Fractured (Ruikar) | CT → DRR | Quantitative | Same as VSD |
-| Regen (clinical) | Real X-rays | Qualitative | Visual assessment only (no 3D ground truth) |
+| Dataset            | Type        | Evaluation   | How                                                    |
+| ------------------ | ----------- | ------------ | ------------------------------------------------------ |
+| VSD (healthy)      | CT → DRR    | Quantitative | Reconstruct from DRRs, compare against ground-truth CT |
+| Fractured (Ruikar) | CT → DRR    | Quantitative | Same as VSD                                            |
+| Regen (clinical)   | Real X-rays | Qualitative  | Visual assessment only (no 3D ground truth)            |
 
 ### Reference Code (`references/`)
 
@@ -62,6 +63,7 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 ## Dataset Notes
 
 ### VSD (Healthy)
+
 - 11 normal subjects: 8 single-folder DICOM + 3 multi-folder merged (010, 015, 017)
 - Multi-folder subjects merged in `data/interim/merged_vsd/` before knee cropping
 - Scans are bilateral — use connected-component analysis to separate left/right legs
@@ -69,11 +71,13 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 - Output: `data/healthy/VSD.{id}/` per-case folders
 
 ### Fractured (Ruikar)
+
 - Case4 and Case10 excluded (scout images, 1 Z-slice each; MIN_Z_SLICES=10)
 - Already knee-region scans — no bilateral separation needed
 - Bimodal Z-spacing: 0.7mm (8 cases) and 3.0mm (6 cases)
 
 ### Regen (Clinical X-rays)
+
 - 30 patient folders with real bi-planar X-rays (.dcm) and annotations (.ann)
 - ~2 X-ray views per patient (AP + lateral)
 - No paired CT volumes — qualitative evaluation only
