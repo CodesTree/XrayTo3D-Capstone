@@ -62,9 +62,14 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 ## Dataset Notes
 
 ### VSD (Healthy)
-- Subject 010 excluded (scan too short, does not contain knee region)
+- 11 normal subjects: 8 single-folder DICOM + 3 multi-folder merged (010, 015, 017)
+- 20 z-prefix full-body CT subjects (z001–z066) — processed via `vsd_z_crop.ipynb`
+- Multi-folder subjects merged in `data/interim/merged_vsd/` before knee cropping
 - Scans are bilateral — use connected-component analysis to separate left/right legs
 - Knee crop margin: +-100mm around knee center
+- Output: `data/raw/healthy/VSD.{id}/` per-case folders
+- **Excluded (TKR)**: z050 Right and z063 Right have total knee replacements — severe metal
+  artifacts, unsuitable for training or testing. Their contralateral sides (Left) may still be usable.
 
 ### Fractured (Ruikar)
 - Case4 and Case10 excluded (scout images, 1 Z-slice each; MIN_Z_SLICES=10)
