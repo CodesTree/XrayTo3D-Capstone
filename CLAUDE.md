@@ -2,16 +2,28 @@
 
 ## Project
 
-3D Knee Reconstruction: Comparing **3D U-Net** vs **Implicit Neural Representation (INR)**.
+3D Knee Reconstruction: Comparing **3D U-Net** vs **V-Net**.
 Capstone 2 — Chan Zheng Shao, Sunway University. Supervised by Assoc. Prof. Ts. Dr Lee Yun Li.
 
 ### Goal
 
-Reconstruct 3D knee anatomy from bi-planar X-ray images. Compare two decoder approaches:
+Conduct a baseline comparison for 3D knee reconstruction from bi-planar X-ray images. Compare two decoder approaches:
 1. **3D U-Net** — baseline from Lai's senior project (code in `references/01–10`)
-2. **INR** — novel contribution (approach TBD: NeRF-based, occupancy networks, SDF, etc.)
+2. **V-Net** — second baseline decoder for comparison
 
 Both share the same encoder (ConvNeXtV2 + cross-attention fusion from Lai's pipeline).
+
+### Conditional Stretch Goal — Fracture-Aware Architecture
+
+If both baseline models (3D U-Net and V-Net) perform poorly at reconstructing fractured knee
+anatomy, the next step is to improve the architecture of whichever model handles fracture cases
+better, making it fracture-aware. This is **conditional** — only pursued if baseline results
+warrant it.
+
+**Training data considerations**: When designing training/evaluation splits for the baseline
+comparison, ensure balanced representation of healthy vs fractured cases to avoid underfitting
+on fracture patterns or overfitting on healthy anatomy. This is especially important if the
+conditional fracture-aware architecture is later needed.
 
 ### Evaluation Strategy
 
@@ -19,7 +31,7 @@ Both share the same encoder (ConvNeXtV2 + cross-attention fusion from Lai's pipe
 |---------|------|------------|-----|
 | VSD (healthy) | CT → DRR | Quantitative | Reconstruct from DRRs, compare against ground-truth CT |
 | Fractured (Ruikar) | CT → DRR | Quantitative | Same as VSD |
-| Regen (clinical) | Real X-rays | Qualitative | Visual assessment only (no 3D ground truth) |
+| Regen (clinical) | Real X-rays | Qualitative | Visual assessment by actual doctors (no 3D ground truth) |
 
 ### Reference Code (`references/`)
 
@@ -52,7 +64,7 @@ Do NOT create standalone `.py` scripts for pipeline steps — always use noteboo
 - **Spatial resampling**: 0.5mm isotropic
 - **HU bone window**: [-450, 1050]
 - **Orientation**: RAS (Right-Anterior-Superior)
-- **Target volume**: Config-driven — 128³ (local) / 512³ (HPC)
+- **Target volume**: 256³ for 3D volumes / 256×256 for 2D images — unified across local and HPC
 - **DRR method**: DiffDRR (unified for healthy + fractured)
 - **Project layout**: Cookiecutter Data Science (`testproject/` package)
 
