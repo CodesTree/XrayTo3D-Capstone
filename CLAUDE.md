@@ -14,6 +14,18 @@ Conduct a comparative baseline between **3D U-Net** and **V-Net** on 3D reconstr
 
 **Conditional stretch goal**: If the 3D U-Net or V-Net baselines perform poorly at reconstructing fracture-sensitive cases, tailor a custom architecture (building on U-Net or V-Net) targeted at fracture-aware 3D reconstruction. This is only in scope IF the baselines demonstrate poor fracture reconstruction — do not treat it as committed work.
 
+### Conditional Stretch Goal — Fracture-Aware Architecture
+
+If both baseline models (3D U-Net and V-Net) perform poorly at reconstructing fractured knee
+anatomy, the next step is to improve the architecture of whichever model handles fracture cases
+better, making it fracture-aware. This is **conditional** — only pursued if baseline results
+warrant it.
+
+**Training data considerations**: When designing training/evaluation splits for the baseline
+comparison, ensure balanced representation of healthy vs fractured cases to avoid underfitting
+on fracture patterns or overfitting on healthy anatomy. This is especially important if the
+conditional fracture-aware architecture is later needed.
+
 ### Evaluation Strategy
 
 | Dataset            | Type        | Evaluation   | How                                                    |
@@ -100,7 +112,7 @@ Do NOT use PowerShell syntax in HPC notebooks — use POSIX shell.
 - **Spatial resampling**: 0.5mm isotropic
 - **HU bone window**: [-450, 1050]
 - **Orientation**: RAS (Right-Anterior-Superior)
-- **Target volume**: Config-driven — 128³ (local) / 512³ (HPC)
+- **Target volume**: 256³ for 3D volumes / 256×256 for 2D images — unified across local and HPC
 - **DRR method**: DiffDRR (unified for healthy + fractured)
 - **Project layout**: Cookiecutter Data Science (`testproject/` package)
 
