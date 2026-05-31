@@ -1,0 +1,26 @@
+# DRR generation environment (DiffDRR) — KEEP SEPARATE from requirements.txt / HPC/requirements_hpc.txt
+#
+# Why separate: diffdrr 0.6.1 requires torchio 1.x, but the main project pins torchio==0.22.1
+# (used by the TotalSegmentator-based preprocessing notebooks). To avoid breaking that pipeline,
+# the DRR step runs in its own virtual environment built from this file.
+#
+# Usage (local, CPU):
+#   python -m venv .venv-drr && .venv-drr\Scripts\activate
+#   pip install -r requirements_drr.txt
+#
+# On HPC: install a CUDA-enabled torch build for the cluster instead of the default CPU wheel,
+# then `pip install diffdrr==0.6.1` (it will pull a compatible torchio 1.x).
+
+diffdrr==0.6.1
+torchio==1.2.0
+
+# Core deps used by notebooks/pre-processing/drr_generation.ipynb
+torch
+nibabel
+numpy
+imageio
+matplotlib
+pandas
+loguru
+tqdm
+ipykernel
