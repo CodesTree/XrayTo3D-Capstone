@@ -3,3 +3,7 @@
 
 # Environment variables
 .env
+
+# Model checkpoints (too large for GitHub)
+*.pth
+*.pt
