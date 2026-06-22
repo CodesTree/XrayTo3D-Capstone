@@ -1,4 +1,4 @@
 dataset,case,side,occ_pct,n_vox,n_components,bridging,seconds,nii,npy
-healthy,VSD_001,left,4.773807525634766,800912,3,0,15.2,data\interim\gt_v5\healthy\VSD_001_Left.nii.gz,data\interim\predrr_occupancy_256\healthy_VSD_001_left.npy
-healthy,VSD_001,right,5.084097385406494,852970,4,0,16.4,data\interim\gt_v5\healthy\VSD_001_Right.nii.gz,data\interim\predrr_occupancy_256\healthy_VSD_001_right.npy
-healthy,VSD_002,left,3.705275058746338,621642,2,0,14.8,data\interim\gt_v5\healthy\VSD_002_Left.nii.gz,data\interim\predrr_occupancy_256\healthy_VSD_002_left.npy
+healthy,VSD_001,left,4.773807525634766,800912,3,0,11.1,data\interim\gt_v5\healthy\VSD_001_Left.nii.gz,data\interim\predrr_occupancy_256\healthy_VSD_001_left.npy
+healthy,VSD_001,right,5.084097385406494,852970,4,0,12.3,data\interim\gt_v5\healthy\VSD_001_Right.nii.gz,data\interim\predrr_occupancy_256\healthy_VSD_001_right.npy
+healthy,VSD_002,left,3.705275058746338,621642,2,0,13.8,data\interim\gt_v5\healthy\VSD_002_Left.nii.gz,data\interim\predrr_occupancy_256\healthy_VSD_002_left.npy
