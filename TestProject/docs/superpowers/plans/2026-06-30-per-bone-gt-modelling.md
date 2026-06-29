@@ -143,211 +143,281 @@ git commit -m "feat: parse per-bone STL filenames and map cases to predrr keys"
 
 ---
 
-## Task 2: Single-case voxelization + visual alignment spot-check
+## Task 2: Port predrr transform + CT-replay validation gate
+
+> **REVISED 2026-06-30.** The predrr `.nii.gz` affine has zeroed translation (world coords lost), so GT cannot be voxelized onto the predrr affine. Instead we replay the predrr geometric transform. This task ports that transform and proves the port is faithful by reproducing the stored predrr from raw CT.
 
 **Files:**
-- Modify: `notebooks/modeling/gt_per_bone.ipynb` (add voxelizer + one-case overlay cells)
+- Modify: `notebooks/modeling/gt_per_bone.ipynb` (remove the broken direct-affine `voxelize_bone` + overlay cells from commit `5f22511`; add ported transform + `process_ct` + CT-match validation)
 
-- [ ] **Step 1: Write the voxelizer function**
+- [ ] **Step 1: Remove the two broken cells**
+
+Delete the `voxelize_bone(stl_path, predrr_img)` cell and the single-case overlay cell added in commit `5f22511` (they assumed a world-registered predrr affine, which does not exist). Keep cells 0–3 (header, config, `parse_bone`, validation building `cases`).
+
+- [ ] **Step 2: Add SimpleITK import + ported constants/functions (verbatim copy)**
+
+Add a cell that `import SimpleITK as sitk` and `from scipy import ndimage`, then copy these **verbatim** from `notebooks/pre-processing/predrr_preprocessing.ipynb` (do NOT edit that file — copy out of it):
+- From cell 1: constants `TARGET_SIZE=256, RESAMPLE_SPACING=0.5, ORIENTATION="RAS", FOV_MM=200.0, FOV_VOXELS=int(round(FOV_MM/RESAMPLE_SPACING)), HU_MIN=-450, HU_MAX=1050, ROI_INTENSITY_THRESHOLD=0.1, ROI_CLOSING_RADIUS=3, ROI_PAD_MARGIN=5`.
+- From cell 3: `BONE_THR=0.45, MIN_AREA=30, END_FRAC=0.25, SI_FLIP_OVERRIDE` (the full dict), and functions `_blobs_in_axial`, `end_blob_counts`, `heuristic_flipped`, `correct_orientation`.
+- From cell 6: functions `resample_volume`, `orient_volume`, `apply_bone_window`, `body_envelope_mask`, `center_to_fixed_fov`, `resize_volume`.
+
+- [ ] **Step 3: Add the two modified/new helpers**
 
 ```python
-def voxelize_bone(stl_path: Path, predrr_img) -> np.ndarray:
-    """STL (world RAS mm) -> uint8 occupancy on predrr voxel grid via inv(affine)."""
-    inv = np.linalg.inv(predrr_img.affine)
-    mesh = trimesh.load(stl_path, process=False)
-    v = np.asarray(mesh.vertices)
-    vh = np.c_[v, np.ones(len(v))]
-    mesh.vertices = (inv @ vh.T).T[:, :3]          # now in voxel-index space
-    vg = mesh.voxelized(pitch=1.0).fill()          # solid fill in index space
-    idx = np.round(np.asarray(vg.points)).astype(int)
-    shape = predrr_img.shape
-    mask = np.zeros(shape, dtype=np.uint8)
-    inb = (idx >= 0).all(1) & (idx[:, 0] < shape[0]) & (idx[:, 1] < shape[1]) & (idx[:, 2] < shape[2])
-    idx = idx[inb]
-    mask[idx[:, 0], idx[:, 1], idx[:, 2]] = 1
-    return mask
+def roi_bone_crop_idx(arr_windowed, threshold=ROI_INTENSITY_THRESHOLD,
+                      closing_radius=ROI_CLOSING_RADIUS, pad=ROI_PAD_MARGIN):
+    """Same as predrr roi_bone_crop but ALSO returns the crop indices so labels can reuse them."""
+    mask = (arr_windowed > threshold).astype(np.uint8)
+    struct = ndimage.generate_binary_structure(3, 1)
+    struct = ndimage.iterate_structure(struct, closing_radius)
+    mask = ndimage.binary_closing(mask, structure=struct).astype(np.uint8)
+    labeled, num = ndimage.label(mask)
+    if num == 0:
+        z1, y1, x1 = arr_windowed.shape
+        return arr_windowed, (0, z1, 0, y1, 0, x1)
+    sizes = ndimage.sum(mask, labeled, range(1, num + 1))
+    mask = (labeled == (np.argmax(sizes) + 1)).astype(np.uint8)
+    coords = np.argwhere(mask)
+    z_min, y_min, x_min = coords.min(0)
+    z_max, y_max, x_max = coords.max(0) + 1
+    z_min = max(0, z_min - pad); y_min = max(0, y_min - pad); x_min = max(0, x_min - pad)
+    z_max = min(arr_windowed.shape[0], z_max + pad)
+    y_max = min(arr_windowed.shape[1], y_max + pad)
+    x_max = min(arr_windowed.shape[2], x_max + pad)
+    return arr_windowed[z_min:z_max, y_min:y_max, x_min:x_max], (z_min, z_max, y_min, y_max, x_min, x_max)
+
+def resize_label(arr, target_size=TARGET_SIZE):
+    """Nearest-neighbour resize for binary labels (mirrors resize_volume's geometry)."""
+    img = sitk.GetImageFromArray(arr.astype(np.float32))
+    target = [target_size] * 3
+    osz, osp = img.GetSize(), img.GetSpacing()
+    nsp = [osp[i] * osz[i] / target[i] for i in range(3)]
+    r = sitk.ResampleImageFilter()
+    r.SetSize(target); r.SetOutputSpacing(nsp)
+    r.SetOutputOrigin(img.GetOrigin()); r.SetOutputDirection(img.GetDirection())
+    r.SetInterpolator(sitk.sitkNearestNeighbor); r.SetDefaultPixelValue(0.0)
+    r.SetTransform(sitk.Transform())
+    return sitk.GetArrayFromImage(r.Execute(img))
+
+def fractured_raw_dir(key):
+    """'Case11_PartRight' -> data/raw/fractured/PartRight/Case11"""
+    stem, side = key.split("_Part")        # ('Case11', 'Right')
+    return ROOT / "data/raw/fractured" / f"Part{side}" / stem
+
+def load_raw_ct(key):
+    rd = sitk.ImageSeriesReader()
+    rd.SetFileNames(rd.GetGDCMSeriesFileNames(str(fractured_raw_dir(key))))
+    return rd.Execute()
+
+def process_ct(key):
+    """Replay predrr's geometric transform on the raw CT. Returns the resampled+oriented sitk
+    image (for label voxelization), the crop box, the S-I flip decision, and the final CT array."""
+    img = load_raw_ct(key)
+    img = resample_volume(img)             # linear, 0.5mm iso
+    img = orient_volume(img)               # RAS
+    img_ro = img                           # geometry labels will be voxelized onto
+    arr = sitk.GetArrayFromImage(img).astype(np.float32)
+    arr = apply_bone_window(arr)
+    arr = body_envelope_mask(arr)
+    cropped, crop = roi_bone_crop_idx(arr)
+    boxed, _ = center_to_fixed_fov(cropped, FOV_VOXELS)
+    resized = resize_volume(boxed, TARGET_SIZE)
+    final, flags = correct_orientation(key, resized)
+    return dict(img_ro=img_ro, crop=crop, si_flip=flags["si_flipped"], ct_final=final)
 ```
 
-- [ ] **Step 2: Spot-check one case/bone against the predrr (the visual "test")**
+- [ ] **Step 4: CT-replay validation gate (the keystone "test")**
 
-Pick the first mapped case; voxelize its femur; overlay on the predrr mid-slices. This is the alignment smoke test:
 ```python
-key  = sorted(cases)[0]
-img  = nib.load(PREDRR / f"{key}.nii.gz")
-ct   = np.asarray(img.dataobj)
-mask = voxelize_bone(cases[key]["femur"], img)
-print(key, "femur voxels:", int(mask.sum()), "ct shape:", ct.shape)
-assert mask.sum() > 1000, "femur mask implausibly small — voxelization/fill failed"
+def dice(a, b):
+    a = a.astype(bool); b = b.astype(bool); s = a.sum() + b.sum()
+    return 1.0 if s == 0 else 2 * (a & b).sum() / s
 
-# overlay at the slice with the most femur signal, per axis
-fig, ax = plt.subplots(1, 3, figsize=(12, 4))
-for a, axis in enumerate([0, 1, 2]):
-    s = mask.sum(axis=tuple(i for i in range(3) if i != axis)).argmax()
-    ct_sl   = np.take(ct,   s, axis=axis)
-    mask_sl = np.take(mask, s, axis=axis)
-    ax[a].imshow(ct_sl.T, cmap="gray", origin="lower")
-    ax[a].imshow(np.ma.masked_where(mask_sl.T == 0, mask_sl.T), cmap="autumn", alpha=0.5, origin="lower")
-    ax[a].set_title(f"{key} femur axis{axis} slice{s}")
-plt.tight_layout(); plt.show()
+key = sorted(cases)[0]
+ct = process_ct(key)
+pred = np.asarray(nib.load(PREDRR / f"{key}.nii.gz").dataobj).astype(np.float32)
+print("ct_final", ct["ct_final"].shape, "predrr", pred.shape, "si_flip", ct["si_flip"])
+d = dice(ct["ct_final"] > 0.4, pred > 0.4)
+print(f"CT-replay bone-mask Dice vs stored predrr: {d:.4f}")
+assert d >= 0.99, f"CT replay does not reproduce predrr (Dice {d:.4f}) — transform port is not faithful"
+print("KEYSTONE PASS: ported transform reproduces predrr -> labels will align by construction")
 ```
+Expected: shapes both `(256,256,256)`, Dice ≥ 0.99. If the Dice is low, first check array layout: predrr's `dataobj` and `ct_final` must be in the same (z,y,x) order. If `process_single_volume` saved a transposed array, transpose `ct_final` to match before comparing (and apply the same layout when writing GT in Task 3). Do NOT proceed until this passes.
 
-- [ ] **Step 3: Eyeball the overlay**
-
-Expected: the colored femur mask sits **on top of** the bright bone in the CT in all 3 panels. If it is shifted, mirrored, or in empty space, that is a RAS/LPS flip — note it; Task 4 adds systematic flip detection/correction. Do not proceed to batch build if the spot-check is grossly misaligned; instead jump to Task 4's flip-handling and re-run this cell.
-
-- [ ] **Step 4: Commit**
+- [ ] **Step 5: Commit**
 
 ```bash
 git add notebooks/modeling/gt_per_bone.ipynb
-git commit -m "feat: voxelize STL onto predrr grid with single-case overlay check"
+git commit -m "feat: port predrr transform + CT-replay validation gate"
 ```
 
 ---
 
-## Task 3: Batch-build per-bone `.nii.gz` + metadata
+## Task 3: Voxelize STL on raw grid + thread labels through the transform -> per-bone nii.gz
 
 **Files:**
 - Modify: `notebooks/modeling/gt_per_bone.ipynb`
 - Create (output): `data/interim/gt_per_bone_256/fractured/<KEY>/<KEY>_<bone>.nii.gz`, `.../gt_per_bone_metadata.csv`
 
-- [ ] **Step 1: Write the batch-build cell**
+- [ ] **Step 1: Add the voxelizer + label-pipeline functions**
+
+```python
+def voxelize_on(stl_path, ref_img):
+    """Solid-rasterize an STL (world LPS mm) onto ref_img's grid -> uint8 (z,y,x) array."""
+    mesh = trimesh.load(stl_path, process=False)
+    v = np.asarray(mesh.vertices)
+    idx = np.array([ref_img.TransformPhysicalPointToContinuousIndex(tuple(map(float, p))) for p in v])
+    mesh.vertices = idx[:, ::-1]                      # (i,j,k)->(k,j,i)=(z,y,x) array space
+    pts = np.round(np.asarray(mesh.voxelized(pitch=1.0).fill().points)).astype(int)
+    shape = sitk.GetArrayFromImage(ref_img).shape     # (z,y,x)
+    m = np.zeros(shape, np.uint8)
+    ok = (pts >= 0).all(1) & (pts[:, 0] < shape[0]) & (pts[:, 1] < shape[1]) & (pts[:, 2] < shape[2])
+    pts = pts[ok]; m[pts[:, 0], pts[:, 1], pts[:, 2]] = 1
+    return m
+
+def label_through_pipeline(label_ro, crop, si_flip):
+    """Apply predrr's post-orient numpy ops (crop/fov/resize/flip) to a label voxelized on img_ro."""
+    z0, z1, y0, y1, x0, x1 = crop
+    cropped = label_ro[z0:z1, y0:y1, x0:x1]
+    boxed, _ = center_to_fixed_fov(cropped, FOV_VOXELS, fill_value=0.0)
+    resized = resize_label(boxed, TARGET_SIZE)
+    if si_flip:
+        resized = np.ascontiguousarray(np.flip(resized, axis=0))
+    return (resized > 0.5).astype(np.uint8)
+
+def build_bone_gt(key, bone_map):
+    """Return {bone: 256^3 uint8 mask on the predrr grid} for one case."""
+    ct = process_ct(key)
+    out = {}
+    for bone, stl in bone_map.items():
+        lab_ro = voxelize_on(stl, ct["img_ro"])
+        out[bone] = label_through_pipeline(lab_ro, ct["crop"], ct["si_flip"])
+    return ct, out
+```
+
+- [ ] **Step 2: Single-case overlay spot-check (visual gate, saved to PNG)**
+
+```python
+key = sorted(cases)[0]
+ct, gt = build_bone_gt(key, cases[key])
+ctf = ct["ct_final"]
+for bone in BONES:
+    print(key, bone, "voxels:", int(gt[bone].sum()))
+    assert gt[bone].sum() > 300, f"{bone} mask implausibly small"
+
+fig, ax = plt.subplots(len(BONES), 3, figsize=(11, 3.2 * len(BONES)))
+for r, bone in enumerate(BONES):
+    mask = gt[bone]
+    for a, axis in enumerate([0, 1, 2]):
+        s = mask.sum(axis=tuple(i for i in range(3) if i != axis)).argmax()
+        ax[r, a].imshow(np.take(ctf, s, axis=axis).T, cmap="gray", origin="lower")
+        ms = np.take(mask, s, axis=axis)
+        ax[r, a].imshow(np.ma.masked_where(ms.T == 0, ms.T), cmap="autumn", alpha=0.5, origin="lower")
+        ax[r, a].set_title(f"{key} {bone} ax{axis}", fontsize=8)
+plt.tight_layout()
+plt.savefig(OUT_ROOT / f"_spotcheck_{key}.png", dpi=110); plt.show()
+```
+Each bone mask must sit on the bright bone of the replayed CT. (Controller will inspect this PNG.)
+
+- [ ] **Step 3: Batch-build all cases -> per-bone nii.gz + metadata**
 
 ```python
 import pandas as pd
 rows = []
 for key, bone_map in sorted(cases.items()):
-    img = nib.load(PREDRR / f"{key}.nii.gz")
-    case_dir = OUT_ROOT / key
-    case_dir.mkdir(parents=True, exist_ok=True)
+    ct, gt = build_bone_gt(key, bone_map)
+    d = dice(ct["ct_final"] > 0.4, np.asarray(nib.load(PREDRR / f"{key}.nii.gz").dataobj) > 0.4)
+    pim = nib.load(PREDRR / f"{key}.nii.gz")          # affine+header so GT overlays predrr in Slicer
+    case_dir = OUT_ROOT / key; case_dir.mkdir(parents=True, exist_ok=True)
     for bone in BONES:
-        stl = bone_map.get(bone)
-        if stl is None:
-            mask = np.zeros(img.shape, dtype=np.uint8); src = ""
-        else:
-            mask = voxelize_bone(stl, img); src = stl.name
-        nib.save(nib.Nifti1Image(mask, img.affine, img.header),
-                 case_dir / f"{key}_{bone}.nii.gz")
+        mask = gt[bone]
+        nib.save(nib.Nifti1Image(mask, pim.affine, pim.header), case_dir / f"{key}_{bone}.nii.gz")
         rows.append(dict(key=key, bone=bone, voxels=int(mask.sum()),
-                         source_stl=src, missing=(stl is None)))
-meta = pd.DataFrame(rows)
-meta.to_csv(OUT_ROOT / "gt_per_bone_metadata.csv", index=False)
-meta
+                         ct_replay_dice=round(float(d), 4), source_stl=bone_map[bone].name))
+    print(f"{key}: ct-replay Dice {d:.4f}  bones " + " ".join(f"{b}={int(gt[b].sum())}" for b in BONES))
+meta = pd.DataFrame(rows); meta.to_csv(OUT_ROOT / "gt_per_bone_metadata.csv", index=False)
+meta.groupby("key").agg(min_voxels=("voxels", "min"), ct_dice=("ct_replay_dice", "first"))
 ```
 
-- [ ] **Step 2: Validate the build (the "test" cell)**
+- [ ] **Step 4: Validate the batch (the "test" cell)**
 
 ```python
 assert (meta.groupby("key").size() == 4).all(), "every case must have 4 bone files"
-assert (~meta.missing).all(), f"missing bone STLs:\n{meta[meta.missing]}"
-assert (meta.loc[~meta.missing, "voxels"] > 500).all(), \
-    f"suspiciously empty masks:\n{meta[(~meta.missing)&(meta.voxels<=500)]}"
-n_files = sum(1 for _ in OUT_ROOT.rglob('*.nii.gz'))
-assert n_files == 4 * len(cases), f"expected {4*len(cases)} files, found {n_files}"
-print("OK:", len(cases), "cases ×4 bones =", n_files, "nii.gz written")
+assert (meta.voxels > 300).all(), f"empty/tiny masks:\n{meta[meta.voxels <= 300]}"
+assert (meta.ct_replay_dice >= 0.99).all(), f"CT replay failed for:\n{meta[meta.ct_replay_dice < 0.99]}"
+nfiles = sum(1 for _ in OUT_ROOT.rglob('*.nii.gz'))
+assert nfiles == 4 * len(cases), f"expected {4*len(cases)} files, found {nfiles}"
+print("OK:", len(cases), "cases x4 bones; all CT-replays >=0.99; ", nfiles, "nii.gz written")
 ```
-Expected: PASS, prints file count. Flag `Case2_PartLeft` (non-fractured) and `Case16_PartRight` (cast-removed source) are still built — they are valid GT, just noted.
 
-- [ ] **Step 3: Manually open one case in 3D Slicer (human gate)**
+- [ ] **Step 5: Human Slicer gate**
 
-Load `data/interim/predrr/fractured/<KEY>.nii.gz` + its 4 `gt_per_bone_256/.../<KEY>_<bone>.nii.gz` as segmentations. Confirm each bone overlays the right anatomy. (This is the payoff of choosing `.nii.gz` output.)
+Open one case in 3D Slicer: load `data/interim/predrr/fractured/<KEY>.nii.gz` and its 4 `gt_per_bone_256/fractured/<KEY>/<KEY>_<bone>.nii.gz`. Confirm each bone overlays the right anatomy. (Controller pauses here for the user.)
 
-- [ ] **Step 4: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add notebooks/modeling/gt_per_bone.ipynb data/interim/gt_per_bone_256/fractured/gt_per_bone_metadata.csv
-git commit -m "feat: batch-build per-bone GT nii.gz + metadata for fractured cases"
+git commit -m "feat: build aligned per-bone GT nii.gz via pipeline-replay"
 ```
-(Note: the `.nii.gz` masks themselves — decide with the user whether to commit binaries or gitignore; default: gitignore the volumes, commit only the metadata CSV.)
+(Decide with the user whether to commit the `.nii.gz` volumes or gitignore them; default: gitignore the volumes, commit only the metadata CSV.)
 
 ---
 
-## Task 4: Alignment validation gate (union-Dice + MIP overlays + flip handling)
+## Task 4: Alignment validation gate (GT-union vs predrr + MIP overlays)
 
 **Files:**
 - Modify: `notebooks/modeling/gt_per_bone.ipynb`
 - Create (output): `data/interim/gt_per_bone_256/fractured/gt_per_bone_alignment.csv`, `.../alignment_grid.png`
 
-- [ ] **Step 1: Locate the existing whole-bone occupancy reference**
+- [ ] **Step 1: Union-vs-predrr Dice across all cases**
 
 ```python
-OCC = ROOT / "data/interim/predrr_occupancy_256"
-GTV5 = ROOT / "data/interim/gt_v5/fractured"
-def ref_occupancy(key):
-    """Existing single-mask reference for this case, or None if absent."""
-    # fractured occupancy npy naming, fall back to gt_v5 nii.gz
-    cand = list(OCC.glob(f"*{key.lower()}*.npy")) + list(OCC.glob(f"fractured_{key.lower()}*.npy"))
-    if cand:
-        return np.load(cand[0]) > 0.5
-    g = GTV5 / f"{key}.nii.gz"
-    return (np.asarray(nib.load(g).dataobj) > 0) if g.exists() else None
-```
-Note: fractured occupancy/gt_v5 may not be pre-cached. If `ref_occupancy` returns `None` for all cases, skip the Dice column and rely on the MIP-on-DRR overlay (Step 3) as the gate instead.
-
-- [ ] **Step 2: Compute union-vs-reference Dice**
-
-```python
-def dice(a, b):
-    a = a.astype(bool); b = b.astype(bool)
-    s = a.sum() + b.sum()
-    return 1.0 if s == 0 else 2 * (a & b).sum() / s
-
 ar = []
 for key in sorted(cases):
-    union = np.zeros(nib.load(PREDRR / f"{key}.nii.gz").shape, bool)
+    union = np.zeros((TARGET_SIZE,) * 3, bool)
     for bone in BONES:
         union |= np.asarray(nib.load(OUT_ROOT / key / f"{key}_{bone}.nii.gz").dataobj) > 0
-    ref = ref_occupancy(key)
+    pred_bone = np.asarray(nib.load(PREDRR / f"{key}.nii.gz").dataobj) > 0.4
     ar.append(dict(key=key, union_voxels=int(union.sum()),
-                   dice_vs_ref=(dice(union, ref) if ref is not None else np.nan)))
+                   dice_union_vs_predrr=round(float(dice(union, pred_bone)), 4)))
 align = pd.DataFrame(ar); align.to_csv(OUT_ROOT / "gt_per_bone_alignment.csv", index=False)
 align
 ```
+Note: union-vs-predrr Dice will be high but not 1.0 — predrr's bone mask includes marrow/threshold effects the STL surface segmentation may exclude, and the STL is a clean manual segmentation. Expect ~0.7–0.9; the real proof of alignment is the CT-replay Dice (Task 3) and the overlays. Flag any case markedly below the cohort median.
 
-- [ ] **Step 3: MIP overlay of GT union on the actual DRR input (the visual gate)**
+- [ ] **Step 2: AP/LAT MIP overlay grid (GT union over replayed-CT MIP), saved to PNG**
 
 ```python
-DRR = ROOT / "data/interim/DRRs/fractured"
-def load_drr_png(key, view):                 # view in {'AP','LAT'} — match your DRR naming
-    import matplotlib.image as mpimg
-    cand = list(DRR.glob(f"*{key}*{view}*")) + list(DRR.glob(f"*{key.lower()}*{view.lower()}*"))
-    return mpimg.imread(cand[0]) if cand else None
-
-n = len(cases); fig, ax = plt.subplots(n, 2, figsize=(8, 3.2 * n))
+n = len(cases); fig, ax = plt.subplots(n, 2, figsize=(8, 3.0 * n))
 for r, key in enumerate(sorted(cases)):
-    union = np.zeros(nib.load(PREDRR / f"{key}.nii.gz").shape, bool)
+    ct = process_ct(key); ctf = ct["ct_final"]
+    union = np.zeros((TARGET_SIZE,) * 3, bool)
     for bone in BONES:
         union |= np.asarray(nib.load(OUT_ROOT / key / f"{key}_{bone}.nii.gz").dataobj) > 0
-    # AP = project along anterior axis, LAT = along lateral axis (adjust axes to your predrr convention)
-    ax[r, 0].imshow(union.max(axis=1).T, origin="lower"); ax[r, 0].set_title(f"{key} GT MIP (AP)")
-    ax[r, 1].imshow(union.max(axis=0).T, origin="lower"); ax[r, 1].set_title(f"{key} GT MIP (LAT)")
+    for c, axis, name in [(0, 1, "AP"), (1, 2, "LAT")]:
+        ax[r, c].imshow(ctf.max(axis=axis).T, cmap="gray", origin="lower")
+        u = union.max(axis=axis)
+        ax[r, c].imshow(np.ma.masked_where(u.T == 0, u.T), cmap="autumn", alpha=0.45, origin="lower")
+        ax[r, c].set_title(f"{key} {name}", fontsize=8); ax[r, c].axis("off")
 plt.tight_layout(); plt.savefig(OUT_ROOT / "alignment_grid.png", dpi=110); plt.show()
 ```
 
-- [ ] **Step 4: Decide pass/fail and handle flips if needed**
+- [ ] **Step 3: Decide pass/fail**
 
 ```python
-THRESH = 0.80
-bad = align[align.dice_vs_ref < THRESH].dropna(subset=["dice_vs_ref"])
-print("cases below threshold:", list(bad.key) or "none")
+med = align.dice_union_vs_predrr.median()
+suspect = align[align.dice_union_vs_predrr < med - 0.15]
+print("cohort median union-Dice:", round(med, 3), "| suspect cases:", list(suspect.key) or "none")
 ```
-If cases fail Dice OR look mirrored/shifted in the MIPs, the cause is almost always an axis flip between Slicer-RAS and the predrr storage. Add a corrected voxelizer that flips the suspect axis and re-run Tasks 3–4 for affected cases:
-```python
-def voxelize_bone_flip(stl_path, predrr_img, flip_axes=()):
-    mask = voxelize_bone(stl_path, predrr_img)
-    for ax_ in flip_axes:
-        mask = np.flip(mask, axis=ax_)
-    return mask
-```
-Empirically find `flip_axes` by re-running the Step-3 overlay until the union lands on the bone; record the chosen `flip_axes` in a markdown cell. Re-run Task 3 batch-build using `voxelize_bone_flip(..., flip_axes=CHOSEN)` so the cache is corrected. **Do not advance to Task 5 until every case passes the visual gate.**
+The controller inspects `alignment_grid.png`: every GT union must overlay the bone silhouette in both AP and LAT. Because alignment is guaranteed by the CT-replay construction, a misaligned case here almost certainly means that case's STL was segmented in a *different* frame (e.g., the cast-removed Case3/Case16) — investigate those specifically if flagged. **Do not advance to Task 5 until the overlays pass.**
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 4: Commit**
 
 ```bash
 git add notebooks/modeling/gt_per_bone.ipynb data/interim/gt_per_bone_256/fractured/gt_per_bone_alignment.csv
-git commit -m "feat: alignment validation gate for per-bone GT (Dice + MIP overlays)"
+git commit -m "feat: GT alignment validation (union-vs-predrr Dice + MIP overlays)"
 ```
-
----
 
 ## Task 5: Multi-label model + per-bone GT loader (new notebook)
 

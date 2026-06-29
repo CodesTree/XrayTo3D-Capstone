@@ -104,3 +104,40 @@ New notebook `notebooks/modeling/gt_per_bone.ipynb`.
 2. Alignment validation passes (overlays register; flips corrected).
 3. Sanity-check: all 4 bone channels reach val Dice ≥ 0.90 on the overfit set.
 4. 3D viewer shows predicted full knee vs GT STLs with per-bone Dice + surface distances.
+
+---
+
+## Revision 2026-06-30 — Alignment via pipeline-replay (supersedes Components 1–2 alignment)
+
+**Discovery during Task 2:** the predrr `.nii.gz` volumes were written with a **zeroed-translation
+affine** (origin at world 0,0,0; correct 0.78125 mm spacing + RAS-ish direction only). The predrr
+build (`predrr_preprocessing.ipynb::process_single_volume`) does its S-I flip, intensity-based ROI
+crop, fixed-FOV centering and resize in **numpy array space**, discarding world coordinates; the ROI
+crop origin is data-derived and **not stored** in `preprocessing_metadata.csv` (only `crop_shape`).
+So the original plan's "voxelize directly onto the predrr affine" is impossible.
+
+**Verified facts (Case11):** the raw fractured CTs still exist
+(`data/raw/fractured/Part{Left,Right}/Case<N>/`, DICOM series) and share the STL's world frame —
+the STL femur world box (X −93.3..−18.4, Y −121.6..−54.6, Z 1271..1401) sits cleanly **inside** the
+raw CT world box (X −158.8..28.8, Y −188.8..−1.2, Z 1162.9..1400.2). The Slicer STL is in the CT's
+LPS frame — **no RAS/LPS sign flip** needed.
+
+**Revised alignment approach (replaces Component 1 voxelization + Component 2 gate):**
+1. Voxelize each STL onto the **raw CT grid** (raw CT `TransformPhysicalPointToContinuousIndex`),
+   producing a per-bone label image with the raw CT's geometry.
+2. Push each per-bone label through the **identical geometric transform** that built predrr —
+   `resample (NEAREST) → orient RAS → ROI crop (reusing the CT-derived crop box) → center 400³ →
+   resize 256³ (NEAREST) → S-I flip (reusing the CT's `correct_orientation` decision)`. The crop
+   indices and flip flag are computed from the CT and **shared** with the labels so they land
+   pixel-perfect on the predrr/DRR grid.
+3. **Keystone validation gate:** replay the *CT* through the same ported functions and confirm it
+   reproduces the stored predrr volume (bone-mask Dice ≥ 0.99 / `allclose`). If the CT replay
+   matches, the bone labels are aligned **by construction**. Then overlay GT-union on predrr +
+   per-case Slicer eyeball as before.
+
+**Implementation note:** the ported transform functions (`resample_volume`, `orient_volume`,
+`apply_bone_window`, `body_envelope_mask`, `roi_bone_crop` — refactored to also return crop indices,
+`center_to_fixed_fov`, `resize_volume`, `correct_orientation`, `SI_FLIP_OVERRIDE`, constants) are
+copied from `predrr_preprocessing.ipynb` into `gt_per_bone.ipynb` (notebook-first; the reference
+notebook stays read-only). Output `.nii.gz` is written with the **stored predrr affine + header** so
+it overlays predrr in Slicer. The direct-affine `voxelize_bone` added in commit `5f22511` is removed.
