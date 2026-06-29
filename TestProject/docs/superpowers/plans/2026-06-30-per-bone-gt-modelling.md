@@ -199,20 +199,32 @@ def resize_label(arr, target_size=TARGET_SIZE):
     r.SetTransform(sitk.Transform())
     return sitk.GetArrayFromImage(r.Execute(img))
 
-def fractured_raw_dir(key):
-    """'Case11_PartRight' -> data/raw/fractured/PartRight/Case11"""
-    stem, side = key.split("_Part")        # ('Case11', 'Right')
-    return ROOT / "data/raw/fractured" / f"Part{side}" / stem
+# Source each case from the SAME volume predrr was built from (per preprocessing metadata).
+# Most fractured cases come from raw DICOM, but the cast-removed cases (Case3, Case16) were
+# preprocessed from data/interim/fractured_cast_cleaned/*.nii.gz. Sourcing raw DICOM for those
+# two gives a different bone window -> different ROI crop -> CT-replay Dice ~0.3. Using the
+# recorded source makes the replayed crop/FOV match the stored predrr exactly.
+import pandas as pd
+_PRE_META = pd.read_csv(ROOT / "data/interim/predrr/preprocessing_metadata.csv").set_index("volume_id")
 
-def load_raw_ct(key):
+def _reroot(p):
+    parts = Path(p).parts
+    return ROOT.joinpath(*parts[parts.index("data"):]) if "data" in parts else Path(p)
+
+def load_source_ct(key):
+    """Load the exact source volume predrr used: cast-cleaned NIfTI or raw DICOM series."""
+    row = _PRE_META.loc[key]
+    src = _reroot(row["source_path"])
+    if row["source_format"] == "nifti":
+        return sitk.ReadImage(str(src))
     rd = sitk.ImageSeriesReader()
-    rd.SetFileNames(rd.GetGDCMSeriesFileNames(str(fractured_raw_dir(key))))
+    rd.SetFileNames(rd.GetGDCMSeriesFileNames(str(src)))
     return rd.Execute()
 
 def process_ct(key):
-    """Replay predrr's geometric transform on the raw CT. Returns the resampled+oriented sitk
+    """Replay predrr's geometric transform on the source CT. Returns the resampled+oriented sitk
     image (for label voxelization), the crop box, the S-I flip decision, and the final CT array."""
-    img = load_raw_ct(key)
+    img = load_source_ct(key)
     img = resample_volume(img)             # linear, 0.5mm iso
     img = orient_volume(img)               # RAS
     img_ro = img                           # geometry labels will be voxelized onto
@@ -406,7 +418,7 @@ Note: union-vs-predrr Dice will be high but not 1.0 — predrr's bone mask inclu
 ```python
 n = len(cases); fig, ax = plt.subplots(n, 2, figsize=(8, 3.0 * n))
 for r, key in enumerate(sorted(cases)):
-    ct = process_ct(key); ctf = ct["ct_final"]
+    ctf = load_grid_zyx(PREDRR / f"{key}.nii.gz")   # predrr == ct_final (Dice 1.0); avoids DICOM reload
     union = np.zeros((TARGET_SIZE,) * 3, bool)
     for bone in BONES:
         union |= load_grid_zyx(OUT_ROOT / key / f"{key}_{bone}.nii.gz") > 0
