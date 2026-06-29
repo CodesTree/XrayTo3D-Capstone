@@ -496,28 +496,50 @@ print(len(KEYS), "keys:", KEYS)
 
 - [ ] **Step 4: Write the per-bone GT loader + build the paired index/dataset**
 
-Per-bone loader that stacks the 4 `.nii.gz`:
+Per-bone loader — **mirrors `load_gt_occupancy` exactly** (threshold + nearest-downsample to
+`TARGET_RES`), but loads the 4 bone files and stacks them. GT was saved via sitk CopyInformation
+from predrr, so `nib.load(GT).get_fdata()` is in the same convention as `load_gt_occupancy` uses for
+predrr — no transpose needed.
 ```python
-def load_gt_per_bone(key):
-    vols = [np.asarray(nib.load(GT_PB / key / f"{key}_{b}.nii.gz").dataobj) > 0 for b in BONES]
-    return torch.from_numpy(np.stack(vols).astype(np.float32))   # (4,T,T,T)
+GT_PB = ROOT / "data/interim/gt_per_bone_256/fractured"
+
+def key_from(dataset, case, side):
+    Side = "Right" if str(side).lower().startswith("r") else "Left"
+    return f"{case}_Part{Side}"                       # fractured predrr/GT key
+
+def load_gt_per_bone(dataset, case, side):
+    key = key_from(dataset, case, side)
+    chans = []
+    for b in BONES:
+        vol = nib.load(str(GT_PB / key / f"{key}_{b}.nii.gz")).get_fdata().astype(np.float32)
+        occ = (vol > 0.5).astype(np.float32)
+        t = F.interpolate(torch.from_numpy(occ)[None, None], size=(TARGET_RES,) * 3, mode="nearest")
+        chans.append(t[0, 0])
+    return torch.stack(chans)                          # (4, T, T, T)
 ```
-Copy `build_paired_index()` and `PairedDRRVolumeDataset` from `decoder_pipeline.ipynb`, then adapt two things: (a) add a `key` column to the index equal to the predrr stem (the same `Case<N>_Part<Side>` string), filtered to `df.key.isin(KEYS)`; (b) in `__getitem__`, replace the GT line with `gt = load_gt_per_bone(r.key)` so `batch["gt"]` is `(B,4,T,T,T)`. Reuse the existing DRR loading (`load_drr`, `paired_tf`) unchanged — inputs are still AP+LAT.
+Copy `build_paired_index()` and `PairedDRRVolumeDataset` from `decoder_pipeline.ipynb`, then adapt:
+(a) restrict the index to fractured cases that have per-bone GT —
+`paired_index = paired_index[paired_index.apply(lambda r: r.dataset=="fractured" and key_from(r.dataset,r.case,r.side) in KEYS, axis=1)].reset_index(drop=True)`;
+(b) in `__getitem__`, replace the GT line with `gt = load_gt_per_bone(r.dataset, r.case, r.side)` so
+`batch["gt"]` is `(B,4,T,T,T)`. Reuse `load_drr`, `paired_tf` unchanged — inputs are still AP+LAT.
+(Note: only fractured has per-bone GT; the sanity-check is fractured-only.)
 
 - [ ] **Step 5: Validate shapes (the "test" cell)**
 
 ```python
-m = build_model().eval()
-ap = torch.randn(1, 3, 256, 256); lat = torch.randn(1, 3, 256, 256)
+m = build_model().to(DEVICE).eval()
+ap = torch.randn(1, 3, 256, 256).to(DEVICE); lat = torch.randn(1, 3, 256, 256).to(DEVICE)
 with torch.no_grad():
     out = m(ap, lat)
 out0 = out[0] if isinstance(out, (tuple, list)) else out
 assert out0.shape[1] == 4, f"expected 4 output channels, got {out0.shape}"
-gt = load_gt_per_bone(KEYS[0])
-assert gt.shape[0] == 4, gt.shape
-print("model out:", tuple(out0.shape), "gt:", tuple(gt.shape))
+assert out0.shape[2:] == (TARGET_RES,) * 3, f"expected {TARGET_RES}^3, got {out0.shape}"
+r0 = paired_index.iloc[0]
+gt = load_gt_per_bone(r0.dataset, r0.case, r0.side)
+assert gt.shape == (4,) + (TARGET_RES,) * 3, gt.shape
+print("model out:", tuple(out0.shape), "gt:", tuple(gt.shape), "| TARGET_RES", TARGET_RES)
 ```
-Expected: output channel dim == 4, gt first dim == 4.
+Expected: `out` is `(1, 4, TARGET_RES, TARGET_RES, TARGET_RES)`, gt is `(4, TARGET_RES, TARGET_RES, TARGET_RES)`.
 
 - [ ] **Step 6: Commit**
 
