@@ -286,13 +286,28 @@ def label_through_pipeline(label_ro, crop, si_flip):
     return (resized > 0.5).astype(np.uint8)
 
 def build_bone_gt(key, bone_map):
-    """Return {bone: 256^3 uint8 mask on the predrr grid} for one case."""
+    """Return {bone: 256^3 uint8 mask in sitk (z,y,x) order on the predrr grid} for one case."""
     ct = process_ct(key)
     out = {}
     for bone, stl in bone_map.items():
         lab_ro = voxelize_on(stl, ct["img_ro"])
         out[bone] = label_through_pipeline(lab_ro, ct["crop"], ct["si_flip"])
     return ct, out
+
+# --- Layout convention (from the Task 2 finding) ---
+# process_ct / build_bone_gt produce arrays in SimpleITK (z,y,x) order, same as predrr's
+# arr_final at save time. predrr was written via `sitk.GetImageFromArray(arr_zyx)` + WriteImage,
+# so on disk nib.load(predrr).dataobj == arr_zyx.transpose(2,1,0). To make GT overlay predrr
+# (in Slicer AND when later loaded by nibabel in the modelling notebook), save GT the SAME way —
+# via sitk, copying predrr's geometry — and load everything here in (z,y,x) via sitk so all
+# internal comparisons/overlays share one order (matching ct_final).
+def save_grid_nii(arr_zyx, key, path):
+    im = sitk.GetImageFromArray(arr_zyx.astype(np.uint8))
+    im.CopyInformation(sitk.ReadImage(str(PREDRR / f"{key}.nii.gz")))
+    sitk.WriteImage(im, str(path))
+
+def load_grid_zyx(path):
+    return sitk.GetArrayFromImage(sitk.ReadImage(str(path)))
 ```
 
 - [ ] **Step 2: Single-case overlay spot-check (visual gate, saved to PNG)**
@@ -326,12 +341,12 @@ import pandas as pd
 rows = []
 for key, bone_map in sorted(cases.items()):
     ct, gt = build_bone_gt(key, bone_map)
-    d = dice(ct["ct_final"] > 0.4, np.asarray(nib.load(PREDRR / f"{key}.nii.gz").dataobj) > 0.4)
-    pim = nib.load(PREDRR / f"{key}.nii.gz")          # affine+header so GT overlays predrr in Slicer
+    # both in sitk (z,y,x) order -> compare directly
+    d = dice(ct["ct_final"] > 0.4, load_grid_zyx(PREDRR / f"{key}.nii.gz") > 0.4)
     case_dir = OUT_ROOT / key; case_dir.mkdir(parents=True, exist_ok=True)
     for bone in BONES:
         mask = gt[bone]
-        nib.save(nib.Nifti1Image(mask, pim.affine, pim.header), case_dir / f"{key}_{bone}.nii.gz")
+        save_grid_nii(mask, key, case_dir / f"{key}_{bone}.nii.gz")   # sitk save -> overlays predrr
         rows.append(dict(key=key, bone=bone, voxels=int(mask.sum()),
                          ct_replay_dice=round(float(d), 4), source_stl=bone_map[bone].name))
     print(f"{key}: ct-replay Dice {d:.4f}  bones " + " ".join(f"{b}={int(gt[b].sum())}" for b in BONES))
@@ -377,8 +392,8 @@ ar = []
 for key in sorted(cases):
     union = np.zeros((TARGET_SIZE,) * 3, bool)
     for bone in BONES:
-        union |= np.asarray(nib.load(OUT_ROOT / key / f"{key}_{bone}.nii.gz").dataobj) > 0
-    pred_bone = np.asarray(nib.load(PREDRR / f"{key}.nii.gz").dataobj) > 0.4
+        union |= load_grid_zyx(OUT_ROOT / key / f"{key}_{bone}.nii.gz") > 0
+    pred_bone = load_grid_zyx(PREDRR / f"{key}.nii.gz") > 0.4
     ar.append(dict(key=key, union_voxels=int(union.sum()),
                    dice_union_vs_predrr=round(float(dice(union, pred_bone)), 4)))
 align = pd.DataFrame(ar); align.to_csv(OUT_ROOT / "gt_per_bone_alignment.csv", index=False)
@@ -394,7 +409,7 @@ for r, key in enumerate(sorted(cases)):
     ct = process_ct(key); ctf = ct["ct_final"]
     union = np.zeros((TARGET_SIZE,) * 3, bool)
     for bone in BONES:
-        union |= np.asarray(nib.load(OUT_ROOT / key / f"{key}_{bone}.nii.gz").dataobj) > 0
+        union |= load_grid_zyx(OUT_ROOT / key / f"{key}_{bone}.nii.gz") > 0
     for c, axis, name in [(0, 1, "AP"), (1, 2, "LAT")]:
         ax[r, c].imshow(ctf.max(axis=axis).T, cmap="gray", origin="lower")
         u = union.max(axis=axis)
