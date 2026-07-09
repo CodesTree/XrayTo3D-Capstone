@@ -285,3 +285,9 @@ ruff
 tqdm
 typer
 gradio
+
+# Ground-truth STL generation (vsd_ts_ground_truth.ipynb)
+# TotalSegmentator: bone segmentation (total + appendicular_bones tasks; appendicular needs a
+#   free non-commercial license via `totalseg_set_license`). trimesh: marching-cubes -> STL export.
+totalsegmentator
+trimesh
