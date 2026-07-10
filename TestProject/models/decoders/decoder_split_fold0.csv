@@ -1,9 +1,0 @@
-dataset,case,side,variant,split
-fractured,Case11,right,normal,val
-fractured,Case12,right,normal,test
-fractured,Case13,right,normal,train
-healthy,VSD_001,right,normal,train
-healthy,VSD_002,left,normal,test
-healthy,VSD_002,right,normal,train
-healthy,VSD_005,left,normal,val
-healthy,VSD_005,right,normal,train
