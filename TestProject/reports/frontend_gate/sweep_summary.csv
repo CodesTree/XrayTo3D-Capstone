@@ -1,0 +1,11 @@
+arm,fold,epochs,best_val_dice,n_test_knees,frac_assd_mm,heal_assd_mm,secs,report_dir
+binary|frozen|noaux,0,2,0.0126,3,108.373,98.39,97.2,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\binary-frozen-noaux\fold0
+binary|frozen|noaux,1,2,0.0009,2,117.302,126.641,111.5,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\binary-frozen-noaux\fold1
+binary|frozen|noaux,2,2,0.0008,2,131.304,140.484,124.1,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\binary-frozen-noaux\fold2
+binary|frozen|noaux,3,2,0.0729,1,,91.782,139.4,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\binary-frozen-noaux\fold3
+binary|frozen|noaux,4,2,0.0221,1,,97.138,122.3,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\binary-frozen-noaux\fold4
+tsdf|frozen|noaux,0,2,0.0104,3,96.988,105.045,129.4,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\tsdf-frozen-noaux\fold0
+tsdf|frozen|noaux,1,2,0.0115,2,76.729,74.376,124.6,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\tsdf-frozen-noaux\fold1
+tsdf|frozen|noaux,2,2,0.0006,2,122.539,122.478,130.0,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\tsdf-frozen-noaux\fold2
+tsdf|frozen|noaux,3,2,0.0104,1,,99.762,144.1,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\tsdf-frozen-noaux\fold3
+tsdf|frozen|noaux,4,2,0.0225,1,,80.888,132.0,C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\TestProject\reports\frontend_gate\tsdf-frozen-noaux\fold4

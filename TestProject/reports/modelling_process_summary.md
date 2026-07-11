@@ -84,16 +84,22 @@ removes) must contain zero structure-intensity pixels. If any instance fails, th
 use. The mask ships with no minimum-blob-size filter and no distance limit for this reason — it only
 removes background, never a disconnected structural sub-region.
 
-### 1.3 Self-supervised pretraining (SimCLR)
-The backbone (ConvNeXtV2) is pretrained with a contrastive objective (SimCLR / NT-Xent loss) on
-**all** available projection images before any supervised step.
+### 1.3 Self-supervised pretraining (FCMAE + cross-view)
+The backbone (ConvNeXtV2) is pretrained **label-free** with a **fully-convolutional masked
+autoencoder (FCMAE)** on structure-restricted masked regions, optionally followed by a **cross-view
+completion** stage (reconstruct a masked view from the other) on **all** available projection images
+before any supervised step — see `pretraining_redesign.md`. This **replaces the previous SimCLR /
+NT-Xent contrastive objective**, which was satisfiable by global shortcut features (silhouette,
+intensity stats) and actively taught the encoder to treat defect-scale local variation as nuisance.
 
-**Reasoning:** SimCLR needs no labels, so it can use every image in the dataset without any risk of
-leaking test-set *labels* into training. It is pretrained once, globally, and reused across every
+**Reasoning:** like SimCLR, FCMAE needs no labels, so it can use every image without any risk of
+leaking test-set *labels* into training; it is pretrained once, globally, and reused across every
 cross-validation fold — the only residual risk is that the backbone has *seen* (not learned labels
-from) held-out images during this self-supervised phase, which is a standard, accepted trade-off in
-low-data settings. A bug in the reference implementation's contrastive loss (the positive-pair labels
-pointed at the wrong index) was identified and corrected here.
+from) held-out images, the standard low-data trade-off. Unlike SimCLR, reconstructing masked structure
+forces the encoder to model local geometry (no negatives, no large-batch dependence, an interpretable
+pixel-space loss); quality is judged by a downstream **Gate G4** (FCMAE-P2 / FCMAE-P1 / ImageNet-FCMAE
+/ random init) rather than by the loss value. The exported checkpoint is `convnextv2_fcmae_encoder.pth`
+(encoder weights only; the masking decoder and any probe heads are discarded at export).
 
 ### 1.4 Hybrid bi-view fusion
 The two projections are merged per feature scale with **two different fusion mechanisms**:
@@ -142,7 +148,7 @@ downstream.
 
 ## Step 2 — Front-end pretraining (`02_frontend_pretrain.ipynb`)
 
-**Goal:** train the fusion + 2D→3D lift (the encoder backbone is kept frozen after step 1's SimCLR
+**Goal:** train the fusion + 2D→3D lift (the encoder backbone is kept frozen after step 1's FCMAE
 pretraining) against the actual 3D target, using a throwaway decoder head, so that when the real
 decoders are attached later, they receive features that already carry useful 3D structure — without
 those features having been shaped to favor either decoder.
@@ -160,7 +166,7 @@ favor. Training with the neutral common-ancestor block avoids this without requi
 unrelated pretext task.
 
 ### 2.2 Per-fold pretraining (no label leakage)
-Unlike the label-free SimCLR stage, this stage trains against real 3D targets, so it **must** respect
+Unlike the label-free FCMAE stage, this stage trains against real 3D targets, so it **must** respect
 the cross-validation split — it is repeated once per fold, each time seeing only that fold's training
 instances. The resulting front-end checkpoint and the fold's train/val/test instance list are both
 written to disk, keyed by fold number, so every later stage (decoder training, comparison) can load an
@@ -176,6 +182,35 @@ destabilizes.
 This notebook is deliberately run at a small resolution, a handful of instances, and 2 epochs — its
 only purpose is to prove the full pipeline executes end-to-end on CPU before committing to the
 full-scale GPU run.
+
+### 2.5 Ground-truth supervision upgrades (C-1 – C-6)
+The per-bone GT was being under-used (binary occupancy only). Following
+`3d_gt_integration_spec.md`, richer GT-derived supervision is added **inside the per-fold boundary**
+(step 2 onward) to sharpen the front-end's shape learning, arbitrated one axis at a time by a gate.
+
+**Governing rule (L-12):** meshes/voxels are **labels** — they never touch the global label-free FCMAE
+stage (step 1). All mesh/voxel-derived supervision below lives in step 2 (`02`) / step 3 (`03`) only.
+
+- **C-1 — TSDF target (implemented).** `00_gt_per_bone.ipynb` writes a truncated signed distance field
+  per bone (`{key}_{bone}_tsdf.nii.gz`, EDT-on-mask, τ≈4 voxels, normalized to [−1, 1], **negative =
+  inside**) alongside the binary masks. Step 2's neutral-head loss becomes
+  `0.5·(TSDF-L1 in band) + 0.5·(BCE+Dice on binary)`; the occupancy head is reparametrized into signed
+  space (`s = 1 − 2·sigmoid(z)`) so no extra head is needed. **Binary stays the evaluation target
+  everywhere** and step 3 is untouched. *Guard L-16:* per-instance sign/band assert. *Monitor M-11:*
+  step-2 val loss split by term.
+- **C-6 — Gate G4 matrix (implemented).** `02` records neutral-head Dice + surface distance (HD95/ASSD
+  mm) per arm, split by cohort, into `models/decoders/gate_g4_arm_metrics.csv`; `04` tabulates
+  arm × cohort and ships an arm only if it **beats the previous accepted arm on the irregular
+  (fractured) cohort without degrading the standard cohort** (negatives kept). Arms: `a` binary
+  (baseline) · `b` +C-1 TSDF · `c` +C-2 aux heads · `d` +C-3 unfrozen.
+- **C-2 — auxiliary 2.5D heads (pending, gated).** Throwaway thickness-map + per-component-silhouette
+  heads off the finest 2D feature. *Guard L-17:* rendered-target geometry must match the lift axes.
+  *Monitor M-12:* aux-head accuracy per component.
+- **C-3 — backbone unfreeze in step 2 (pending, gated).** Config flag; `03`'s frozen regime is
+  preserved (features stay byte-identical to both decoders within a fold). *Monitor M-14:* train−val
+  overfitting gap per fold.
+- **Deferred:** C-4 (N-view cross-view completion; needs the D-1 provenance decision) and C-5
+  (synthetic irregular generation; per-fold, train-only) are documented but not implemented.
 
 ---
 
@@ -328,7 +363,7 @@ numeric score.
 | Decision | Reasoning |
 |---|---|
 | Shared encoder, decoder-only difference | Isolates the variable actually under study; anything else shared would confound the comparison. |
-| SimCLR pretrained once globally, front-end pretrained per fold | Self-supervised pretraining uses no labels (safe to share across folds); anything trained against real targets must respect fold boundaries to avoid label leakage. |
+| FCMAE pretrained once globally, front-end pretrained per fold | Self-supervised pretraining uses no labels (safe to share across folds); anything trained against real targets (incl. the C-1 TSDF supervision) must respect fold boundaries to avoid label leakage (L-12). |
 | Neutral common-ancestor block for front-end pretraining | Prevents the shared features from being implicitly biased toward one decoder's inductive bias. |
 | Orthogonal back-projection lift (replacing extrusion) | The prior approach architecturally could not encode depth-varying structure, capping results regardless of decoder — this was the single highest-impact fix in the pipeline. |
 | Two front-end regimes (frozen / finetuned) | Separates "does the decoder block matter in isolation" from "does it matter once the whole stack can adapt." |
