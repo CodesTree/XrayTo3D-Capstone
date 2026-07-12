@@ -129,8 +129,9 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 - Scans are bilateral — use connected-component analysis to separate left/right legs
 - Knee crop margin: +-100mm around knee center
 - Output: `data/raw/healthy/VSD.{id}/` per-case folders
-- **Excluded (TKR)**: z050 Right and z063 Right have total knee replacements — severe metal
-  artifacts, unsuitable for training or testing. Their contralateral sides (Left) may still be usable.
+- **Excluded (TKR)**: z050 Left and z063 Left have total knee replacements — severe metal
+  artifacts, unsuitable for training or testing. Their contralateral sides (Right) may still be usable.
+  (Sides corrected after the L/R relabel: the TKR knee is the anatomical Left; the usable knee is the Right.)
 
 ### Fractured (Ruikar)
 
