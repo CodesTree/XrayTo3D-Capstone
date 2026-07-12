@@ -1,0 +1,31 @@
+{
+  "pretext": "FCMAE+crossview(P2)",
+  "blessed_stage": "P2",
+  "backbone": "convnextv2_tiny",
+  "img_size": 256,
+  "feat_dims": [
+    96,
+    192,
+    384,
+    768
+  ],
+  "patch": 32,
+  "mask_ratio": 0.6,
+  "sigma_floor": 0.01,
+  "bg_quota": 0.15,
+  "occ_eligible": 0.05,
+  "struct_weight": 2.0,
+  "lambda_xview": 1.0,
+  "xview_slack": 1,
+  "channel_adaptation": "replicate_1to3",
+  "input_norm": {
+    "mean": 0.5,
+    "std": 0.5
+  },
+  "monitor_split_csv": "pretrain_monitor_split.csv",
+  "monitor_instances": [
+    "fractured/Case1/left",
+    "healthy/VSD_005/left",
+    "healthy/VSD_014/right"
+  ]
+}

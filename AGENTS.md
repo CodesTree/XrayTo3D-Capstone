@@ -1,4 +1,4 @@
-# AGENTS.md
+# CLAUDE.md
 
 ## Project
 
@@ -7,12 +7,12 @@ Capstone 2 — Chan Zheng Shao, Sunway University. Supervised by Assoc. Prof. Ts
 
 ### Goal
 
-Conduct a baseline comparison for 3D knee reconstruction from bi-planar X-ray images. Compare two decoder approaches:
+Conduct a comparative baseline between **3D U-Net** and **V-Net** on 3D reconstruction across all three datasets. Both models share the same encoder (ConvNeXtV2 + cross-attention fusion from Lai's pipeline); only the decoder differs.
 
 1. **3D U-Net** — baseline from Lai's senior project (code in `references/01–10`)
-2. **V-Net** — second baseline decoder for comparison
+2. **V-Net** — comparison model
 
-Both share the same encoder (ConvNeXtV2 + cross-attention fusion from Lai's pipeline).
+**Conditional stretch goal**: If the 3D U-Net or V-Net baselines perform poorly at reconstructing fracture-sensitive cases, tailor a custom architecture (building on U-Net or V-Net) targeted at fracture-aware 3D reconstruction. This is only in scope IF the baselines demonstrate poor fracture reconstruction — do not treat it as committed work.
 
 ### Conditional Stretch Goal — Fracture-Aware Architecture
 
@@ -28,10 +28,10 @@ conditional fracture-aware architecture is later needed.
 
 ### Evaluation Strategy
 
-| Dataset            | Type        | Evaluation   | How                                                    |
-| ------------------ | ----------- | ------------ | ------------------------------------------------------ |
-| VSD (healthy)      | CT → DRR    | Quantitative | Reconstruct from DRRs, compare against ground-truth CT |
-| Fractured (Ruikar) | CT → DRR    | Quantitative | Same as VSD                                            |
+| Dataset            | Type        | Evaluation   | How                                                      |
+| ------------------ | ----------- | ------------ | -------------------------------------------------------- |
+| VSD (healthy)      | CT → DRR    | Quantitative | Reconstruct from DRRs, compare against ground-truth CT   |
+| Fractured (Ruikar) | CT → DRR    | Quantitative | Same as VSD                                              |
 | Regen (clinical)   | Real X-rays | Qualitative  | Visual assessment by actual doctors (no 3D ground truth) |
 
 ### Reference Code (`references/`)
@@ -60,6 +60,53 @@ Do NOT create standalone `.py` scripts for pipeline steps — always use noteboo
 4. **Goal-driven execution.** Every task should have a stated success criterion and a verification
    step before moving on.
 
+## Environments
+
+### Local (Windows)
+
+- **OS**: Windows 11, PowerShell
+- **Project root**: `C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\`
+- **Notebook root**: `TestProject/notebooks/`
+- **Target volume**: 128³
+- **Device**: CPU
+
+### HPC (Sunway University)
+
+- **Platform**: AWS Linux, accessed via Open OnDemand (browser, code-server)
+- **Python**: 3.12, venv at `.venv/`
+- **Working directory**: `/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/`
+  - Note the space before the underscore in the directory name.
+- **HPC structure**:
+  ```
+  Marcus_Chan_Zheng_Shao_CP2 _24020059/
+  ├── .venv/
+  ├── data/
+  │   ├── interim/merged_vsd/     # VSD_010/015/016/017/019_merged.nii.gz
+  │   └── raw/
+  │       ├── fractured/
+  │       ├── Regen_XRays/
+  │       └── VSD_Dataset/        # 001,002,005,006,010,014,015,016,017,019,023,z001,z004,...
+  ├── notebooks/                  # HPC pipeline notebooks
+  ├── requirements.txt            # DO NOT use — contains pywin32 (Windows-only)
+  └── temp_reqs.txt
+  ```
+- **Requirements**: Use `requirements_hpc.txt` from the local digital twin (pywin32 removed, TotalSegmentator added)
+- **Target volume**: 512³
+- **Device**: `cuda` (GPU available)
+- **TotalSegmentator**: `fast=False` (full model on GPU)
+
+### Local HPC Digital Twin (`TestProject/HPC/`)
+
+Mirrors the HPC structure for local development before uploading:
+
+- `TestProject/HPC/HPC_notebooks/pre_processing_HPC/` → maps to HPC `notebooks/`
+- `TestProject/HPC/requirements_hpc.txt` → the corrected requirements for HPC
+
+**Naming convention**: local uses `HPC_notebooks/pre_processing_HPC/`; HPC uses `notebooks/`.
+
+When writing HPC notebooks, always use Linux paths rooted at the HPC working directory.
+Do NOT use PowerShell syntax in HPC notebooks — use POSIX shell.
+
 ## Confirmed Parameters (CT Preprocessing)
 
 - **Spatial resampling**: 0.5mm isotropic
@@ -77,10 +124,13 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 ### VSD (Healthy)
 
 - 11 normal subjects: 8 single-folder DICOM + 3 multi-folder merged (010, 015, 017)
+- 20 z-prefix full-body CT subjects (z001–z066) — processed via `vsd_z_crop.ipynb`
 - Multi-folder subjects merged in `data/interim/merged_vsd/` before knee cropping
 - Scans are bilateral — use connected-component analysis to separate left/right legs
 - Knee crop margin: +-100mm around knee center
-- Output: `data/healthy/VSD.{id}/` per-case folders
+- Output: `data/raw/healthy/VSD.{id}/` per-case folders
+- **Excluded (TKR)**: z050 Right and z063 Right have total knee replacements — severe metal
+  artifacts, unsuitable for training or testing. Their contralateral sides (Left) may still be usable.
 
 ### Fractured (Ruikar)
 

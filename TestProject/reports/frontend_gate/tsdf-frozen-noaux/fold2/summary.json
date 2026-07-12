@@ -1,0 +1,11 @@
+{
+  "arm": "tsdf|frozen|noaux",
+  "fold": 2,
+  "epochs": 2,
+  "best_val_dice": 0.0006,
+  "n_test_knees": 2,
+  "frac_assd_mm": 122.539,
+  "heal_assd_mm": 122.478,
+  "secs": 130.0,
+  "report_dir": "C:\\Users\\Chan Zheng Shao\\OneDrive\\Desktop\\Github Repo\\TestProject\\TestProject\\reports\\frontend_gate\\tsdf-frozen-noaux\\fold2"
+}

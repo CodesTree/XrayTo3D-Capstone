@@ -1,0 +1,4 @@
+arm,step2_target,frozen,fold,dataset,case,side,dice,hd95_mm,assd_mm
+binary|frozen|noaux,binary,True,0,fractured,Case12,right,0.012262011878192425,169.97064421963393,108.37254335868997
+binary|frozen|noaux,binary,True,0,healthy,VSD_002,left,0.011529890820384026,136.57215535597618,99.17922358799757
+binary|frozen|noaux,binary,True,0,healthy,VSD_005,right,0.013844743371009827,137.16121208710666,97.60042401174567

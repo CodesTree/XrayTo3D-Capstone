@@ -1,0 +1,2 @@
+arm,step2_target,frozen,fold,dataset,case,side,dice,hd95_mm,assd_mm
+tsdf|frozen|noaux,tsdf_blend,True,4,healthy,VSD_005,left,0.023770887404680252,125.47529866429477,80.88822429751372

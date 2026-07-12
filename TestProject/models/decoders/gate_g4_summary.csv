@@ -1,0 +1,7 @@
+arm,dataset,n,dice,hd95_mm,assd_mm
+binary|frozen|noaux,all,9,0.012,162.156,112.2
+binary|frozen|noaux,fractured,3,0.005,171.275,118.993
+binary|frozen|noaux,healthy,6,0.015,157.596,108.804
+tsdf|frozen|noaux,all,9,0.01,149.222,98.206
+tsdf|frozen|noaux,fractured,3,0.009,148.458,98.752
+tsdf|frozen|noaux,healthy,6,0.011,149.604,97.933

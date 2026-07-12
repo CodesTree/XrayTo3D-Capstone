@@ -1,0 +1,11 @@
+{
+  "arm": "binary|frozen|noaux",
+  "fold": 2,
+  "epochs": 2,
+  "best_val_dice": 0.0008,
+  "n_test_knees": 2,
+  "frac_assd_mm": 131.304,
+  "heal_assd_mm": 140.484,
+  "secs": 124.1,
+  "report_dir": "C:\\Users\\Chan Zheng Shao\\OneDrive\\Desktop\\Github Repo\\TestProject\\TestProject\\reports\\frontend_gate\\binary-frozen-noaux\\fold2"
+}

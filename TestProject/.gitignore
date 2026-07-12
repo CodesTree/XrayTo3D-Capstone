@@ -5,8 +5,7 @@
 /artifacts/ 
 
 #References
-/references/dataset_info
-/references/project_outline
+/references
 
 # Mac OS-specific storage files
 .DS_Store
