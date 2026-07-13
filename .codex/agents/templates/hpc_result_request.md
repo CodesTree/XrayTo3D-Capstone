@@ -2,7 +2,7 @@
 
 Please run <notebook path> through Open OnDemand.
 
-- Working directory: /home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2 _24020059/
+- Working directory: /home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/
 - Environment: .venv, Python 3.12, required GPU/RAM/wall time:
 - Verify cells/config:
 - Expected outputs:

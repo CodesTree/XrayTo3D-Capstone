@@ -75,10 +75,9 @@ Do NOT create standalone `.py` scripts for pipeline steps — always use noteboo
 - **Platform**: AWS Linux, accessed via Open OnDemand (browser, code-server)
 - **Python**: 3.12, venv at `.venv/`
 - **Working directory**: `/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/`
-  - Note the space before the underscore in the directory name.
 - **HPC structure**:
   ```
-  Marcus_Chan_Zheng_Shao_CP2 _24020059/
+  Marcus_Chan_Zheng_Shao_CP2_24020059/
   ├── .venv/
   ├── data/
   │   ├── interim/merged_vsd/     # VSD_010/015/016/017/019_merged.nii.gz

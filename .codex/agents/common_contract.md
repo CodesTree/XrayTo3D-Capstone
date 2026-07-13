@@ -33,7 +33,7 @@ Local work covers inventories, manifests, leakage checks, config validation, syn
 
 HPC notebooks use Linux paths rooted at:
 
-/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2 _24020059/
+/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/
 
 Local twins are under TestProject/HPC/HPC_notebooks/. Only cells tagged environment-configuration may differ from their local pair; algorithm cells must hash identically.
 

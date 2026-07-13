@@ -1,0 +1,40 @@
+{
+  "task_id": "s1_predrr_preprocessing_job3699",
+  "run_id": "job_3699",
+  "verdict": "RETRY",
+  "reviewed_at_local_date": "2026-07-14",
+  "job": {
+    "job_id": "3699",
+    "cluster": "lumiere",
+    "queue_descriptor": "gpu-8c-l4-1g",
+    "exact_gpu_model": null,
+    "requested_host_ram_gib": null,
+    "reported_peak_memory_gib": 8.63,
+    "reported_peak_memory_kind": "unspecified",
+    "peak_cpu_percent": 9.39,
+    "wall_time": "23:06:00",
+    "bulk_output_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/data/interim/predrr_lps_256_v1"
+  },
+  "outputs": {
+    "nifti_count": 71,
+    "healthy_count": 58,
+    "fractured_count": 13,
+    "manifest_id_match": true,
+    "shape": [256, 256, 256],
+    "spacing_mm": [0.78125, 0.78125, 0.78125],
+    "orientation": "LPS"
+  },
+  "findings": {
+    "retention_proxy_reclassified": true,
+    "case2_retention_replayed": 0.608303,
+    "vsd_z046_right_requires_si_flip": true,
+    "user_confirmed_no_flip": ["Case14_PartRight", "VSD_016_Left"]
+  },
+  "bundle_gaps": [
+    "standalone notebook-generated run configuration JSON",
+    "exact GPU model",
+    "requested host RAM",
+    "separate peak GPU and host memory",
+    "HPC SHA-256 manifest for the 71 bulk NIfTIs"
+  ]
+}
