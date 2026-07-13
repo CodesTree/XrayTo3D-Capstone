@@ -1,0 +1,24 @@
+{
+  "manifest_version": "quantitative_manifest_v1",
+  "sha256": "c517ccfe09f5231e39825848a9c0aa2b2df299b69255d57c29100411bcc8ef0e",
+  "seed": 42,
+  "n_splits": 5,
+  "validation_rule": "(test_fold + 1) mod 5",
+  "included_planning_rows": 71,
+  "ready_rows": 0,
+  "pending_recertification_rows": 71,
+  "excluded_rows": 7,
+  "certification_approved": false,
+  "leakage": {
+    "subject_multiple_test_folds": 0,
+    "fold5_rows": 0,
+    "augmentation_parent_mismatch": 0
+  },
+  "blocking_notes": [
+    "VSD010 merge geometry passes; the four-bone multibone v2 audit supersedes absolute-X inference and passes 58/58 retained VSD knees.",
+    "z050/z063 Right survivors and Left TKR exclusions are user-approved.",
+    "Focused CT-STL-target review passes z023 Left/Right and z036 Left/Right; no mapping override is required.",
+    "Versioned predrr, four-bone targets and AP/LAT DRRs require returned HPC evidence.",
+    "Manual Ruikar fracture ROI statuses require user review."
+  ]
+}

@@ -1,0 +1,23 @@
+{
+  "contract": "notebook_parity_v1",
+  "pairs": [
+    {
+      "local": "notebooks/pre-processing/predrr_preprocessing.ipynb",
+      "hpc": "HPC/HPC_notebooks/pre_processing_HPC/predrr_preprocessing.ipynb",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "local": "notebooks/pre-processing/drr_generation.ipynb",
+      "hpc": "HPC/HPC_notebooks/pre_processing_HPC/drr_generation.ipynb",
+      "status": "PASS",
+      "errors": []
+    },
+    {
+      "local": "notebooks/data_management/05_vsd_merge_laterality_audit.ipynb",
+      "hpc": "HPC/HPC_notebooks/pre_processing_HPC/vsd_merge_laterality_audit.ipynb",
+      "status": "PASS",
+      "errors": []
+    }
+  ]
+}

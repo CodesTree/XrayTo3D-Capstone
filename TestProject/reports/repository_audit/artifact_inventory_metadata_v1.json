@@ -1,0 +1,23 @@
+{
+  "mode": "configuration_only_no_deletion",
+  "snapshot_started_utc": "2026-07-13T05:01:39.506345+00:00",
+  "completeness_rule": "All in-scope paths present when the scan starts are classified; files created later belong to the next snapshot.",
+  "unexplained_missing_at_snapshot": 0,
+  "raw_data_filenames_inventoried": false,
+  "regen_raw_modified": false,
+  "allowed_classes": [
+    "authoritative",
+    "generated",
+    "legacy",
+    "provisional",
+    "reusable",
+    "smoke-only"
+  ],
+  "legacy_or_smoke_items": 34,
+  "final_config_forbidden": [
+    "binary_union",
+    "tsdf",
+    "fold_id_5",
+    "neutral_smoke"
+  ]
+}

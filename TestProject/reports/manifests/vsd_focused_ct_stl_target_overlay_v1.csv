@@ -1,0 +1,5 @@
+sample_id,named_side,x_only_inferred_side,fibula_minus_tibia_lps_x_mm,stl_chirality_score,stl_inferred_side,target_chirality_score,target_inferred_side,stl_si_reflection_normalized,target_si_reflection_normalized,ct_stl_min_inside_fraction,ct_stl_min_surface_bone_fraction,target_predrr_recall,target_predrr_dice,status
+VSD_z023_Left,Left,Right,-6.997,0.7173,Left,0.7148,Left,False,False,0.8937,0.6163,0.9583,0.7522,PASS
+VSD_z023_Right,Right,Right,-11.007,-0.6981,Right,-0.7004,Right,False,False,0.9394,0.5147,0.9209,0.7428,PASS
+VSD_z036_Left,Left,Left,38.619,0.8338,Left,0.8345,Left,False,False,0.9331,0.6342,0.8452,0.6213,PASS
+VSD_z036_Right,Right,Left,12.281,-0.761,Right,-0.7605,Right,False,False,0.8001,0.5753,0.9081,0.6719,PASS

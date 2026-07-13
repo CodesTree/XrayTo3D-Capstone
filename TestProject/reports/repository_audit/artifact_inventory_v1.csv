@@ -1,0 +1,406 @@
+path,artifact_type,classification,reason,item_count,bytes_total,final_selectable
+.codex/agents/README.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/common_contract.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/registry.yaml,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_a_repository_audit.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_b_manifest_leakage.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_c_fracture_target_integrity.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_d_geometry_projection.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_e_decoder_fairness.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_f_training_reproducibility.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_g_fracture_supervision.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_h_metric_integrity.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_i_statistics.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_j_clinical_evaluation.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_k_provenance_reporting.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_l_academic_evidence.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/agent_n_independent_qa.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/roles/project_orchestrator.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/templates/decision_record.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/templates/handoff.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/templates/hpc_result_request.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/templates/independent_gate_review.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+.codex/agents/templates/task_brief.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+AGENTS.md,contract,authoritative,foundation contract or canonical manifest,,,True
+CLAUDE.md,contract,authoritative,foundation contract or canonical manifest,,,True
+TestProject/HPC/HPC_notebooks/modeling_HPC/01_encoder_pipeline.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_notebooks/modeling_HPC/02_frontend_pretrain.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_notebooks/modeling_HPC/03_decoder_pipeline.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_notebooks/modeling_HPC/04_decoder_comparison.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_notebooks/pre_processing_HPC/drr_generation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/HPC/HPC_notebooks/pre_processing_HPC/predrr_preprocessing.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/HPC/HPC_notebooks/pre_processing_HPC/vsd_gt_watertight.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_notebooks/pre_processing_HPC/vsd_merge_laterality_audit.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_notebooks/pre_processing_HPC/vsd_ts_ground_truth.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/HPC/HPC_results/encoder_pipeline_result,output_collection,generated,generated output collection,3.0,342997733.0,False
+TestProject/HPC/HPC_results/encoder_pipeline_result/encoder_simclr_history.csv,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/encoder_pipeline_result/encoder_simclr_trainstate.pth,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/encoder_pipeline_result/simclr_pretrain_split.csv,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/frontend_pretrain_result,output_collection,generated,generated output collection,5.0,21895.0,False
+TestProject/HPC/HPC_results/frontend_pretrain_result/neutral_history_fold0.csv,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/frontend_pretrain_result/neutral_history_fold1.csv,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/frontend_pretrain_result/neutral_history_fold2.csv,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/frontend_pretrain_result/neutral_history_fold3.csv,report,generated,derived report or documentation,,,False
+TestProject/HPC/HPC_results/frontend_pretrain_result/neutral_history_fold4.csv,report,generated,derived report or documentation,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_epoch025.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_epoch050.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_epoch075.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_epoch100.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/convnextv2_simclr_encoder_epoch125.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/fold0/frozen/unet/unet_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/fold0/frozen/unet/unet_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/fold0/frozen/unet/unet_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/fold0/frozen/unet/unet_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/neutral_fold0/neutral_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/neutral_fold0/neutral_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/neutral_fold0/neutral_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/decoders/neutral_fold0/neutral_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/encoder_simclr_trainstate.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/artifacts/old_models/front_end_fold0.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/configs/baseline_protocol_v1.json,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+TestProject/configs/data_contract_v1.json,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+TestProject/configs/vsd_laterality_overrides_v1.json,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+TestProject/data/interim/DRRs,output_collection,legacy,unversioned preprocessing output,287.0,42893972.0,False
+TestProject/data/interim/DRRs_diffdrr_lps_256_v1,output_collection,provisional,versioned output awaits HPC evidence,0.0,0.0,False
+TestProject/data/interim/fracture_roi_lps_256_v1,output_collection,provisional,versioned output awaits HPC evidence,0.0,0.0,False
+TestProject/data/interim/fractured_cast_cleaned,output_collection,generated,generated output collection,2.0,96984815.0,False
+TestProject/data/interim/gt_per_bone_256,output_collection,legacy,legacy TSDF or unversioned target path,579.0,136061875.0,False
+TestProject/data/interim/gt_per_bone_lps_256_v1,output_collection,provisional,versioned output awaits HPC evidence,0.0,0.0,False
+TestProject/data/interim/gt_per_bone_occ_64,output_collection,generated,generated output collection,9.0,37749888.0,False
+TestProject/data/interim/gt_per_bone_tsdf_64,output_collection,legacy,legacy TSDF or unversioned target path,9.0,37749888.0,False
+TestProject/data/interim/healthy_cleaned,output_collection,generated,generated output collection,2.0,10302664.0,False
+TestProject/data/interim/merged_vsd,output_collection,generated,generated output collection,6.0,2548989329.0,False
+TestProject/data/interim/predrr,output_collection,legacy,unversioned preprocessing output,73.0,976838839.0,False
+TestProject/data/interim/predrr_lps_256_v1,output_collection,provisional,versioned output awaits HPC evidence,0.0,0.0,False
+TestProject/data/interim/predrr_occupancy_256,output_collection,generated,generated output collection,3.0,201326976.0,False
+TestProject/data/processed/augmented_DRRs,output_collection,generated,generated output collection,3269.0,858383579.0,False
+TestProject/docs/.gitkeep,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/README.md,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/docs/getting-started.md,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/docs/index.md,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/mkdocs.yml,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/superpowers/plans/2026-06-30-per-bone-gt-modelling.md,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/superpowers/specs/2026-06-30-per-bone-gt-modelling-design.md,config_or_document,generated,derived report or documentation,,,False
+TestProject/docs/superpowers/specs/2026-07-12-foundation-implementation-v1.md,config_or_document,authoritative,foundation contract or canonical manifest,,,True
+TestProject/models/convnextv2_fcmae_encoder.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/convnextv2_fcmae_p1_encoder.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/convnextv2_fcmae_p1_encoder_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/convnextv2_fcmae_p2_encoder.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/convnextv2_fcmae_p2_encoder_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/convnextv2_simclr_encoder.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold0/neutral_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold0/neutral_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold0/neutral_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold0/neutral_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold1/neutral_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold1/neutral_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold1/neutral_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold1/neutral_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold2/neutral_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold2/neutral_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold2/neutral_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold2/neutral_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold3/neutral_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold3/neutral_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold3/neutral_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold3/neutral_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold4/neutral_best.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold4/neutral_epoch000.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold4/neutral_epoch001.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold4/neutral_last.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/decoders/neutral_fold5/neutral_best.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/decoders/neutral_fold5/neutral_epoch000.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/decoders/neutral_fold5/neutral_epoch001.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/decoders/neutral_fold5/neutral_last.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/fcmae_p1_trainstate.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/fcmae_p2_trainstate.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/front_end_fold0.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/front_end_fold1.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/front_end_fold2.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/front_end_fold3.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/front_end_fold4.pth,checkpoint,provisional,checkpoint requires fold provenance and gate review,,,False
+TestProject/models/front_end_fold5.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/notebooks/data_exploration/explore_VSD.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_exploration/explore_fractured.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_exploration/explore_regen.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_exploration/explore_z_VSD.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_exploration/vsd_017_spacing_investigation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_exploration/vsd_exclusion_validation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_exploration/vsd_folder_compare.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/data_management/00_manifest_and_reconciliation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/01_fracture_roi_annotation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/02_lps_geometry_validation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/03_notebook_environment_parity.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/04_contract_validation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/05_vsd_merge_laterality_audit.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/06_artifact_inventory.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/07_vsd_cohort_laterality_audit.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/data_management/08_vsd_focused_ct_stl_target_overlay_audit.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/modeling/00_gt_per_bone.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/modeling/01_encoder_pipeline.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/modeling/02_frontend_pretrain.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/modeling/03_decoder_pipeline.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/modeling/04_decoder_comparison.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/modeling/05_decoder_ui.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/modeling/06_metric_foundation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/modeling/tests/metric_foundation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/data_augmentation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/pre-processing/drr_generation.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/pre-processing/fractured_cast_cleanup.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/ground_truth_orientation_fix.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/orientation_validation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/predrr_preprocessing.ipynb,notebook,reusable,active notebook-first foundation workflow,,,False
+TestProject/notebooks/pre-processing/vsd_crop_validation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/vsd_knee_cropping.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/vsd_lr_label_validation.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/vsd_lr_rename_executor.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/vsd_multi_merge.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/vsd_z_crop.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/notebooks/pre-processing/z036_contralateral_cleanup.ipynb,notebook,provisional,not certified for final configuration,,,False
+TestProject/references/Lai's Capstone Project/convnextv2_finetuned_simclr.pth,checkpoint,reusable,immutable reference implementation,,,False
+TestProject/references/Lai's Capstone Project/src/utils/convnextv2_finetuned_xray.pth,checkpoint,reusable,immutable reference implementation,,,False
+TestProject/reports/.gitkeep,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage0/s0_foundation_contract/agent_n_review.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage0/s0_foundation_contract/handoff.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage0/s0_foundation_contract/task_brief.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage1/s1_manifest_geometry/decision_required_vsd_laterality.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage1/s1_manifest_geometry/handoff.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage1/s1_manifest_geometry/task_brief.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage2/README.md,report,generated,derived report or documentation,,,False
+TestProject/reports/agent_runs/stage2/s2_local_scaffold/handoff.md,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/.gitkeep,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/cross_dataset_comparison.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case11_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case11_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case11_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case12_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case12_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case12_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case13_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case13_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case13_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case14_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case14_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case14_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case15_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case15_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case15_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case16_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case16_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case16_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case1_PartLeft_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case1_PartLeft_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case1_PartLeft_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case2_PartLeft_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case2_PartLeft_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case2_PartLeft_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case3_PartLeft_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case3_PartLeft_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case3_PartLeft_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case5_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case5_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case5_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case6_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case6_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case6_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case7_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case7_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case7_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case8_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case8_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case8_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case9_PartRight_axial_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case9_PartRight_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/frac_Case9_PartRight_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/fractured_hu_histograms.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/fractured_exploration/fractured_spacing_summary.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P01_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P02_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P03_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P04_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P05_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P06_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P07_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P08_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P09_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P10_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P11_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P12_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P13_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P14_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P15_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P16_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P17_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P18_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P19_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P20_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P21_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P22_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P23_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P24_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P25_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P26_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P27_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P28_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P29_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_P30_detail.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_dicom_metadata.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_geometry_analysis.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_intensity_analysis.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/regen_exploration/regen_sample_grid.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_017_investigation/fov_comparison_017.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_017_investigation/naive_vstack_artifact.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/cross_dataset_comparison.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/subject_screening_coronal.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_001_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_001_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_001_knee_axial.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_002_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_002_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_002_knee_axial.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_005_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_005_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_005_knee_axial.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_006_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_006_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_006_knee_axial.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_010_exclusion.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_010_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_010_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_010_knee_axial.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_014_exploration.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_014_hu_histogram.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_014_knee_axial.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_bone_profiles.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_exploration/vsd_hu_histograms.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_lr_validation/vsd_lr_rename_manifest.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_lr_validation/vsd_lr_stl_gallery.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/vsd_lr_validation/vsd_lr_verdicts.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_crop_robustness_validation.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z001_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z004_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z009_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z013_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z023_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z027_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z035_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z036_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z042_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z046_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z049_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z050_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z055_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z056_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z057_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z061_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z062_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z063_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z064_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_crop/z_z066_crop_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_bone_profiles_all.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_coronal_views.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_demographics_comparison.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_hu_histograms.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_knee_identification.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_vs_regular_spacing_comparison.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z001_overview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z001_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z001_separation_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z004_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z009_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z013_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z023_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z027_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z035_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z036_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z042_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z046_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z049_overview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z049_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z049_separation_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z050_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z055_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z056_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z057_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z061_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z062_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z063_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z064_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z066_overview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z066_peak_diagnostic.png,report,generated,derived report or documentation,,,False
+TestProject/reports/figures/z_vsd_exploration/z_z066_separation_test.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold0/curves.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold0/gate_metrics.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold0/history.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold0/recon_preview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold0/summary.json,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold1/curves.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold1/gate_metrics.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold1/history.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold1/recon_preview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold1/summary.json,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold2/curves.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold2/gate_metrics.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold2/history.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold2/recon_preview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold2/summary.json,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold3/curves.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold3/gate_metrics.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold3/history.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold3/recon_preview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold3/summary.json,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold4/curves.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold4/gate_metrics.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold4/history.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold4/recon_preview.png,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/binary-frozen-noaux/fold4/summary.json,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/sweep_summary.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/manifests/cohort_flow_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/leakage_report_v1.json,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/quantitative_manifest_v1.csv,report,authoritative,foundation contract or canonical manifest,,,True
+TestProject/reports/manifests/quantitative_manifest_v1.metadata.json,report,authoritative,foundation contract or canonical manifest,,,True
+TestProject/reports/manifests/quantitative_manifest_v1.sha256,report,authoritative,foundation contract or canonical manifest,,,True
+TestProject/reports/manifests/tkr_laterality_lps_centroids_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd010_bilateral_coverage_v1.png,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd010_merge_geometry_v1.json,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_cohort_laterality_intrinsic_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_cohort_laterality_intrinsic_v1.json,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_cohort_laterality_multibone_v2.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_cohort_laterality_multibone_v2.json,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_focused_ct_stl_target_overlay_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_focused_ct_stl_target_overlay_v1.json,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_focused_ct_stl_target_overlay_v1.png,report,generated,derived report or documentation,,,False
+TestProject/reports/manifests/vsd_laterality_selected_review_v1.png,report,generated,derived report or documentation,,,False
+TestProject/reports/repository_audit/artifact_inventory_metadata_v1.json,report,generated,derived report or documentation,,,False
+TestProject/reports/repository_audit/artifact_inventory_summary_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/repository_audit/artifact_inventory_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/repository_audit/legacy_quarantine_v1.csv,report,generated,derived report or documentation,,,False
+TestProject/reports/repository_audit/notebook_parity_v1.json,report,generated,derived report or documentation,,,False

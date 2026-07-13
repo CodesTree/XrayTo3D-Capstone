@@ -1,0 +1,15 @@
+artifact_type,classification,n
+checkpoint,legacy,5
+checkpoint,provisional,51
+checkpoint,reusable,2
+config_or_document,authoritative,26
+config_or_document,generated,7
+contract,authoritative,2
+notebook,provisional,31
+notebook,reusable,15
+output_collection,generated,8
+output_collection,legacy,4
+output_collection,provisional,4
+report,authoritative,3
+report,generated,222
+report,legacy,25

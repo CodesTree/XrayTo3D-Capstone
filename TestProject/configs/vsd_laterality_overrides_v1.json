@@ -1,0 +1,25 @@
+{
+  "version": "vsd_laterality_overrides_v1",
+  "mode": "source_sample_id_to_canonical_sample_id",
+  "raw_files_modified": false,
+  "status": "no_override_required_after_focused_audit",
+  "active_overrides": {},
+  "confirmed_no_override": [
+    "VSD_010_Left",
+    "VSD_010_Right",
+    "VSD_z023_Left",
+    "VSD_z023_Right",
+    "VSD_z036_Left",
+    "VSD_z036_Right",
+    "VSD_z050_Right",
+    "VSD_z063_Right"
+  ],
+  "review_candidates": {},
+  "audit_evidence": {
+    "focused_audit": "reports/manifests/vsd_focused_ct_stl_target_overlay_v1.json",
+    "cohort_audit": "reports/manifests/vsd_cohort_laterality_multibone_v2.json",
+    "verdict": "PASS",
+    "conclusion": "The z023 Left and z036 Right flags were false positives from an X-only test. Four-bone STL and target chirality passes all 58 retained VSD knees."
+  },
+  "superseded_audit": "reports/manifests/vsd_cohort_laterality_intrinsic_v1.json"
+}

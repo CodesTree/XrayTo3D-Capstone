@@ -1,0 +1,134 @@
+{
+  "status": "PASS_GEOMETRY",
+  "header_pass": true,
+  "orientation_consistent": true,
+  "pixel_spacing_consistent": true,
+  "duplicates_absent": true,
+  "series": [
+    {
+      "folder": "SMIR.Lower_limb.045Y.F.CT.265",
+      "n_files": 997,
+      "position_min_mm": 696.4,
+      "position_max_mm": 1294.0,
+      "median_slice_spacing_mm": 0.6000000000000227,
+      "duplicate_positions": 0,
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "iop": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "pixel_spacing": [
+        0.826171875,
+        0.826171875
+      ]
+    },
+    {
+      "folder": "SMIR.Lower_limb.045Y.F.CT.268",
+      "n_files": 763,
+      "position_min_mm": 238.8,
+      "position_max_mm": 696.0,
+      "median_slice_spacing_mm": 0.6000000000000227,
+      "duplicate_positions": 0,
+      "normal": [
+        0.0,
+        0.0,
+        1.0
+      ],
+      "iop": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0,
+        0.0
+      ],
+      "pixel_spacing": [
+        0.826171875,
+        0.826171875
+      ]
+    }
+  ],
+  "boundaries": [
+    {
+      "from": "SMIR.Lower_limb.045Y.F.CT.268",
+      "to": "SMIR.Lower_limb.045Y.F.CT.265",
+      "signed_gap_mm": 0.39999999999997726,
+      "overlap_detected": false
+    }
+  ],
+  "merged": {
+    "shape": [
+      512,
+      512,
+      1760
+    ],
+    "spacing_mm": [
+      0.826171875,
+      0.826171875,
+      0.6000000238418579
+    ],
+    "axcodes": [
+      "L",
+      "P",
+      "S"
+    ],
+    "physical_extent_mm": [
+      423.0,
+      423.0,
+      1056.00004196167
+    ]
+  },
+  "bilateral_pixel_coverage_reviewed": true,
+  "bilateral_knees": [
+    {
+      "sample_id": "VSD_010_Left",
+      "centroid_lps_xyz_mm": [
+        -67.01508965614471,
+        102.1181279223063,
+        756.5869835364746
+      ],
+      "world_lower_mm": [
+        -117.1630859375,
+        60.4970703125,
+        650.4000244140625
+      ],
+      "world_upper_mm": [
+        -13.0654296875,
+        170.3779296875,
+        849.0000323057175
+      ],
+      "contained_in_merged_fov": true
+    },
+    {
+      "sample_id": "VSD_010_Right",
+      "centroid_lps_xyz_mm": [
+        54.12216142545608,
+        94.70231423890783,
+        756.2152225342934
+      ],
+      "world_lower_mm": [
+        1.8056640625,
+        49.7568359375,
+        650.4000244140625
+      ],
+      "world_upper_mm": [
+        104.2509765625,
+        161.2900390625,
+        849.0000323057175
+      ],
+      "contained_in_merged_fov": true
+    }
+  ],
+  "bilateral_coverage_pass": true,
+  "absolute_lps_x_used_for_side": false,
+  "qa_figure": "reports/manifests/vsd010_bilateral_coverage_v1.png",
+  "laterality_source": "vsd_cohort_laterality_intrinsic_v1"
+}

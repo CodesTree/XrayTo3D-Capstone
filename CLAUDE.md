@@ -67,7 +67,7 @@ Do NOT create standalone `.py` scripts for pipeline steps — always use noteboo
 - **OS**: Windows 11, PowerShell
 - **Project root**: `C:\Users\Chan Zheng Shao\OneDrive\Desktop\Github Repo\TestProject\`
 - **Notebook root**: `TestProject/notebooks/`
-- **Target volume**: 128³
+- **Target volume**: 256³
 - **Device**: CPU
 
 ### HPC (Sunway University)
@@ -91,7 +91,7 @@ Do NOT create standalone `.py` scripts for pipeline steps — always use noteboo
   └── temp_reqs.txt
   ```
 - **Requirements**: Use `requirements_hpc.txt` from the local digital twin (pywin32 removed, TotalSegmentator added)
-- **Target volume**: 512³
+- **Target volume**: 256³
 - **Device**: `cuda` (GPU available)
 - **TotalSegmentator**: `fast=False` (full model on GPU)
 
@@ -111,7 +111,8 @@ Do NOT use PowerShell syntax in HPC notebooks — use POSIX shell.
 
 - **Spatial resampling**: 0.5mm isotropic
 - **HU bone window**: [-450, 1050]
-- **Orientation**: RAS (Right-Anterior-Superior)
+- **Canonical orientation**: LPS (Left-Posterior-Superior) end-to-end
+- **Intermediate resampling**: 0.5mm isotropic; the stored 200mm/256 grid is 0.78125mm isotropic
 - **Target volume**: 256³ for 3D volumes / 256×256 for 2D images — unified across local and HPC
 - **DRR method**: DiffDRR (unified for healthy + fractured)
 - **Project layout**: Cookiecutter Data Science (`testproject/` package)
@@ -124,18 +125,19 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 ### VSD (Healthy)
 
 - 11 normal subjects: 8 single-folder DICOM + 3 multi-folder merged (010, 015, 017)
-- 20 z-prefix full-body CT subjects (z001–z066) — processed via `vsd_z_crop.ipynb`
+- 20 z-prefix full-body CT subjects (z001–z066) in the source study — processed via `vsd_z_crop.ipynb`; z057 Left/Right are excluded for metal artefacts
 - Multi-folder subjects merged in `data/interim/merged_vsd/` before knee cropping
 - Scans are bilateral — use connected-component analysis to separate left/right legs
 - Knee crop margin: +-100mm around knee center
 - Output: `data/raw/healthy/VSD.{id}/` per-case folders
-- **Excluded (TKR)**: z050 Left and z063 Left have total knee replacements — severe metal
-  artifacts, unsuitable for training or testing. Their contralateral sides (Right) may still be usable.
-  (Sides corrected after the L/R relabel: the TKR knee is the anatomical Left; the usable knee is the Right.)
+- **Excluded (TKR)**: the user-approved surviving knees for z050 and z063 are anatomical Right;
+  intrinsic LPS fibula/tibia evidence confirms this. Their affected anatomical Left knees are excluded
+  for severe metal artefacts. Raw source files remain unchanged.
 
 ### Fractured (Ruikar)
 
 - Case4 and Case10 excluded (scout images, 1 Z-slice each; MIN_Z_SLICES=10)
+- Case8 excluded for fracture-fixation metal hardware
 - Already knee-region scans — no bilateral separation needed
 - Bimodal Z-spacing: 0.7mm (8 cases) and 3.0mm (6 cases)
 
@@ -145,3 +147,18 @@ pipeline. They require their own image preprocessing (resize, normalize, etc.).
 - ~2 X-ray views per patient (AP + lateral)
 - No paired CT volumes — qualitative evaluation only
 - Contains patient names in folder/filenames — handle with care
+## Foundation Experiment Contract
+
+- Final quantitative cohort: 58 healthy knees + 13 fractured knees = 71.
+- Reconstruction target: four binary channels in `[femur, tibia, patella, fibula]` order.
+- Encoder policy: five fold-specific FCMAE P1 + cross-view P2 checkpoints, trained without test-fold subjects.
+- Shared front end: train through a neutral head per fold, discard the head, then freeze encoder/fusion/lift for both decoders.
+- Raw Regen PII is not modified. Generated manifests, figures, logs, and handoffs use study IDs only.
+- Full U-Base/V-Base cross-validation is blocked until the Stage 2 independent QA gate passes.
+
+## HPC Result Handoff
+
+Heavy preprocessing and modelling notebooks may run through Open OnDemand. After every HPC run,
+the responsible agent must ask the user for the executed notebook or log, configuration, summary
+CSV/JSON, QA figures, resource usage, job/output paths, and hashes for large outputs. Submission or
+file existence is not evidence of success. Dependent work resumes only after a recorded PASS verdict.
