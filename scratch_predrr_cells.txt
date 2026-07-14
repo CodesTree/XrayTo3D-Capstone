@@ -1,0 +1,97 @@
+============================== CELL 0 id=a1b2c3d4 exec_count=None
+# Unified Pre-DRR Preprocessing Pipeline
+
+Standardizes raw knee CT volumes into a uniform format suitable for **DRR generation** via DiffDRR.
+
+## Pipeline
+Load → Resample (0.5mm isotropic) → Orient (LPS) → Bone Window ([-450, 1050] HU) → **Body-Envelope Mask (drop CT table + extra body parts)** → ROI Bone Crop → **Center into Fixed Physical FOV (200mm cube)** → Resize to TARGET_SIZE³ → Save NIfTI
+
+## Datasets (71 volumes)
+| Dataset | Count | Format | Source |
+|---------|-------|--------|--------|
+| Regular VSD (healthy) | 22 | NIfTI | `data/raw/healthy/VSD.{001-023}/` |
+| Z-prefix VSD (healthy) | 36 | NIfTI | `data/raw/healthy/VSD.z{001-066}/` |
+| Fractured (Ruikar) | 13 | DICOM | `data/raw/fractured/Part{Left,Right}/` |
+
+Output is split per dataset under `data/interim/predrr_lps_256_v1/{healthy,fractured}/`.
+
+## Laterality, Exclusions & Cleaning (decisions + justification)
+- **Non-destructive side mapping** — canonical output IDs are read from configs/vsd_laterality_overrides_v1.json; raw files are never renamed. The active map is empty because the focused four-bone audit found no mapping override is required.
+- **TKR metal (healthy)** — one affected knee from each of `z050` and `z063` is excluded; current LPS-centroid evidence infers excluded Left and surviving Right, with user approval pending: total knee replacements saturate the
+  HU ceiling, masquerade as bone, and occlude the true joint (unrecoverable). Defensive in code — only
+  the survivor files are named `Right` and are retained only after the pending user laterality gate.
+- **Metal hardware (fractured)** — `Case8` excluded: lodged metallic hardware saturates HU and hides
+  the underlying bone shape (unrecoverable) — same policy as the TKR cases. Dropped from train + eval.
+- **Scouts (fractured)** — `Case4`, `Case10` excluded: single-slice scout series (< `MIN_Z_SLICES`).
+- **Fused cast (fractured)** — `Case3`, `Case16`: a dense cast/holder is topologically fused to the
+  limb, so no threshold / connected-component can separate it. Removed manually in 3D Slicer and
+  de-specked via `fractured_cast_cleanup.ipynb` → `data/interim/fractured_cast_cleaned/`; this notebook
+  re-points those cases at the cleaned NIfTI via the `CAST_CLEANED` override.
+- **Body-envelope mask (ALL cases — VSD + fractured)** — step 4b keeps the largest soft-tissue
+  connected component (+ fill holes) and zeros everything outside the limb, removing the CT
+  table/support slab and any disconnected extra body parts. Air-gap-separated table cases (e.g.
+  `Case5`, `Case11`, `Case12`) are cleaned automatically here — no manual work needed.
+- **Contralateral-leg contamination (healthy)** — `VSD.z036`: bilateral FOV captured
+  contralateral-leg bone (~14–30 k mm³) that passes `GT_THRESH`. Soft-tissue
+  `body_envelope_mask` cannot separate both legs (one soft envelope); a bone distance gate
+  is unsafe (flags the fibula). Erosion-based leg separation is applied in
+  `z036_contralateral_cleanup.ipynb` → `data/interim/healt
+============================== CELL 5 id=castclean-override exec_count=4
+# ============================================================
+# Cast-cleaned source override (fused-cast cases only)
+# ============================================================
+# Case3 and Case16 have a cast topologically FUSED to the limb (cannot be auto-separated by
+# body_envelope_mask). They were removed manually in 3D Slicer + de-specked via
+# fractured_cast_cleanup.ipynb -> data/interim/fractured_cast_cleaned/<Case>_clean.nii.gz.
+# Re-point those cases at the cleaned NIfTI so their predrr no longer rebuilds the cast from
+# the raw DICOM. (Case5/Case11 are TABLE, not cast -- air-gap separated -- so they stay on
+# raw DICOM and are cleaned automatically by body_envelope_mask during processing.)
+CAST_CLEANED = {
+    "Case3_PartLeft": "Case3_clean.nii.gz",
+    "Case16_PartRight": "Case16_clean.nii.gz",
+}
+_clean_dir = PROJECT_ROOT / "data" / "interim" / "fractured_cast_cleaned"
+for vid, fname in CAST_CLEANED.items():
+    p = _clean_dir / fname
+    m = df_cases["volume_id"] == vid
+    if m.any() and p.exists():
+        df_cases.loc[m, "source_format"] = "nifti"
+        df_cases.loc[m, "file_path"] = str(p)
+        print(f"  [CAST-CLEANED] {vid} -> {p.name}")
+    elif m.any():
+        print(f"  [WARN] {vid}: cleaned file missing ({p}); still using raw DICOM (cast present)")
+    else:
+        print(f"  [WARN] {vid}: not found in df_cases (skipped)")
+
+# ============================================================
+# Contralateral-leg cleaned source override (z036 only)
+# ============================================================
+# VSD.z036 is a bilateral full-body CT whose knee crop captured contralateral-leg bone inside the
+# 200mm FOV. The soft-tissue body_envelope_mask cannot separate two legs sharing one envelope, and
+# a bone-level distance gate is unsafe (flags the fibula). Erosion-based leg separation is applied
+# in z036_contralateral_cleanup.ipynb -> data/interim/healthy_cleaned/.
+# z036 Right: auto-separated (erosion breaks the inter-leg bridge cleanly).
+# z036 Left : bridged even after erosion -> manual 3D Slicer step required; warn until file exists.
+CONTRALATERAL_CLEANED = {
+    "VSD_z036_Right": "VSD_z036_Right_clean.nii.gz",
+    "VSD_z036_Left":  "VSD_z036_Left_clean.nii.gz",
+}
+_healthy_clean_dir = PROJECT_ROOT / "data" / "interim" / "healthy_cleaned"
+for vid, fname in CONTRALATERAL_CLEANED.items():
+    p = _healthy_clean_dir / fname
+    m = df_cases["volume_id"] == vid
+    if m.any() and p.exists():
+        df_cases.loc[m, "source_format"] = "nifti"
+        df_cases.loc[m, "file_path"] = str(p)
+        print(f"  [CONTRALATERAL-CLEANED] {vid} -> {p.name}")
+    elif m.any():
+        print(f"  [WARN] {vid}: cleaned file missing ({p}); still using raw NIfTI (contralateral bone present)")
+    else:
+        print(f"  [WARN] {vid}: not found in df_cases (skipped)")
+
+--OUT--
+  [CAST-CLEANED] Case3_PartLeft -> Case3_clean.nii.gz
+  [CAST-CLEANED] Case16_PartRight -> Case16_clean.nii.gz
+  [CONTRALATERAL-CLEANED] VSD_z036_Right -> VSD_z036_Right_clean.nii.gz
+  [CONTRALATERAL-CLEANED] VSD_z036_Left -> VSD_z036_Left_clean.nii.gz
+
