@@ -6,8 +6,10 @@
   "hf_hub_id": "timm/convnextv2_tiny.fcmae",
   "origin_repository": "https://github.com/facebookresearch/ConvNeXt-V2",
   "license": "CC-BY-NC-4.0",
-  "relative_path": "models/pretrained/foundation_stage2_v1/convnextv2_tiny_1k_224_fcmae.pt",
-  "runtime_download_allowed": false,
-  "size_bytes": null,
-  "sha256": null
+  "loader": "timm.create_model",
+  "pretrained": true,
+  "features_only": true,
+  "cache_managed_by": "timm",
+  "manual_checkpoint_required": false,
+  "loaded_state_sha256_recorded_per_run": true
 }
