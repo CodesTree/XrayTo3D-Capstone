@@ -2,7 +2,7 @@
 
 ## Entry gate
 
-Do not run until `s2_1a_fcmae_p1_fold0` has an independent `PASS` and its approved fold-0 P1 export and best trainstate are present with matching hashes.
+Do not run until `s2_1a_fcmae_p1_fold0` has an independent `PASS`, its approved fold-0 P1 artifacts match their hashes, and the P1 feature audit has structural status `PASS`. Local/global quality may be `WARN`.
 
 ## HPC run
 

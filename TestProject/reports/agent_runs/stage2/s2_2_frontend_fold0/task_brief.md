@@ -2,7 +2,7 @@
 
 ## Entry gate
 
-Do not run until the matching fold-0 P2 encoder has an independent `PASS`.
+Do not run until the matching fold-0 P2 encoder has an independent `PASS` and the P2 feature audit has structural status `PASS`. Audit quality warnings are recorded but do not automatically block this phase.
 
 ## HPC run
 

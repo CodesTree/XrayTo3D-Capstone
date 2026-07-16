@@ -43,4 +43,6 @@ Before a run, give the user the notebook path, cells/config to verify, environme
 
 The returned bundle must contain the executed notebook or log, run config JSON, summary CSV/JSON, QA figures/overlays, traceback if any, GPU model, requested host RAM and wall time, observed peak GPU/host memory where available, job ID, bulk-output path, and hashes for large outputs.
 
+Scoped exception: for the accepted Stage 1 DRR evidence task s1_drr_generation_evidence_v1, job ID, GPU model, requested host RAM and wall time are best-effort informational fields and are not PASS requirements. Numerical QA, hashes, configuration, QA figures, output paths and independent review remain mandatory. This exception does not apply to Stage 2 or later HPC modelling work.
+
 Never infer success from submission or file existence. Review the bundle and issue exactly one verdict: PASS, RETRY or BLOCKED. Record evidence and verdict before dependent HPC work starts.
