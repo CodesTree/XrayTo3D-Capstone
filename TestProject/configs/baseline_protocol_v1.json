@@ -21,7 +21,7 @@
     "discard_training_head": true,
     "freeze_for_decoder_comparison": true
   },
-  "decoder_conditions": ["plain_unet_style", "residual_vnet_style"],
+  "decoder_conditions": ["plain_unet_style", "residual_vnet_style", "residual_relu_style", "plain_prelu_style"],
   "normalization": {
     "type": "GroupNorm",
     "groups": 8
