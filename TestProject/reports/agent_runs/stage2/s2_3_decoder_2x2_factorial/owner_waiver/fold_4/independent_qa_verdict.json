@@ -1,0 +1,24 @@
+{
+  "accepted_warnings": [
+    "global_feature_evidence_below_threshold",
+    "p2_preservation_warning"
+  ],
+  "audit_sha256": "3d1712db18ff0a78f983f1f220b82c31e8db809a0a7105638fc69b43929a76b5",
+  "conditions": [
+    "retain_fold4_in_primary",
+    "run_fold4_excluded_sensitivity",
+    "no_absolute_frontend_quality_claim",
+    "record_l2_l3_dimensional_collapse"
+  ],
+  "decision_authority": "project_owner",
+  "disposition": "ACCEPT_WITH_CONDITIONS",
+  "fold": 4,
+  "independent_review_waived": true,
+  "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+  "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+  "reviewed_at_utc": "2026-07-21T08:25:45Z",
+  "reviewer": null,
+  "schema_version": "stage2_decoder_entry_qa_v1",
+  "scope": "decoder_comparison",
+  "status": "PASS"
+}

@@ -1,0 +1,76 @@
+{
+  "arm": "residual_relu_style",
+  "augmentation": {
+    "enabled": false,
+    "reason": "deterministic_cached_capacity_gate"
+  },
+  "entry_qa": {
+    "audit_sha256": "6faf9d13331b51750f438b9189a066ed62aa354db4b45480c5ea04b7f9312c5c",
+    "independent_verdict_sha256": "5edf553291fa2c8249db17bfaea97850e5ed42a913305d5c14255513baf971a1",
+    "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+    "quality_status": "WARN",
+    "warnings": [
+      "p2_preservation_warning"
+    ]
+  },
+  "fold": 0,
+  "hardware": {
+    "cuda_device_name": "NVIDIA L4",
+    "device": "cuda"
+  },
+  "hyperparameters": {
+    "activation_checkpointing": true,
+    "amp": true,
+    "batch_size": 1,
+    "bce_pos_weight_by_bone": {
+      "femur": 43.12925720214844,
+      "fibula": 429.51068115234375,
+      "patella": 518.780517578125,
+      "tibia": 47.87561798095703
+    },
+    "bce_pos_weight_scope": "fixed_subset_aggregate",
+    "deep_supervision": false,
+    "evaluation_every": 10,
+    "learning_rate": 0.001,
+    "loss": "0.5_subset_balanced_bce+0.5_soft_dice",
+    "max_epochs": 350,
+    "minimum_dice_each_case_bone": 0.9,
+    "optimizer": "Adam",
+    "required_consecutive_passes": 2,
+    "target_size": 256
+  },
+  "input_feature_sha256": {
+    "Case14_PartRight": [
+      "5473ea0af9e30709eea1e964b8cf11407d23fe3ed960be8d0493dc3a6c7a4b3d",
+      "32d5441adf8bb63dcbbe7b52b77a0523c20bda9fe3a480977a94cde1be68db0b",
+      "0ca950fa0c00569eed0f7fba29550d16e737c0ad9f757b5ce7610e65b93952e2",
+      "25da86e4e7fbf9e5b5be361d94d2b169f3a1481340a16363e98ba20e3d876729"
+    ],
+    "VSD_016_Left": [
+      "6bba8f708d9c84424a6a78d5471c76ed09b01b815fba9d092a0482b35ffda36f",
+      "2a43df48a952660c58384637c91192fc2cb5b6b6ac28f04babfb0208ddc7579f",
+      "ede4151cab93e27c00fa34bf429d08622e7f139ec74f3833299543172a1ce135",
+      "6d95dbb1d6b6b4af5167c9472ee076ca46e9e11d3e46958f4be988d6e85f3140"
+    ]
+  },
+  "logit_resolution": 128,
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "output_paths": {
+    "output_dir": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_relu_style/subset_2_mixed"
+  },
+  "protocol_version": "baseline_protocol_v1",
+  "sample_ids": [
+    "VSD_016_Left",
+    "Case14_PartRight"
+  ],
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "software": {
+    "python": "3.12.3",
+    "torch": "2.10.0+cu128"
+  },
+  "stage": "decoder_capacity_gate",
+  "subset": "subset_2_mixed",
+  "upstream_feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+  "upstream_frontend_checkpoint_sha256": "7d7e79bc8b2f9c25e68b6012d5ce567cc9d4524b7ad4ef9e04f5616bb1cfaa88"
+}

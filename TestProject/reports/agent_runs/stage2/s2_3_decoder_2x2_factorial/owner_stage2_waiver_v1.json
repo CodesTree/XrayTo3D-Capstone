@@ -1,0 +1,24 @@
+{
+  "conditions": [
+    "retain_fold4_in_primary",
+    "run_fold4_excluded_sensitivity",
+    "no_absolute_frontend_quality_claim"
+  ],
+  "decision_authority": "project_owner",
+  "fold_dispositions": {
+    "0": "ACCEPT",
+    "1": "ACCEPT",
+    "2": "ACCEPT",
+    "3": "ACCEPT_WITH_CONDITIONS",
+    "4": "ACCEPT_WITH_CONDITIONS"
+  },
+  "independent_review_required": false,
+  "preserve_historical_quality_status": true,
+  "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+  "reason": "The project owner explicitly waived the independent-review requirement and directed progression to the decoder comparison using the evidence-based fold dispositions.",
+  "recorded_at_utc": "2026-07-21T08:25:45Z",
+  "schema_version": "owner_stage2_waiver_v1",
+  "scope": "decoder_comparison_and_full_decoder_cross_validation",
+  "status": "PASS",
+  "waived_requirement": "independent_stage2_reviewer"
+}

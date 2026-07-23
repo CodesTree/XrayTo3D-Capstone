@@ -208,7 +208,7 @@ A single metric core is shared by the decoder, comparison, and test notebooks, w
 
 **Aggregation:** metrics aggregate **subject-first** (bilateral knees of one subject averaged together) before the cohort mean, so subjects with two knees are not double-counted.
 
-**Planned statistics (Stage 3, not yet run):** paired **Wilcoxon signed-rank** tests across the five folds to compare U-Net vs V-Net, per the fracture-comparison methodology (cross-validation + surface metrics + non-parametric paired test). `04_decoder_comparison.ipynb` currently validates only the Stage 2 schema; full five-fold aggregation and thesis comparisons are explicitly deferred to Stage 3.
+**Planned statistics (Stage 3, not yet run):** a descriptive effect-size comparison across the five folds to compare U-Net vs V-Net (raw/favourable mean and median per-subject differences with fold-stratified bootstrap confidence intervals, no significance test), per the fracture-comparison methodology (cross-validation + surface metrics). `04_decoder_comparison.ipynb` currently validates only the Stage 2 schema; full five-fold aggregation and thesis comparisons are explicitly deferred to Stage 3.
 
 ---
 
@@ -229,7 +229,7 @@ The handoff rule is strict and worth stating in the report as a methodological s
 | Stage 2.2 shared front end                   | ✅            | ✅ (deterministic feature hashing)         | ❌                                         | ❌                                           |
 | Stage 2.3 decoders + overfit gate            | ✅            | ✅ (fairness contract, save/resume logic)  | ❌ (needs HPC GPU)                         | ❌                                           |
 | Stage 2 metric core + tests                  | ✅            | ✅ (synthetic analytic tests)              | n/a                                        | ❌ (Agent-N review pending)                  |
-| Stage 3 five-fold comparison + Wilcoxon      | Designed only | —                                          | ❌                                         | Blocked until Stage 2 PASS                   |
+| Stage 3 five-fold comparison + effect size   | Designed only | —                                          | ❌                                         | Blocked until Stage 2 PASS                   |
 
 **In one sentence:** the experimental apparatus for a rigorous, leakage-free U-Net-vs-V-Net comparison is complete and self-consistent; the empirical comparison has not yet been run.
 
@@ -238,7 +238,7 @@ The handoff rule is strict and worth stating in the report as a methodological s
 ## 12. Suggested mapping to capstone report chapters
 
 - **Introduction / Problem** → §1 (framing, why a _controlled_ decoder comparison).
-- **Literature / Methodology background** → §6–§9 (FCMAE, cross-view fusion, U-Net vs V-Net, surface metrics + Wilcoxon).
+- **Literature / Methodology background** → §6–§9 (FCMAE, cross-view fusion, U-Net vs V-Net, surface metrics + effect-size comparison).
 - **Datasets** → §2 (three datasets, roles, exclusions with justification).
 - **Data preparation** → §3–§4 (preprocessing, per-bone GT, cohort + fold design).
 - **Experimental design / rigour** → §1 fairness contract, §4 leakage control, §8 architecture contract, §10 evidence discipline. _This is the chapter where the project is strongest and most defensible — lead with it._

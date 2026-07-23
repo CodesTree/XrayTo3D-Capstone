@@ -1,0 +1,129 @@
+{
+  "activation": "relu",
+  "architecture": {
+    "activation": "relu",
+    "groupnorm_layers": 8,
+    "label": "ReLU + residual",
+    "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+    "parameters": 8604516,
+    "residual": true
+  },
+  "arm": "residual_relu_style",
+  "arm_label": "ReLU + residual",
+  "best_validation_macro_dice": 0.479004830121994,
+  "checkpoint_sha256": "14c91b9101597691e0351c5cb21dd080fb8ce79193ce6dd62738fff89f630056",
+  "config_sha256": "531f207b51a35624e99d04dab69d73fa8901a909a640f59c48c7b6893a362067",
+  "effective_spacing_mm": 1.5625,
+  "epochs_completed": 20,
+  "fold": 1,
+  "front_end_state_sha256_after": "4f58c28dc41f9ae1387a650829d572d46be6e2f3f105625a81866a713ea22f50",
+  "front_end_unchanged": true,
+  "hyperparameters": {
+    "activation_checkpointing": true,
+    "amp": true,
+    "batch_size": 1,
+    "bce_pos_weight_by_bone": {
+      "femur": 36.96407699584961,
+      "fibula": 566.8525390625,
+      "patella": 428.1968688964844,
+      "tibia": 51.343955993652344
+    },
+    "bce_pos_weight_scope": "fixed_fold_training_split_aggregate",
+    "learning_rate": 0.001,
+    "loss": "0.5_training_split_balanced_bce+0.5_soft_dice",
+    "max_epochs": 20,
+    "optimizer": "Adam",
+    "patience": 15,
+    "scheduler": "CosineAnnealingLR",
+    "threshold": 0.5
+  },
+  "logit_resolution": 128,
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "oof_rows": 14,
+  "output_resolution": 256,
+  "qa": {
+    "audit_linkage": {
+      "payload": {
+        "authorization_mode": "owner_waiver",
+        "current_audit_sha256": "c973268b3c712b052b384dace611c54eaca147dbf40a05b1672d8faa52ce1687",
+        "fold": 1,
+        "frontend_checkpoint_sha256": "d6509c1698db6c02e78d6253c52f8e443eea95523a57d0226923df6577698e34",
+        "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+        "reason": "P2 audit evidence was regenerated without changing the P2 encoder or frozen shared-front-end weights.",
+        "recorded_audit_sha256": "d0e408d7dba5a37d908d66b983cbc372af7109dfcced9e4e834889f2abd14ee9",
+        "reviewed_at_utc": "2026-07-21T08:25:45Z",
+        "reviewer": null,
+        "schema_version": "posthoc_audit_linkage_v1",
+        "status": "PASS"
+      },
+      "sha256": "b1409f7e848d925bcded73f810d55348e969311290ba279813e1fe739f1279fe"
+    },
+    "audit_sha256": "c973268b3c712b052b384dace611c54eaca147dbf40a05b1672d8faa52ce1687",
+    "independent_sha256": "1d338196cb279ccea941a08732027e0a1dad23f877e6138df0e4a770f3106261",
+    "independent_verdict": {
+      "accepted_warnings": [],
+      "audit_sha256": "c973268b3c712b052b384dace611c54eaca147dbf40a05b1672d8faa52ce1687",
+      "conditions": [],
+      "decision_authority": "project_owner",
+      "disposition": "ACCEPT",
+      "fold": 1,
+      "independent_review_waived": true,
+      "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+      "reviewed_at_utc": "2026-07-21T08:25:45Z",
+      "reviewer": null,
+      "schema_version": "stage2_decoder_entry_qa_v1",
+      "scope": "decoder_comparison",
+      "status": "PASS"
+    },
+    "quality_status": "PASS",
+    "stage2_training_evidence": {
+      "capacity_gate": {
+        "failed_runs": [
+          {
+            "arm": "plain_unet_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          },
+          {
+            "arm": "plain_prelu_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          }
+        ],
+        "override_applied": true,
+        "override_reason": "project_owner_authorized_final_training_evaluation",
+        "reported_pass": false
+      },
+      "capacity_summary_sha256": "595976f5ff0772450960626ae5f8b88c1e882f37123d7f83952838c62b0d1931",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4"
+    },
+    "warnings": []
+  },
+  "residual": true,
+  "resource_usage": {
+    "gpu_headroom_fraction": 0.6451084716392662,
+    "peak_gpu_bytes": 8400525824,
+    "peak_host_bytes": 3435696128,
+    "total_gpu_bytes": 23670685696,
+    "wall_seconds": 2366.9
+  },
+  "resume": {
+    "enabled": false,
+    "resumed": false,
+    "start_epoch": 0
+  },
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "shared_frontend_sha256": "d6509c1698db6c02e78d6253c52f8e443eea95523a57d0226923df6577698e34",
+  "shared_frontend_state_sha256": "4f58c28dc41f9ae1387a650829d572d46be6e2f3f105625a81866a713ea22f50",
+  "shared_init_sha256": "69c0781d167afa8358d045fe2b6cf740899dee6c67437bec3eb39da2ea664ac0",
+  "stage": "controlled_decoder_cv",
+  "success": true,
+  "sweep": false,
+  "training_checkpoint_sha256": "5d44a606999ae2ce6037e8c32b3fa3c84f37aaac418ee2f8ce35493cffaeb778"
+}

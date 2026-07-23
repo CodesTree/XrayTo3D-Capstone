@@ -1,0 +1,11 @@
+{
+  "current_audit_sha256": "REPLACE_WITH_CURRENT_P2_AUDIT_SHA256",
+  "fold": 0,
+  "frontend_checkpoint_sha256": "REPLACE_WITH_SHARED_FRONTEND_SHA256",
+  "reason": "P2 audit evidence was regenerated without changing the P2 encoder or frozen shared-front-end weights.",
+  "recorded_audit_sha256": "REPLACE_WITH_SHA_RECORDED_IN_SHARED_FRONTEND_PROVENANCE",
+  "reviewed_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "reviewer": "REPLACE_WITH_INDEPENDENT_REVIEWER",
+  "schema_version": "posthoc_audit_linkage_v1",
+  "status": "PASS"
+}

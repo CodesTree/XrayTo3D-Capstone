@@ -1,0 +1,545 @@
+{
+  "audit_version": "p2_pairing_audit_v2",
+  "best_trainstate_sha256": "5174b217aaec76a33852ab05c84d7517c347f2d776e1fc2cd04fa5671ad0c205",
+  "config_sha256": "1154d8b98a76e9cc04677641d8c6ad34b861b3facaf9a7d560ca4c7bce7fc283",
+  "fold": 4,
+  "history_sha256": "622776269354a93a1cd80fcf2988aa8fb888856dc2a26b011ae614dc5e83d330",
+  "history_summary": {
+    "best_epoch": 97,
+    "best_validation_loss": 0.4200434386730194,
+    "first_epoch": 0,
+    "initial_validation_loss": 0.4693260788917541,
+    "last_epoch": 99,
+    "minimum_feature_std": 0.4194575548171997,
+    "row_count": 100
+  },
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "mask_repeats": 8,
+  "median_subject_margin": 9.626150131225586e-06,
+  "module_sha256": {
+    "cross_decoder": "3128338955d572d12876a9080e9260709230cac8387bd8fdce06785166ddf608",
+    "encoder": "a4b7bbaabccf3125361b5925298659fd380360f49e41f6150f998d782b3255bb",
+    "fcmae_decoder": "964fefbce14ac9c1891efbaa657756a45ed186c986f7bb69eb641638c5f818ac"
+  },
+  "negative_policy": "same_dataset_different_subject",
+  "optimizer_objects_created": false,
+  "repeat_results": [
+    {
+      "margin_shuffled_minus_paired": -5.0036443604351e-05,
+      "repeat": 0,
+      "subject_macro_paired_loss": 0.332339314950837,
+      "subject_macro_shuffled_loss": 0.33228927850723267
+    },
+    {
+      "margin_shuffled_minus_paired": 0.00019355780548518942,
+      "repeat": 1,
+      "subject_macro_paired_loss": 0.3527449816465378,
+      "subject_macro_shuffled_loss": 0.35293853945202297
+    },
+    {
+      "margin_shuffled_minus_paired": 0.00118696358468795,
+      "repeat": 2,
+      "subject_macro_paired_loss": 0.3382341050439411,
+      "subject_macro_shuffled_loss": 0.33942106862862903
+    },
+    {
+      "margin_shuffled_minus_paired": -0.0001330574353535785,
+      "repeat": 3,
+      "subject_macro_paired_loss": 0.3441927797264523,
+      "subject_macro_shuffled_loss": 0.3440597222910987
+    },
+    {
+      "margin_shuffled_minus_paired": -0.0002918789784113751,
+      "repeat": 4,
+      "subject_macro_paired_loss": 0.33393538660473293,
+      "subject_macro_shuffled_loss": 0.33364350762632156
+    },
+    {
+      "margin_shuffled_minus_paired": 2.7452905972835673e-05,
+      "repeat": 5,
+      "subject_macro_paired_loss": 0.3454266024960412,
+      "subject_macro_shuffled_loss": 0.345454055402014
+    },
+    {
+      "margin_shuffled_minus_paired": -9.936425420975503e-05,
+      "repeat": 6,
+      "subject_macro_paired_loss": 0.35521383583545685,
+      "subject_macro_shuffled_loss": 0.3551144715812471
+    },
+    {
+      "margin_shuffled_minus_paired": -0.00020278493563335998,
+      "repeat": 7,
+      "subject_macro_paired_loss": 0.33916908668147194,
+      "subject_macro_shuffled_loss": 0.3389663017458386
+    }
+  ],
+  "sample_count": 15,
+  "sample_results": [
+    {
+      "dataset": "Ruikar",
+      "margin_shuffled_minus_paired": -0.0002599954605102539,
+      "negative_sample_ids": [
+        "Case2_PartLeft",
+        "Case3_PartLeft"
+      ],
+      "paired_loss": 0.3633059561252594,
+      "sample_id": "Case15_PartRight",
+      "shuffled_loss": 0.36304596066474915,
+      "subject_id": "Case15"
+    },
+    {
+      "dataset": "Ruikar",
+      "margin_shuffled_minus_paired": 0.0001341402530670166,
+      "negative_sample_ids": [
+        "Case15_PartRight",
+        "Case3_PartLeft"
+      ],
+      "paired_loss": 0.3460169732570648,
+      "sample_id": "Case2_PartLeft",
+      "shuffled_loss": 0.34615111351013184,
+      "subject_id": "Case2"
+    },
+    {
+      "dataset": "Ruikar",
+      "margin_shuffled_minus_paired": 0.00045540928840637207,
+      "negative_sample_ids": [
+        "Case15_PartRight",
+        "Case2_PartLeft"
+      ],
+      "paired_loss": 0.3403579294681549,
+      "sample_id": "Case3_PartLeft",
+      "shuffled_loss": 0.3408133387565613,
+      "subject_id": "Case3"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": -9.5367431640625e-07,
+      "negative_sample_ids": [
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.3503062129020691,
+      "sample_id": "VSD_001_Left",
+      "shuffled_loss": 0.3503052592277527,
+      "subject_id": "VSD_001"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 2.0205974578857422e-05,
+      "negative_sample_ids": [
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.3517608642578125,
+      "sample_id": "VSD_001_Right",
+      "shuffled_loss": 0.35178107023239136,
+      "subject_id": "VSD_001"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 0.0006245970726013184,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.33887913823127747,
+      "sample_id": "VSD_002_Left",
+      "shuffled_loss": 0.3395037353038788,
+      "subject_id": "VSD_002"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 0.0014017224311828613,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.33409732580184937,
+      "sample_id": "VSD_002_Right",
+      "shuffled_loss": 0.3354990482330322,
+      "subject_id": "VSD_002"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": -0.0005666911602020264,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.32192254066467285,
+      "sample_id": "VSD_z027_Left",
+      "shuffled_loss": 0.3213558495044708,
+      "subject_id": "VSD_z027"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": -0.0005172491073608398,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.35100454092025757,
+      "sample_id": "VSD_z027_Right",
+      "shuffled_loss": 0.35048729181289673,
+      "subject_id": "VSD_z027"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 0.0005786716938018799,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.3469417095184326,
+      "sample_id": "VSD_z046_Left",
+      "shuffled_loss": 0.3475203812122345,
+      "subject_id": "VSD_z046"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": -0.001321554183959961,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.31172192096710205,
+      "sample_id": "VSD_z046_Right",
+      "shuffled_loss": 0.3104003667831421,
+      "subject_id": "VSD_z046"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 0.0016425848007202148,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.3321189880371094,
+      "sample_id": "VSD_z056_Left",
+      "shuffled_loss": 0.3337615728378296,
+      "subject_id": "VSD_z056"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 0.0009202063083648682,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "paired_loss": 0.33767056465148926,
+      "sample_id": "VSD_z056_Right",
+      "shuffled_loss": 0.3385907709598541,
+      "subject_id": "VSD_z056"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": -0.0027439892292022705,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right"
+      ],
+      "paired_loss": 0.35017943382263184,
+      "sample_id": "VSD_z062_Left",
+      "shuffled_loss": 0.34743544459342957,
+      "subject_id": "VSD_z062"
+    },
+    {
+      "dataset": "VSD",
+      "margin_shuffled_minus_paired": 0.0007227659225463867,
+      "negative_sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right",
+        "VSD_002_Left",
+        "VSD_002_Right",
+        "VSD_z027_Left",
+        "VSD_z027_Right",
+        "VSD_z046_Left",
+        "VSD_z046_Right",
+        "VSD_z056_Left",
+        "VSD_z056_Right"
+      ],
+      "paired_loss": 0.3418613076210022,
+      "sample_id": "VSD_z062_Right",
+      "shuffled_loss": 0.3425840735435486,
+      "subject_id": "VSD_z062"
+    }
+  ],
+  "sample_weighted_margin_shuffled_minus_paired": 7.262825965881348e-05,
+  "sample_weighted_paired_loss": 0.3412097096443176,
+  "sample_weighted_shuffled_loss": 0.34128233790397644,
+  "schema_version": "foundation_stage2_v1",
+  "status": "PASS",
+  "subject_count": 9,
+  "subject_macro_margin_shuffled_minus_paired": 7.88569450378418e-05,
+  "subject_macro_paired_loss": 0.34265701472759247,
+  "subject_macro_relative_margin": 0.00023008080436110078,
+  "subject_macro_shuffled_loss": 0.3427358716726303,
+  "subject_results": [
+    {
+      "margin_shuffled_minus_paired": -0.0002599954605102539,
+      "paired_loss": 0.3633059561252594,
+      "sample_ids": [
+        "Case15_PartRight"
+      ],
+      "shuffled_loss": 0.36304596066474915,
+      "subject_id": "Case15"
+    },
+    {
+      "margin_shuffled_minus_paired": 0.0001341402530670166,
+      "paired_loss": 0.3460169732570648,
+      "sample_ids": [
+        "Case2_PartLeft"
+      ],
+      "shuffled_loss": 0.34615111351013184,
+      "subject_id": "Case2"
+    },
+    {
+      "margin_shuffled_minus_paired": 0.00045540928840637207,
+      "paired_loss": 0.3403579294681549,
+      "sample_ids": [
+        "Case3_PartLeft"
+      ],
+      "shuffled_loss": 0.3408133387565613,
+      "subject_id": "Case3"
+    },
+    {
+      "margin_shuffled_minus_paired": 9.626150131225586e-06,
+      "paired_loss": 0.3510335385799408,
+      "sample_ids": [
+        "VSD_001_Left",
+        "VSD_001_Right"
+      ],
+      "shuffled_loss": 0.351043164730072,
+      "subject_id": "VSD_001"
+    },
+    {
+      "margin_shuffled_minus_paired": 0.0010131597518920898,
+      "paired_loss": 0.3364882320165634,
+      "sample_ids": [
+        "VSD_002_Left",
+        "VSD_002_Right"
+      ],
+      "shuffled_loss": 0.3375013917684555,
+      "subject_id": "VSD_002"
+    },
+    {
+      "margin_shuffled_minus_paired": -0.0005419701337814331,
+      "paired_loss": 0.3364635407924652,
+      "sample_ids": [
+        "VSD_z027_Left",
+        "VSD_z027_Right"
+      ],
+      "shuffled_loss": 0.3359215706586838,
+      "subject_id": "VSD_z027"
+    },
+    {
+      "margin_shuffled_minus_paired": -0.00037144124507904053,
+      "paired_loss": 0.32933181524276733,
+      "sample_ids": [
+        "VSD_z046_Left",
+        "VSD_z046_Right"
+      ],
+      "shuffled_loss": 0.3289603739976883,
+      "subject_id": "VSD_z046"
+    },
+    {
+      "margin_shuffled_minus_paired": 0.0012813955545425415,
+      "paired_loss": 0.3348947763442993,
+      "sample_ids": [
+        "VSD_z056_Left",
+        "VSD_z056_Right"
+      ],
+      "shuffled_loss": 0.33617617189884186,
+      "subject_id": "VSD_z056"
+    },
+    {
+      "margin_shuffled_minus_paired": -0.001010611653327942,
+      "paired_loss": 0.346020370721817,
+      "sample_ids": [
+        "VSD_z062_Left",
+        "VSD_z062_Right"
+      ],
+      "shuffled_loss": 0.3450097590684891,
+      "subject_id": "VSD_z062"
+    }
+  ],
+  "subjects_with_positive_margin": 5,
+  "test_dataset_constructed": false,
+  "test_sample_ids_not_opened": [
+    "Case12_PartRight",
+    "Case5_PartRight",
+    "Case9_PartRight",
+    "VSD_005_Left",
+    "VSD_005_Right",
+    "VSD_016_Left",
+    "VSD_016_Right",
+    "VSD_017_Left",
+    "VSD_017_Right",
+    "VSD_z001_Left",
+    "VSD_z001_Right",
+    "VSD_z013_Left",
+    "VSD_z013_Right",
+    "VSD_z050_Right"
+  ],
+  "train_sample_ids": [
+    "Case11_PartRight",
+    "Case13_PartRight",
+    "Case14_PartRight",
+    "Case16_PartRight",
+    "Case1_PartLeft",
+    "Case6_PartRight",
+    "Case7_PartRight",
+    "VSD_006_Left",
+    "VSD_006_Right",
+    "VSD_010_Left",
+    "VSD_010_Right",
+    "VSD_014_Left",
+    "VSD_014_Right",
+    "VSD_015_Left",
+    "VSD_015_Right",
+    "VSD_019_Left",
+    "VSD_019_Right",
+    "VSD_023_Left",
+    "VSD_023_Right",
+    "VSD_z004_Left",
+    "VSD_z004_Right",
+    "VSD_z009_Left",
+    "VSD_z009_Right",
+    "VSD_z023_Left",
+    "VSD_z023_Right",
+    "VSD_z035_Left",
+    "VSD_z035_Right",
+    "VSD_z036_Left",
+    "VSD_z036_Right",
+    "VSD_z042_Left",
+    "VSD_z042_Right",
+    "VSD_z049_Left",
+    "VSD_z049_Right",
+    "VSD_z055_Left",
+    "VSD_z055_Right",
+    "VSD_z061_Left",
+    "VSD_z061_Right",
+    "VSD_z063_Right",
+    "VSD_z064_Left",
+    "VSD_z064_Right",
+    "VSD_z066_Left",
+    "VSD_z066_Right"
+  ],
+  "training_was_not_repeated": true,
+  "validation_sample_ids": [
+    "Case15_PartRight",
+    "Case2_PartLeft",
+    "Case3_PartLeft",
+    "VSD_001_Left",
+    "VSD_001_Right",
+    "VSD_002_Left",
+    "VSD_002_Right",
+    "VSD_z027_Left",
+    "VSD_z027_Right",
+    "VSD_z046_Left",
+    "VSD_z046_Right",
+    "VSD_z056_Left",
+    "VSD_z056_Right",
+    "VSD_z062_Left",
+    "VSD_z062_Right"
+  ],
+  "validation_subject_ids": [
+    "Case15",
+    "Case2",
+    "Case3",
+    "VSD_001",
+    "VSD_002",
+    "VSD_z027",
+    "VSD_z046",
+    "VSD_z056",
+    "VSD_z062"
+  ]
+}

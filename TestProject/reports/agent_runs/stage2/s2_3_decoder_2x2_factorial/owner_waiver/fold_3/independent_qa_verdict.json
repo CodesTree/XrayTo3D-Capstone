@@ -1,0 +1,21 @@
+{
+  "accepted_warnings": [
+    "p2_preservation_warning"
+  ],
+  "audit_sha256": "59734610d1c771210d1ee3ea34a5eaef3adcc94ea1aa8f0e47b494bdd375aec1",
+  "conditions": [
+    "retain_p2_preservation_warning_in_provenance",
+    "record_l2_effective_rank_caveat"
+  ],
+  "decision_authority": "project_owner",
+  "disposition": "ACCEPT_WITH_CONDITIONS",
+  "fold": 3,
+  "independent_review_waived": true,
+  "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+  "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+  "reviewed_at_utc": "2026-07-21T08:25:45Z",
+  "reviewer": null,
+  "schema_version": "stage2_decoder_entry_qa_v1",
+  "scope": "decoder_comparison",
+  "status": "PASS"
+}

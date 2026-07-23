@@ -1,0 +1,13 @@
+{
+  "authorization_mode": "owner_waiver",
+  "current_audit_sha256": "c973268b3c712b052b384dace611c54eaca147dbf40a05b1672d8faa52ce1687",
+  "fold": 1,
+  "frontend_checkpoint_sha256": "d6509c1698db6c02e78d6253c52f8e443eea95523a57d0226923df6577698e34",
+  "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+  "reason": "P2 audit evidence was regenerated without changing the P2 encoder or frozen shared-front-end weights.",
+  "recorded_audit_sha256": "d0e408d7dba5a37d908d66b983cbc372af7109dfcced9e4e834889f2abd14ee9",
+  "reviewed_at_utc": "2026-07-21T08:25:45Z",
+  "reviewer": null,
+  "schema_version": "posthoc_audit_linkage_v1",
+  "status": "PASS"
+}

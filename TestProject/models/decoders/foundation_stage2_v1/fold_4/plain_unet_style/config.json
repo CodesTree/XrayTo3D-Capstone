@@ -1,0 +1,119 @@
+{
+  "activation": "relu",
+  "architecture": {
+    "activation": "relu",
+    "groupnorm_layers": 8,
+    "label": "U (ReLU, plain)",
+    "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+    "parameters": 8429956,
+    "residual": false
+  },
+  "arm": "plain_unet_style",
+  "arm_label": "U (ReLU, plain)",
+  "effective_spacing_mm": 1.5625,
+  "fold": 4,
+  "hyperparameters": {
+    "activation_checkpointing": true,
+    "amp": true,
+    "batch_size": 1,
+    "bce_pos_weight_by_bone": {
+      "femur": 35.173980712890625,
+      "fibula": 572.6047973632812,
+      "patella": 440.6326904296875,
+      "tibia": 50.82663345336914
+    },
+    "bce_pos_weight_scope": "fixed_fold_training_split_aggregate",
+    "learning_rate": 0.001,
+    "loss": "0.5_training_split_balanced_bce+0.5_soft_dice",
+    "max_epochs": 20,
+    "optimizer": "Adam",
+    "patience": 15,
+    "scheduler": "CosineAnnealingLR",
+    "threshold": 0.5
+  },
+  "logit_resolution": 128,
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "output_resolution": 256,
+  "qa": {
+    "audit_linkage": {
+      "payload": {
+        "authorization_mode": "owner_waiver",
+        "current_audit_sha256": "3d1712db18ff0a78f983f1f220b82c31e8db809a0a7105638fc69b43929a76b5",
+        "fold": 4,
+        "frontend_checkpoint_sha256": "944afa90f29bdf5412cf3f14712fca34b9d07f8b684be38d9735a14e5378ebd8",
+        "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+        "reason": "P2 audit evidence was regenerated without changing the P2 encoder or frozen shared-front-end weights.",
+        "recorded_audit_sha256": "8bd6e49d4da0e7581fd99bc8494170c72b80b57ab2654507ca540316a05e7d10",
+        "reviewed_at_utc": "2026-07-21T08:25:45Z",
+        "reviewer": null,
+        "schema_version": "posthoc_audit_linkage_v1",
+        "status": "PASS"
+      },
+      "sha256": "04fe3fce53735fd0660c76c890c481bf79eb6f895a369d49fefe340b1bb3d2eb"
+    },
+    "audit_sha256": "3d1712db18ff0a78f983f1f220b82c31e8db809a0a7105638fc69b43929a76b5",
+    "independent_sha256": "6e4de7a3f700ed9c2e847d5ea0e16f410c5eceb501933164ff33192865dcf26d",
+    "independent_verdict": {
+      "accepted_warnings": [
+        "global_feature_evidence_below_threshold",
+        "p2_preservation_warning"
+      ],
+      "audit_sha256": "3d1712db18ff0a78f983f1f220b82c31e8db809a0a7105638fc69b43929a76b5",
+      "conditions": [
+        "retain_fold4_in_primary",
+        "run_fold4_excluded_sensitivity",
+        "no_absolute_frontend_quality_claim",
+        "record_l2_l3_dimensional_collapse"
+      ],
+      "decision_authority": "project_owner",
+      "disposition": "ACCEPT_WITH_CONDITIONS",
+      "fold": 4,
+      "independent_review_waived": true,
+      "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+      "reviewed_at_utc": "2026-07-21T08:25:45Z",
+      "reviewer": null,
+      "schema_version": "stage2_decoder_entry_qa_v1",
+      "scope": "decoder_comparison",
+      "status": "PASS"
+    },
+    "quality_status": "WARN",
+    "stage2_training_evidence": {
+      "capacity_gate": {
+        "failed_runs": [
+          {
+            "arm": "plain_unet_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          },
+          {
+            "arm": "plain_prelu_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          }
+        ],
+        "override_applied": true,
+        "override_reason": "project_owner_authorized_final_training_evaluation",
+        "reported_pass": false
+      },
+      "capacity_summary_sha256": "595976f5ff0772450960626ae5f8b88c1e882f37123d7f83952838c62b0d1931",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4"
+    },
+    "warnings": [
+      "global_feature_evidence_below_threshold",
+      "p2_preservation_warning"
+    ]
+  },
+  "residual": false,
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "shared_frontend_sha256": "944afa90f29bdf5412cf3f14712fca34b9d07f8b684be38d9735a14e5378ebd8",
+  "shared_frontend_state_sha256": "322d01a0f6ffe24111e877bd16e46b4d795ce58625bf2fc3586daba45d071692",
+  "shared_init_sha256": "69c0781d167afa8358d045fe2b6cf740899dee6c67437bec3eb39da2ea664ac0",
+  "stage": "controlled_decoder_cv",
+  "sweep": false
+}
