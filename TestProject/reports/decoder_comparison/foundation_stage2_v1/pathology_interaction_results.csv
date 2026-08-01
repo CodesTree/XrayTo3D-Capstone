@@ -1,0 +1,5 @@
+metric,contrast,healthy_median_favourable,fractured_median_favourable,cohort_difference,note
+dice_macro,residual_main,0.05169812193756239,0.04173273549895157,-0.009965386438610821,descriptive_only_n_fractured_13
+dice_macro,decoder_family_V_minus_U,0.049469095706724,0.03615457124809163,-0.013314524458632376,descriptive_only_n_fractured_13
+assd_mm_macro,residual_main,3.340892539429832,3.1423772651443667,-0.19851527428546545,descriptive_only_n_fractured_13
+assd_mm_macro,decoder_family_V_minus_U,3.0034026956095374,2.5524964033363666,-0.4509062922731708,descriptive_only_n_fractured_13

@@ -1,0 +1,8 @@
+{
+  "arm": "residual_relu_style",
+  "label": "ReLU + residual",
+  "best_validation_subject_macro_dice": 0.46433806885033846,
+  "epochs_completed": 43,
+  "encoder_gradient_confirmed": true,
+  "best_model": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/residual_relu_style/best_model.pth"
+}
