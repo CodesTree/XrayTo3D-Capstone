@@ -1,0 +1,15 @@
+{
+  "schema_version": "foundation_stage2_pretrained_v1",
+  "model_tag": "convnextv2_tiny.fcmae",
+  "pretrained_configuration": "fcmae",
+  "source_url": "https://dl.fbaipublicfiles.com/convnext/convnextv2/pt_only/convnextv2_tiny_1k_224_fcmae.pt",
+  "hf_hub_id": "timm/convnextv2_tiny.fcmae",
+  "origin_repository": "https://github.com/facebookresearch/ConvNeXt-V2",
+  "license": "CC-BY-NC-4.0",
+  "loader": "timm.create_model",
+  "pretrained": true,
+  "features_only": true,
+  "cache_managed_by": "timm",
+  "manual_checkpoint_required": false,
+  "loaded_state_sha256_recorded_per_run": true
+}

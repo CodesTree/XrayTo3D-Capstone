@@ -1,0 +1,51 @@
+{
+  "accepted_pre_amendment_runs": [],
+  "capacity_disposition": {
+    "failed_runs": [
+      {
+        "arm": "plain_unet_style",
+        "failure_reasons": [
+          "overfit_dice_gate_failed"
+        ],
+        "subset": "subset_1_healthy"
+      },
+      {
+        "arm": "plain_prelu_style",
+        "failure_reasons": [
+          "overfit_dice_gate_failed"
+        ],
+        "subset": "subset_1_healthy"
+      }
+    ],
+    "override_reason": "project_owner_authorized_final_training_evaluation",
+    "reported_pass": false,
+    "status": "ACCEPT_WITH_PROJECT_OWNER_OVERRIDE"
+  },
+  "capacity_summary_sha256": "595976f5ff0772450960626ae5f8b88c1e882f37123d7f83952838c62b0d1931",
+  "conditions": [
+    "retain_fold4_in_primary",
+    "run_fold4_excluded_sensitivity",
+    "no_absolute_frontend_quality_claim",
+    "preserve_failed_capacity_status_in_provenance",
+    "final_training_for_comparative_evaluation_only",
+    "use_revised_training_split_weighted_bce",
+    "do_not_reuse_pre_amendment_unweighted_decoder_runs"
+  ],
+  "decision_authority": "project_owner",
+  "fold_verdict_sha256": {
+    "0": "5edf553291fa2c8249db17bfaea97850e5ed42a913305d5c14255513baf971a1",
+    "1": "1d338196cb279ccea941a08732027e0a1dad23f877e6138df0e4a770f3106261",
+    "2": "d99af7b4846b5f37a62a5ebb3fa8d18151d887df5175575b345336192356f6de",
+    "3": "afd21b1f198acd9d22924d3e0b112823148a35f320411940cbb849b8aac08dc4",
+    "4": "6e4de7a3f700ed9c2e847d5ea0e16f410c5eceb501933164ff33192865dcf26d"
+  },
+  "independent_review_waived": true,
+  "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+  "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+  "protocol_deviation": "The original all-eight-capacity-runs-pass requirement is overridden by the project owner for final comparative training. The capacity failure is not relabelled as a pass.",
+  "reviewed_at_utc": "2026-07-21T13:23:57Z",
+  "reviewer": null,
+  "schema_version": "stage2_combined_decoder_gate_v1",
+  "scope": "full_decoder_cross_validation",
+  "status": "PASS"
+}

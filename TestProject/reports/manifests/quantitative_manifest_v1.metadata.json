@@ -1,0 +1,88 @@
+{
+  "manifest_version": "quantitative_manifest_v1",
+  "sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "seed": 42,
+  "n_splits": 5,
+  "validation_rule": "(test_fold + 1) mod 5",
+  "included_planning_rows": 71,
+  "ready_rows": 71,
+  "pending_recertification_rows": 0,
+  "excluded_rows": 7,
+  "certification_approved": true,
+  "certification_decision": {
+    "decision_id": "s1_manifest_certification_v1_2026-07-16",
+    "decision": "PASS",
+    "approved": true,
+    "approved_by": "Agent B following Agent N independent Stage 1 PASS",
+    "approved_date": "2026-07-16",
+    "scope": "Promote the 71 manifest-aligned Stage 1 cases after ROI, target, predrr, DRR, cohort and leakage gates passed."
+  },
+  "certification_prerequisites": {
+    "explicit_agent_n_stage1_decision_pass": true,
+    "agent_n_fracture_roi_review_pass": true,
+    "fracture_roi_contract_pass": true,
+    "returned_hpc_drr_evidence_pass": true,
+    "all_versioned_artifact_sets_present": true,
+    "cohort_contract_58_healthy_13_fractured": true
+  },
+  "fracture_roi_status_source": "reports/manifests/fracture_roi_status_v1.csv",
+  "fracture_roi_status_sha256": "8763b97eb83d6218ca5263a12701172ca2afd7380cd1fd46f585c2026484ec6c",
+  "fracture_roi_review_rows": 13,
+  "fold_counts": {
+    "0": 15,
+    "1": 14,
+    "2": 14,
+    "3": 14,
+    "4": 14
+  },
+  "leakage": {
+    "subject_multiple_test_folds": 0,
+    "fold5_rows": 0,
+    "augmentation_parent_mismatch": 0,
+    "derived_split_subject_overlap": 0,
+    "split_overlap_details": [
+      {
+        "test_fold": 0,
+        "validation_fold": 1,
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      {
+        "test_fold": 1,
+        "validation_fold": 2,
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      {
+        "test_fold": 2,
+        "validation_fold": 3,
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      {
+        "test_fold": 3,
+        "validation_fold": 4,
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      },
+      {
+        "test_fold": 4,
+        "validation_fold": 0,
+        "train_validation": 0,
+        "train_test": 0,
+        "validation_test": 0
+      }
+    ]
+  },
+  "blocking_notes": [],
+  "certification_notes": [
+    "All 71 included rows are certified from explicit reviewed evidence; file existence alone is insufficient.",
+    "The seven exclusions are preserved unchanged.",
+    "Case2_PartLeft retains the approved no_visible_fracture ROI adjudication.",
+    "Agent N independent read-only re-review of this regenerated manifest and hash remains required before Stage 2 real-data execution."
+  ]
+}

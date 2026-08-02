@@ -1,0 +1,8 @@
+{
+  "arm": "residual_vnet_style",
+  "label": "V (PReLU, residual)",
+  "best_validation_subject_macro_dice": 0.48320345114916563,
+  "epochs_completed": 43,
+  "encoder_gradient_confirmed": true,
+  "best_model": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/residual_vnet_style/best_model.pth"
+}

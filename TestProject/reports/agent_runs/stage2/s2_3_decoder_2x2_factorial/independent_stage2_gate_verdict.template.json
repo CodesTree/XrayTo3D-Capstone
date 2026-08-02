@@ -1,0 +1,22 @@
+{
+  "accepted_pre_amendment_runs": [],
+  "capacity_summary_sha256": "REPLACE_AFTER_ALL_EIGHT_CAPACITY_RUNS_PASS",
+  "conditions": [
+    "retain_fold4_in_primary",
+    "run_fold4_excluded_sensitivity",
+    "no_absolute_frontend_quality_claim"
+  ],
+  "fold_verdict_sha256": {
+    "0": "REPLACE",
+    "1": "REPLACE",
+    "2": "REPLACE",
+    "3": "REPLACE",
+    "4": "REPLACE"
+  },
+  "protocol_amendment_sha256": "REPLACE_WITH_AMENDMENT_SHA256",
+  "reviewed_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "reviewer": "REPLACE_WITH_INDEPENDENT_REVIEWER",
+  "schema_version": "stage2_combined_decoder_gate_v1",
+  "scope": "full_decoder_cross_validation",
+  "status": "PASS"
+}

@@ -1,0 +1,11 @@
+{
+  "audit_version": "vsd_focused_ct_stl_target_overlay_v1",
+  "verdict": "PASS",
+  "conclusion": "The z023 Left and z036 Right X-only flags were false positives. Both sides of both subjects pass CT-STL support, four-bone STL/target chirality and target-predrr alignment. No mapping override is justified.",
+  "focus_csv": "vsd_focused_ct_stl_target_overlay_v1.csv",
+  "focus_csv_sha256": "80f5f3c9031d84b25d0146c484053be9fe62ebea1e8d20e1e673e5f9d8a4092e",
+  "figure": "vsd_focused_ct_stl_target_overlay_v1.png",
+  "figure_sha256": "9da92942e83fc75cc86e140ef6da3c352a5509199c3f4a74038e9439e907d182",
+  "cohort_csv": "vsd_cohort_laterality_multibone_v2.csv",
+  "cohort_csv_sha256": "cc6fbe5bc344a3a35475f118d68cb55265ec55fcf869adc040c7b8e33c516718"
+}

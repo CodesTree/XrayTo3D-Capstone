@@ -1,0 +1,135 @@
+{
+  "activation": "relu",
+  "architecture": {
+    "activation": "relu",
+    "groupnorm_layers": 8,
+    "label": "U (ReLU, plain)",
+    "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+    "parameters": 8429956,
+    "residual": false
+  },
+  "arm": "plain_unet_style",
+  "arm_label": "U (ReLU, plain)",
+  "best_validation_macro_dice": 0.4464876651763916,
+  "checkpoint_sha256": "03f0e05e832474ef20fdee92b49684ce66c250693e8aace66607acbc46ea4860",
+  "config_sha256": "d8e8113ec204e01ff52715a054c411898ed6a3f53e3a49da4e1f07de11f2f8e6",
+  "effective_spacing_mm": 1.5625,
+  "epochs_completed": 20,
+  "fold": 0,
+  "front_end_state_sha256_after": "7593d916f10ffa9ca638da510e485c3932c871c3163bdb5bcbe8070d79a65e36",
+  "front_end_unchanged": true,
+  "hyperparameters": {
+    "activation_checkpointing": true,
+    "amp": true,
+    "batch_size": 1,
+    "bce_pos_weight_by_bone": {
+      "femur": 36.9212760925293,
+      "fibula": 570.576171875,
+      "patella": 443.0332946777344,
+      "tibia": 51.62729263305664
+    },
+    "bce_pos_weight_scope": "fixed_fold_training_split_aggregate",
+    "learning_rate": 0.001,
+    "loss": "0.5_training_split_balanced_bce+0.5_soft_dice",
+    "max_epochs": 20,
+    "optimizer": "Adam",
+    "patience": 15,
+    "scheduler": "CosineAnnealingLR",
+    "threshold": 0.5
+  },
+  "logit_resolution": 128,
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "oof_rows": 15,
+  "output_resolution": 256,
+  "qa": {
+    "audit_linkage": {
+      "payload": {
+        "authorization_mode": "owner_waiver",
+        "current_audit_sha256": "6faf9d13331b51750f438b9189a066ed62aa354db4b45480c5ea04b7f9312c5c",
+        "fold": 0,
+        "frontend_checkpoint_sha256": "2363169c418eb683be5a71e712424a0504deed633ea74b62fe8e3c2623466a78",
+        "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+        "reason": "P2 audit evidence was regenerated without changing the P2 encoder or frozen shared-front-end weights.",
+        "recorded_audit_sha256": "05d6131b577ca0067f76b65cc99f39eeb362f6a15f227f21c4a569846c7390a5",
+        "reviewed_at_utc": "2026-07-21T08:25:45Z",
+        "reviewer": null,
+        "schema_version": "posthoc_audit_linkage_v1",
+        "status": "PASS"
+      },
+      "sha256": "5464edb08c55517cc104829a1a6a4988b3871b85f275218c532795a0a14417bc"
+    },
+    "audit_sha256": "6faf9d13331b51750f438b9189a066ed62aa354db4b45480c5ea04b7f9312c5c",
+    "independent_sha256": "5edf553291fa2c8249db17bfaea97850e5ed42a913305d5c14255513baf971a1",
+    "independent_verdict": {
+      "accepted_warnings": [
+        "p2_preservation_warning"
+      ],
+      "audit_sha256": "6faf9d13331b51750f438b9189a066ed62aa354db4b45480c5ea04b7f9312c5c",
+      "conditions": [
+        "retain_p2_preservation_warning_in_provenance"
+      ],
+      "decision_authority": "project_owner",
+      "disposition": "ACCEPT",
+      "fold": 0,
+      "independent_review_waived": true,
+      "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+      "reviewed_at_utc": "2026-07-21T08:25:45Z",
+      "reviewer": null,
+      "schema_version": "stage2_decoder_entry_qa_v1",
+      "scope": "decoder_comparison",
+      "status": "PASS"
+    },
+    "quality_status": "WARN",
+    "stage2_training_evidence": {
+      "capacity_gate": {
+        "failed_runs": [
+          {
+            "arm": "plain_unet_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          },
+          {
+            "arm": "plain_prelu_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          }
+        ],
+        "override_applied": true,
+        "override_reason": "project_owner_authorized_final_training_evaluation",
+        "reported_pass": false
+      },
+      "capacity_summary_sha256": "595976f5ff0772450960626ae5f8b88c1e882f37123d7f83952838c62b0d1931",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4"
+    },
+    "warnings": [
+      "p2_preservation_warning"
+    ]
+  },
+  "residual": false,
+  "resource_usage": {
+    "gpu_headroom_fraction": 0.6422255863322499,
+    "peak_gpu_bytes": 8468765696,
+    "peak_host_bytes": 3928801280,
+    "total_gpu_bytes": 23670685696,
+    "wall_seconds": 2242.5
+  },
+  "resume": {
+    "enabled": false,
+    "resumed": false,
+    "start_epoch": 0
+  },
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "shared_frontend_sha256": "2363169c418eb683be5a71e712424a0504deed633ea74b62fe8e3c2623466a78",
+  "shared_frontend_state_sha256": "7593d916f10ffa9ca638da510e485c3932c871c3163bdb5bcbe8070d79a65e36",
+  "shared_init_sha256": "69c0781d167afa8358d045fe2b6cf740899dee6c67437bec3eb39da2ea664ac0",
+  "stage": "controlled_decoder_cv",
+  "success": true,
+  "sweep": false,
+  "training_checkpoint_sha256": "563a5a9df1e19ca304efae77ff0b93ea15559e0bc164fafacb40a5f715c48719"
+}

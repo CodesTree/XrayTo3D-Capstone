@@ -1,0 +1,227 @@
+{
+  "augmentation": {
+    "brightness": [
+      -0.05,
+      0.05
+    ],
+    "clamp": [
+      0.0,
+      1.0
+    ],
+    "forbidden": [
+      "crop",
+      "rotation",
+      "translation",
+      "flip",
+      "elastic",
+      "cutout",
+      "random_erasing"
+    ],
+    "gamma": [
+      0.9,
+      1.1
+    ],
+    "gaussian_noise_sigma": [
+      0.0,
+      0.02
+    ],
+    "independent_ap_lat": true,
+    "kind": "online_photometric_only"
+  },
+  "baseline_protocol_sha256": "a2ac34d76ceea9d488de8f7841b48552390194ce5ecc2221ec03ab5eac5db0cb",
+  "best_validation_loss": 0.09813542451177325,
+  "config_sha256": "9b4f1768d8f6ed4392f7e45a74ac86fcaece1d49cac295d4c339b79c9c3342a3",
+  "data_contract_sha256": "614bdc2c87bb5c6922cd0c5c45ac1420b14251895c9fe7ad4595719430c37710",
+  "encoder_sha256": "3f21fb7d1bd82eacbbcd6f39bbc41cad5d1385d2e07dbbb77cbd8ec57ca5bcf0",
+  "fold": 1,
+  "hardware": {
+    "cuda_device_name": "NVIDIA L4",
+    "device": "cuda"
+  },
+  "hyperparameters": {
+    "accum_steps": 8,
+    "decoder_dim": 512,
+    "early_stop_patience": 30,
+    "effective_batch": 128,
+    "mask_ratio": 0.6,
+    "micro_batch": 16,
+    "p1_max_epochs": 250,
+    "p2_max_epochs": 100,
+    "patch_size": 32,
+    "peak_lr": 7.5e-05,
+    "warmup_fraction": 0.08,
+    "weight_decay": 0.05,
+    "xview_row_slack": 1,
+    "xview_weight": 1.0
+  },
+  "initial_validation_loss": 0.372585049697331,
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "oom_policy": {
+    "action": "restart_from_pinned_initialization_with_half_micro_batch_and_double_accumulation",
+    "effective_batch_must_remain": 128
+  },
+  "output_paths": {
+    "artifact_root": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/foundation_stage2_v1/fold_1"
+  },
+  "pretrained_configuration": {
+    "architecture": "convnextv2_tiny",
+    "crop_mode": "center",
+    "crop_pct": 0.875,
+    "custom_load": false,
+    "first_conv": "stem.0",
+    "fixed_input_size": false,
+    "hf_hub_id": "timm/convnextv2_tiny.fcmae",
+    "input_size": [
+      3,
+      224,
+      224
+    ],
+    "interpolation": "bicubic",
+    "license": "cc-by-nc-4.0",
+    "mean": [
+      0.485,
+      0.456,
+      0.406
+    ],
+    "origin_url": "https://github.com/facebookresearch/ConvNeXt-V2",
+    "paper_ids": "arXiv:2301.00808",
+    "paper_name": "ConvNeXt-V2: Co-designing and Scaling ConvNets with Masked Autoencoders",
+    "pool_size": [
+      7,
+      7
+    ],
+    "std": [
+      0.229,
+      0.224,
+      0.225
+    ],
+    "tag": "fcmae",
+    "url": "https://dl.fbaipublicfiles.com/convnext/convnextv2/pt_only/convnextv2_tiny_1k_224_fcmae.pt"
+  },
+  "pretrained_model": "convnextv2_tiny.fcmae",
+  "pretrained_source": {
+    "cache_managed_by": "timm",
+    "features_only": true,
+    "hf_hub_id": "timm/convnextv2_tiny.fcmae",
+    "license": "CC-BY-NC-4.0",
+    "loaded_state_sha256_recorded_per_run": true,
+    "loader": "timm.create_model",
+    "manual_checkpoint_required": false,
+    "model_tag": "convnextv2_tiny.fcmae",
+    "origin_repository": "https://github.com/facebookresearch/ConvNeXt-V2",
+    "pretrained": true,
+    "pretrained_configuration": "fcmae",
+    "resolved_hf_hub_id": "timm/convnextv2_tiny.fcmae",
+    "resolved_input_size": [
+      3,
+      224,
+      224
+    ],
+    "resolved_license": "cc-by-nc-4.0",
+    "resolved_url": "https://dl.fbaipublicfiles.com/convnext/convnextv2/pt_only/convnextv2_tiny_1k_224_fcmae.pt",
+    "schema_version": "foundation_stage2_pretrained_v1",
+    "source_url": "https://dl.fbaipublicfiles.com/convnext/convnextv2/pt_only/convnextv2_tiny_1k_224_fcmae.pt",
+    "timm_version": "1.0.27"
+  },
+  "pretrained_state_sha256": "02485c20906e80d06ee812a180329620c4baf3a2140531d914e157b45a438a30",
+  "protocol_version": "baseline_protocol_v1",
+  "qa_figures": [
+    "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/foundation_stage2_v1/fold_1/fcmae_p1_training_curve.png"
+  ],
+  "resource_usage": {
+    "cuda_peak_gb": 2.769,
+    "elapsed_seconds": 791.3,
+    "rss_gb": 2.238
+  },
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "software": {
+    "python": "3.12.3",
+    "timm": "1.0.27",
+    "torch": "2.10.0+cu128"
+  },
+  "stage": "FCMAE_P1",
+  "stage1_certification": {
+    "approved": true,
+    "decision_id": "s1_manifest_certification_v1_2026-07-16"
+  },
+  "test_sample_ids_not_opened": [
+    "Case13_PartRight",
+    "Case7_PartRight",
+    "VSD_006_Left",
+    "VSD_006_Right",
+    "VSD_023_Left",
+    "VSD_023_Right",
+    "VSD_z004_Left",
+    "VSD_z004_Right",
+    "VSD_z036_Left",
+    "VSD_z036_Right",
+    "VSD_z061_Left",
+    "VSD_z061_Right",
+    "VSD_z064_Left",
+    "VSD_z064_Right"
+  ],
+  "train_sample_ids": [
+    "Case12_PartRight",
+    "Case14_PartRight",
+    "Case15_PartRight",
+    "Case1_PartLeft",
+    "Case2_PartLeft",
+    "Case3_PartLeft",
+    "Case5_PartRight",
+    "Case6_PartRight",
+    "Case9_PartRight",
+    "VSD_001_Left",
+    "VSD_001_Right",
+    "VSD_002_Left",
+    "VSD_002_Right",
+    "VSD_005_Left",
+    "VSD_005_Right",
+    "VSD_010_Left",
+    "VSD_010_Right",
+    "VSD_014_Left",
+    "VSD_014_Right",
+    "VSD_016_Left",
+    "VSD_016_Right",
+    "VSD_017_Left",
+    "VSD_017_Right",
+    "VSD_z001_Left",
+    "VSD_z001_Right",
+    "VSD_z009_Left",
+    "VSD_z009_Right",
+    "VSD_z013_Left",
+    "VSD_z013_Right",
+    "VSD_z027_Left",
+    "VSD_z027_Right",
+    "VSD_z046_Left",
+    "VSD_z046_Right",
+    "VSD_z049_Left",
+    "VSD_z049_Right",
+    "VSD_z050_Right",
+    "VSD_z056_Left",
+    "VSD_z056_Right",
+    "VSD_z062_Left",
+    "VSD_z062_Right",
+    "VSD_z063_Right",
+    "VSD_z066_Left",
+    "VSD_z066_Right"
+  ],
+  "trainstate_sha256": "ea741cbdb55ba2e3969b58ffd79637ffe9da8f4de8dfcc10891db237d6ccfe0d",
+  "upstream_checkpoint_sha256": null,
+  "validation_sample_ids": [
+    "Case11_PartRight",
+    "Case16_PartRight",
+    "VSD_015_Left",
+    "VSD_015_Right",
+    "VSD_019_Left",
+    "VSD_019_Right",
+    "VSD_z023_Left",
+    "VSD_z023_Right",
+    "VSD_z035_Left",
+    "VSD_z035_Right",
+    "VSD_z042_Left",
+    "VSD_z042_Right",
+    "VSD_z055_Left",
+    "VSD_z055_Right"
+  ]
+}

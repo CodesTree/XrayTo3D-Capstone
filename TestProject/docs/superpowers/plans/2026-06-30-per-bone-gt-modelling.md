@@ -727,5 +727,5 @@ git commit -m "feat: 3D predicted-knee vs GT-STL comparison viewer + surface met
 - Run every cell with `./.venv/Scripts/python.exe` as the kernel — the default `python` has a broken numpy/matplotlib ABI (project memory).
 - DRR/predrr axis conventions: AP/LAT MIP axes in Task 4 Step 3 and the DRR view-name globbing in Task 4 Step 1 may need adjusting to your actual `data/interim/DRRs/fractured` filenames and predrr lift-axis convention (predrr axes L-R / A-P / S-I; AP→axis1, LAT→axis0 per project memory). Verify against one real file before batch use.
 - Whether to commit the generated `.nii.gz` volumes or gitignore them is a user decision (Task 3 Step 4 note) — default to committing only CSVs/PNGs.
-- This plan delivers the **sanity-check**, not generalization. Full k-fold training, both front-end regimes, and Wilcoxon comparison remain a later stage (out of scope per spec).
+- This plan delivers the **sanity-check**, not generalization. Full k-fold training, both front-end regimes, and effect-size decoder comparison remain a later stage (out of scope per spec).
 ```

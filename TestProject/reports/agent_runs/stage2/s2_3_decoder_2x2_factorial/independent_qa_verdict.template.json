@@ -1,0 +1,13 @@
+{
+  "accepted_warnings": [],
+  "audit_sha256": "REPLACE_WITH_CURRENT_P2_AUDIT_SHA256",
+  "conditions": [],
+  "disposition": "ACCEPT_OR_ACCEPT_WITH_CONDITIONS",
+  "fold": 0,
+  "protocol_amendment_sha256": "REPLACE_WITH_AMENDMENT_SHA256",
+  "reviewed_at_utc": "YYYY-MM-DDTHH:MM:SSZ",
+  "reviewer": "REPLACE_WITH_INDEPENDENT_REVIEWER",
+  "schema_version": "stage2_decoder_entry_qa_v1",
+  "scope": "decoder_comparison",
+  "status": "PASS"
+}

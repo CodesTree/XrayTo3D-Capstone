@@ -1,0 +1,49 @@
+{
+  "task_id": "s1_predrr_preprocessing_z046_retry",
+  "run_id": "z046_retry_20260714",
+  "verdict": "PASS",
+  "reviewed_at_local_date": "2026-07-14",
+  "execution": {
+    "job_id": null,
+    "process_only_ids": [
+      "VSD_z046_Right"
+    ],
+    "requested_count": 1,
+    "successful_count": 1,
+    "reported_metadata_rows": 71,
+    "traceback_count": 0
+  },
+  "artifacts": {
+    "executed_notebook_sha256": "1a2d97c5696e80854096c75cab7a9c7334c2291ec0e8f8844ce96a481e551207",
+    "metadata_sha256": "929f02d865588cee60ce36ff1778efd1b8175e4af0479362df6086f2a1a52387",
+    "corrected_nifti_repository_path": "TestProject/data/interim/predrr_lps_256_v1/healthy/VSD_z046_Right.nii.gz",
+    "corrected_nifti_hpc_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/data/interim/predrr_lps_256_v1/healthy/VSD_z046_Right.nii.gz",
+    "corrected_nifti_size_bytes": 12214699,
+    "corrected_nifti_sha256": "35b14a4587fc0ad5e900a9ef42d4539263364d4eda5f503e1651184df9e87c23"
+  },
+  "independent_checks": {
+    "metadata_rows": 71,
+    "unique_volume_ids": 71,
+    "vsd_z046_right_si_flipped": true,
+    "shape": [
+      256,
+      256,
+      256
+    ],
+    "spacing_mm": [
+      0.78125,
+      0.78125,
+      0.78125
+    ],
+    "orientation": "LPS",
+    "pixel_type": "float32",
+    "user_3d_slicer_upright_approval": true,
+    "agent_n_approved": true
+  },
+  "administrative_gaps": [
+    "retry job ID was not separately reported",
+    "retry GPU model, requested host RAM, wall time and peak memory were not separately reported",
+    "original Job 3699 did not contain hashes for all 71 pre-retry NIfTIs"
+  ],
+  "scope_note": "PASS applies to predrr preprocessing. Full Stage 1 remains incomplete pending four-channel targets, fracture ROIs and AP/LAT DRRs."
+}

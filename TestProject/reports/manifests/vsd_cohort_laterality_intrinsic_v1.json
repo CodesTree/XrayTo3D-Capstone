@@ -1,0 +1,32 @@
+{
+  "audit_version": "vsd_cohort_laterality_intrinsic_v1",
+  "method": "fibula_vs_tibia_centroid_in_LPS",
+  "total": 58,
+  "pass": 56,
+  "review_required": 2,
+  "flagged_samples": [
+    "VSD_z023_Left",
+    "VSD_z036_Right"
+  ],
+  "vsd010_status": [
+    {
+      "sample_id": "VSD_010_Left",
+      "status": "PASS"
+    },
+    {
+      "sample_id": "VSD_010_Right",
+      "status": "PASS"
+    }
+  ],
+  "tkr_survivor_status": [
+    {
+      "sample_id": "VSD_z050_Right",
+      "status": "PASS"
+    },
+    {
+      "sample_id": "VSD_z063_Right",
+      "status": "PASS"
+    }
+  ],
+  "limitation": "Preliminary audit on legacy targets; confirm flagged cases visually and replay versioned targets before certification."
+}

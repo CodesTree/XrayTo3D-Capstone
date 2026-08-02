@@ -1,0 +1,353 @@
+{
+  "architecture": {
+    "plain_prelu_style": {
+      "activation": "prelu",
+      "groupnorm_layers": 8,
+      "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+      "parameters": 8430916,
+      "residual": false
+    },
+    "plain_unet_style": {
+      "activation": "relu",
+      "groupnorm_layers": 8,
+      "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+      "parameters": 8429956,
+      "residual": false
+    },
+    "residual_relu_style": {
+      "activation": "relu",
+      "groupnorm_layers": 8,
+      "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+      "parameters": 8604516,
+      "residual": true
+    },
+    "residual_vnet_style": {
+      "activation": "prelu",
+      "groupnorm_layers": 8,
+      "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+      "parameters": 8605476,
+      "residual": true
+    }
+  },
+  "entry_qa": {
+    "audit_sha256": "6faf9d13331b51750f438b9189a066ed62aa354db4b45480c5ea04b7f9312c5c",
+    "independent_verdict_sha256": "5edf553291fa2c8249db17bfaea97850e5ed42a913305d5c14255513baf971a1",
+    "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+    "quality_status": "WARN",
+    "warnings": [
+      "p2_preservation_warning"
+    ]
+  },
+  "expected_results": 8,
+  "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+  "fold": 0,
+  "pass": false,
+  "protocol_version": "baseline_protocol_v1",
+  "results": [
+    {
+      "arm": "plain_unet_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 41.4819221496582,
+        "fibula": 577.864013671875,
+        "patella": 470.0054931640625,
+        "tibia": 55.12253952026367
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_unet_style/subset_1_healthy/decoder_gate_failed.pth",
+      "checkpoint_sha256": "6ee521109ef57b9d1a826947a0d11d04d6aba72686bec064c75ce0b29c3f8ed3",
+      "config_sha256": "bcde7717ec21b3f6c684d01ca84ebd07157ec266240b0c82489f40ece74cf0d5",
+      "epochs_completed": 350,
+      "failure_reasons": [
+        "overfit_dice_gate_failed"
+      ],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": false,
+      "global_updates": 350,
+      "gpu_headroom_fraction": 0.6458565929327271,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9340195059776306,
+      "minimum_dice_fibula": 0.7807604670524597,
+      "minimum_dice_patella": 0.7641153335571289,
+      "minimum_dice_tibia": 0.9546211361885071,
+      "parameters": 8429956,
+      "pass": false,
+      "peak_gpu_bytes": 8382817280,
+      "peak_host_bytes": 2483433472,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_unet_style/subset_1_healthy/capacity_curve.png",
+      "resume_logits_sha256": "17a979cbf01fa939a084a924459d07d19bca86eddcdb1285bc9bc5640c964578",
+      "resume_parameter_sha256": "dacfdbc2b4e331db0fa1b27c071433b2e6a01973511c526360d5b01a8c84a155",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left"
+      ],
+      "subset": "subset_1_healthy",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 696.8
+    },
+    {
+      "arm": "residual_vnet_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 41.4819221496582,
+        "fibula": 577.864013671875,
+        "patella": 470.0054931640625,
+        "tibia": 55.12253952026367
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_vnet_style/subset_1_healthy/decoder_gate_pass.pth",
+      "checkpoint_sha256": "96a50ca98652b5aecb94495827fd8a20d1a2534d7ff224c8fbab4121ea4eaa0b",
+      "config_sha256": "7ad8a2f4051420f9f7eb34bb8c4ae566cb6c42e90042023f1aaebc1176210438",
+      "epochs_completed": 121,
+      "failure_reasons": [],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": true,
+      "global_updates": 121,
+      "gpu_headroom_fraction": 0.6443350863543991,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.944416344165802,
+      "minimum_dice_fibula": 0.9143496751785278,
+      "minimum_dice_patella": 0.9143414497375488,
+      "minimum_dice_tibia": 0.9065799117088318,
+      "parameters": 8605476,
+      "pass": true,
+      "peak_gpu_bytes": 8418832384,
+      "peak_host_bytes": 2514407424,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_vnet_style/subset_1_healthy/capacity_curve.png",
+      "resume_logits_sha256": "d28a9c542a5d1819221a22f65d687e8992f10af5d9a644a9830a79f12e64af71",
+      "resume_parameter_sha256": "a24b628a38c662fd3d704b38753f41c6251748bbda028752fe8fc86f5393cc96",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left"
+      ],
+      "subset": "subset_1_healthy",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 247.8
+    },
+    {
+      "arm": "residual_relu_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 41.4819221496582,
+        "fibula": 577.864013671875,
+        "patella": 470.0054931640625,
+        "tibia": 55.12253952026367
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_relu_style/subset_1_healthy/decoder_gate_pass.pth",
+      "checkpoint_sha256": "c3ffbc2e66bfec5883b26ce78109a6bf95846d2ff6712d85520733674714b280",
+      "config_sha256": "910533f99bbd868d594a8c85db02b7862b3e42d40e84737e7803ed9eadd423d4",
+      "epochs_completed": 141,
+      "failure_reasons": [],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": true,
+      "global_updates": 141,
+      "gpu_headroom_fraction": 0.6457229619918823,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9446917176246643,
+      "minimum_dice_fibula": 0.9441498517990112,
+      "minimum_dice_patella": 0.9675707221031189,
+      "minimum_dice_tibia": 0.9166133999824524,
+      "parameters": 8604516,
+      "pass": true,
+      "peak_gpu_bytes": 8385980416,
+      "peak_host_bytes": 2519609344,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_relu_style/subset_1_healthy/capacity_curve.png",
+      "resume_logits_sha256": "ad8f3f078d67cc4d179f9a249e3383ace62957f514fc71e22fb0fe3ef959a96a",
+      "resume_parameter_sha256": "ee0b183a5ec363e1a31068561a1e900dfd39b76dd50d20e43f1e66a496126fe4",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left"
+      ],
+      "subset": "subset_1_healthy",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 290.5
+    },
+    {
+      "arm": "plain_prelu_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 41.4819221496582,
+        "fibula": 577.864013671875,
+        "patella": 470.0054931640625,
+        "tibia": 55.12253952026367
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_prelu_style/subset_1_healthy/decoder_gate_failed.pth",
+      "checkpoint_sha256": "cff08126fca7adcc392fe75f6bd28bf6320cc05d6b2b45d19d5c418a1de80639",
+      "config_sha256": "f64174bd92e04ab229a04242d1633c7cb6bf1e51f770c8f42ab10740296a54c8",
+      "epochs_completed": 350,
+      "failure_reasons": [
+        "overfit_dice_gate_failed"
+      ],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": false,
+      "global_updates": 350,
+      "gpu_headroom_fraction": 0.6444327247595422,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9537011981010437,
+      "minimum_dice_fibula": 0.8435225486755371,
+      "minimum_dice_patella": 0.8040087819099426,
+      "minimum_dice_tibia": 0.9529862403869629,
+      "parameters": 8430916,
+      "pass": false,
+      "peak_gpu_bytes": 8416521216,
+      "peak_host_bytes": 2519609344,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_prelu_style/subset_1_healthy/capacity_curve.png",
+      "resume_logits_sha256": "fad25420ba25a57ba56164ad7448731084afbee710309aa5689e89c0fec5aac0",
+      "resume_parameter_sha256": "00bc5a72dcc1a4b42a9eb48153cba268811bfd5bed954034d0cb35d70e350738",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left"
+      ],
+      "subset": "subset_1_healthy",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 695.1
+    },
+    {
+      "arm": "plain_unet_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 43.12925720214844,
+        "fibula": 429.51068115234375,
+        "patella": 518.780517578125,
+        "tibia": 47.87561798095703
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_unet_style/subset_2_mixed/decoder_gate_pass.pth",
+      "checkpoint_sha256": "0cfcd75971a501369f8320f71fc1097ee5965e90cf0fcca5c9a5ad056706e6e8",
+      "config_sha256": "5b73bdbd58cac96c362b31ab0c6f99c503dff66babaa30c8dc14ab4d98c9d046",
+      "epochs_completed": 251,
+      "failure_reasons": [],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": true,
+      "global_updates": 502,
+      "gpu_headroom_fraction": 0.6458067571140631,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9379332065582275,
+      "minimum_dice_fibula": 0.9137100577354431,
+      "minimum_dice_patella": 0.9196377396583557,
+      "minimum_dice_tibia": 0.916767954826355,
+      "parameters": 8429956,
+      "pass": true,
+      "peak_gpu_bytes": 8383996928,
+      "peak_host_bytes": 2521948160,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_unet_style/subset_2_mixed/capacity_curve.png",
+      "resume_logits_sha256": "9bb377531356e2e5851aae5cc5fd2fb3149babd0c01760ef220e8d95a91a0c06",
+      "resume_parameter_sha256": "516d4c0e0936d7279930a12056176660d6aa0f28540b444eb1da4cf2399eb1f0",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left",
+        "Case14_PartRight"
+      ],
+      "subset": "subset_2_mixed",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 996.5
+    },
+    {
+      "arm": "residual_vnet_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 43.12925720214844,
+        "fibula": 429.51068115234375,
+        "patella": 518.780517578125,
+        "tibia": 47.87561798095703
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_vnet_style/subset_2_mixed/decoder_gate_pass.pth",
+      "checkpoint_sha256": "6d7f62a2cb68e644c90dff49f7f366280e09d0456f1d7a30d0e03734587d479a",
+      "config_sha256": "2fc25ca5518c205234ffd0e94848459db6ff8811394f2071108b2cbbc4dae51b",
+      "epochs_completed": 181,
+      "failure_reasons": [],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": true,
+      "global_updates": 362,
+      "gpu_headroom_fraction": 0.6442824818791426,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9478187561035156,
+      "minimum_dice_fibula": 0.933600902557373,
+      "minimum_dice_patella": 0.9267740249633789,
+      "minimum_dice_tibia": 0.9148705005645752,
+      "parameters": 8605476,
+      "pass": true,
+      "peak_gpu_bytes": 8420077568,
+      "peak_host_bytes": 2530308096,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_vnet_style/subset_2_mixed/capacity_curve.png",
+      "resume_logits_sha256": "7abab9eb03af664478f31a2fe59f96b788cf7a0a873ee95ad2f0992628a2684c",
+      "resume_parameter_sha256": "c1e070eaed3268da432948d3ce141198b00130d6ead18263e2dac35706390348",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left",
+        "Case14_PartRight"
+      ],
+      "subset": "subset_2_mixed",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 734.3
+    },
+    {
+      "arm": "residual_relu_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 43.12925720214844,
+        "fibula": 429.51068115234375,
+        "patella": 518.780517578125,
+        "tibia": 47.87561798095703
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_relu_style/subset_2_mixed/decoder_gate_pass.pth",
+      "checkpoint_sha256": "e7aeb5fe4312220e81fc18264d9dcda331715d93946ceb9d348b83fff7c115c6",
+      "config_sha256": "58463511f3386f6c4637a77bb6419ae0708146b2bfb5df677398a93cb9f844d7",
+      "epochs_completed": 161,
+      "failure_reasons": [],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": true,
+      "global_updates": 322,
+      "gpu_headroom_fraction": 0.6457008127391427,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9394214749336243,
+      "minimum_dice_fibula": 0.9053925275802612,
+      "minimum_dice_patella": 0.9234795570373535,
+      "minimum_dice_tibia": 0.9192730188369751,
+      "parameters": 8604516,
+      "pass": true,
+      "peak_gpu_bytes": 8386504704,
+      "peak_host_bytes": 2535727104,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/residual_relu_style/subset_2_mixed/capacity_curve.png",
+      "resume_logits_sha256": "887bb64123e1007503e0f703e68de3288f87ea00eefb9b106b40073b47f59338",
+      "resume_parameter_sha256": "f56f46a761b3654169b42ab8b04d207fb33090f69943b61d39755c64689924fa",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left",
+        "Case14_PartRight"
+      ],
+      "subset": "subset_2_mixed",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 663.3
+    },
+    {
+      "arm": "plain_prelu_style",
+      "bce_pos_weight_by_bone": {
+        "femur": 43.12925720214844,
+        "fibula": 429.51068115234375,
+        "patella": 518.780517578125,
+        "tibia": 47.87561798095703
+      },
+      "checkpoint_path": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_prelu_style/subset_2_mixed/decoder_gate_pass.pth",
+      "checkpoint_sha256": "c146f64abcc9c4722a39bdb58a2e820671550c1d1f2e63bb34a7156a23db9251",
+      "config_sha256": "5de06a97f925e2a0ca53d816c1571ba66b8a6e75d9af8742de9b33951f87d8d0",
+      "epochs_completed": 261,
+      "failure_reasons": [],
+      "feature_cache_sha256": "84a7976eb1e4e40a4a37c5abbdbf3c4b6783219826ea5772861fd4b905eeaa98",
+      "gate_pass": true,
+      "global_updates": 522,
+      "gpu_headroom_fraction": 0.6444576426688742,
+      "memory_pass": true,
+      "minimum_dice_femur": 0.9391191005706787,
+      "minimum_dice_fibula": 0.9047295451164246,
+      "minimum_dice_patella": 0.9330310821533203,
+      "minimum_dice_tibia": 0.9084100127220154,
+      "parameters": 8430916,
+      "pass": true,
+      "peak_gpu_bytes": 8415931392,
+      "peak_host_bytes": 2538352640,
+      "qa_figure": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/decoders/foundation_stage2_v1/fold_0/plain_prelu_style/subset_2_mixed/capacity_curve.png",
+      "resume_logits_sha256": "a601eb2205742e8edf4487c6e1d1c7956b1a96751b389e8c90d926be666cdcf3",
+      "resume_parameter_sha256": "f6494aee1351c2bded04ff800186ae75cad00aacb051f36d57aae4982a899db8",
+      "resume_pass": true,
+      "sample_ids": [
+        "VSD_016_Left",
+        "Case14_PartRight"
+      ],
+      "subset": "subset_2_mixed",
+      "total_gpu_bytes": 23670685696,
+      "wall_seconds": 1036.8
+    }
+  ],
+  "schema_version": "foundation_stage2_v1"
+}

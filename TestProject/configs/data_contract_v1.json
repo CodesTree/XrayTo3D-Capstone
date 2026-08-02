@@ -1,0 +1,39 @@
+{
+  "contract_version": "data_contract_v1",
+  "canonical_orientation": "LPS",
+  "intermediate_resampling_mm": [0.5, 0.5, 0.5],
+  "fixed_fov_mm": [200.0, 200.0, 200.0],
+  "final_shape": [256, 256, 256],
+  "final_spacing_mm": [0.78125, 0.78125, 0.78125],
+  "intensity_window_hu": [-450, 1050],
+  "bone_channels": ["femur", "tibia", "patella", "fibula"],
+  "target_version": "pb_occ_lps_256_v1",
+  "drr_version": "diffdrr_siddon_lps_256_v1",
+  "roi_version": "fracture_roi_lps_256_v1",
+  "versioned_outputs": {
+    "predrr": "data/interim/predrr_lps_256_v1",
+    "target": "data/interim/gt_per_bone_lps_256_v1",
+    "drr": "data/interim/DRRs_diffdrr_lps_256_v1",
+    "fracture_roi": "data/interim/fracture_roi_lps_256_v1"
+  },
+  "expected_ready_counts": {
+    "healthy": 58,
+    "fractured": 13,
+    "total": 71
+  },
+  "exclusions": {
+    "VSD_z057_Left": "metal_artifact",
+    "VSD_z057_Right": "metal_artifact",
+    "Case4_PartLeft": "scout_localizer",
+    "Case8_PartRight": "fracture_fixation_implant",
+    "Case10_PartRight": "scout_localizer"
+  },
+  "tkr_policy": "Retain the user-approved anatomical Right knees for VSD z050 and z063; exclude their anatomical Left TKR knees. Intrinsic fibula/tibia LPS evidence is recorded and raw files remain unchanged.",
+  "regen_policy": "Do not modify raw Regen PII. Generated artifacts use study IDs only.",
+  "legacy_targets_forbidden": [
+    "predrr_occupancy_256",
+    "gt_v5",
+    "binary_union",
+    "tsdf"
+  ]
+}

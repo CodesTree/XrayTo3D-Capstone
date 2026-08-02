@@ -1,0 +1,44 @@
+{
+  "protocol_version": "baseline_protocol_v1",
+  "seed": 42,
+  "n_folds": 5,
+  "fold_assignment": {
+    "method": "StratifiedGroupKFold",
+    "group": "subject_id",
+    "test_fold_field": "test_fold",
+    "validation_rule": "(test_fold + 1) mod 5",
+    "augmentation_inherits_parent": true
+  },
+  "encoder": {
+    "architecture": "ConvNeXtV2",
+    "pretraining": ["FCMAE_P1", "cross_view_P2"],
+    "policy": "per_fold_train_subjects_only",
+    "test_subject_access": "forbidden"
+  },
+  "shared_frontend": {
+    "training_head": "neutral_single_conv",
+    "target": "four_channel_binary_occupancy",
+    "discard_training_head": true,
+    "freeze_for_decoder_comparison": true
+  },
+  "decoder_conditions": ["plain_unet_style", "residual_vnet_style", "residual_relu_style", "plain_prelu_style"],
+  "normalization": {
+    "type": "GroupNorm",
+    "groups": 8
+  },
+  "loss": {
+    "bce_weight": 0.5,
+    "soft_dice_weight": 0.5
+  },
+  "output_channels": ["femur", "tibia", "patella", "fibula"],
+  "overfit_gate": {
+    "subsets": [1, 2],
+    "minimum_dice_each_bone": 0.9
+  },
+  "final_training_blocked_until": "stage_2_agent_n_pass",
+  "forbidden": {
+    "fold_ids": [5],
+    "targets": ["binary_union", "tsdf"],
+    "regimes": ["finetuned_frontend_primary_comparison"]
+  }
+}

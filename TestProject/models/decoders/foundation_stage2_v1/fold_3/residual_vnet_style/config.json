@@ -1,0 +1,115 @@
+{
+  "activation": "prelu",
+  "architecture": {
+    "activation": "prelu",
+    "groupnorm_layers": 8,
+    "label": "V (PReLU, residual)",
+    "output_policy": "four_logits_128_then_trilinear_256_align_corners_false",
+    "parameters": 8605476,
+    "residual": true
+  },
+  "arm": "residual_vnet_style",
+  "arm_label": "V (PReLU, residual)",
+  "effective_spacing_mm": 1.5625,
+  "fold": 3,
+  "hyperparameters": {
+    "activation_checkpointing": true,
+    "amp": true,
+    "batch_size": 1,
+    "bce_pos_weight_by_bone": {
+      "femur": 34.153507232666016,
+      "fibula": 554.4158935546875,
+      "patella": 423.3197021484375,
+      "tibia": 50.64717483520508
+    },
+    "bce_pos_weight_scope": "fixed_fold_training_split_aggregate",
+    "learning_rate": 0.001,
+    "loss": "0.5_training_split_balanced_bce+0.5_soft_dice",
+    "max_epochs": 20,
+    "optimizer": "Adam",
+    "patience": 15,
+    "scheduler": "CosineAnnealingLR",
+    "threshold": 0.5
+  },
+  "logit_resolution": 128,
+  "manifest_sha256": "bdaef4df5e93f7ff2150051931a024147d4ead8f6f4f80caf1a230a9a590868d",
+  "output_resolution": 256,
+  "qa": {
+    "audit_linkage": {
+      "payload": {
+        "authorization_mode": "owner_waiver",
+        "current_audit_sha256": "59734610d1c771210d1ee3ea34a5eaef3adcc94ea1aa8f0e47b494bdd375aec1",
+        "fold": 3,
+        "frontend_checkpoint_sha256": "ad149d2d657b33b4a7d89dee4965105460051f0b63c624f24b32f001d44416ab",
+        "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+        "reason": "P2 audit evidence was regenerated without changing the P2 encoder or frozen shared-front-end weights.",
+        "recorded_audit_sha256": "c1b14b588e5f0697d11f4efc8f1a0021f47f4c41e13b1d57482d0ed1a2ee2daf",
+        "reviewed_at_utc": "2026-07-21T08:25:45Z",
+        "reviewer": null,
+        "schema_version": "posthoc_audit_linkage_v1",
+        "status": "PASS"
+      },
+      "sha256": "8661e3688bf1eb110277ea5b4f7c7f0a0a70122e6e2282546e3d9732df8b169d"
+    },
+    "audit_sha256": "59734610d1c771210d1ee3ea34a5eaef3adcc94ea1aa8f0e47b494bdd375aec1",
+    "independent_sha256": "afd21b1f198acd9d22924d3e0b112823148a35f320411940cbb849b8aac08dc4",
+    "independent_verdict": {
+      "accepted_warnings": [
+        "p2_preservation_warning"
+      ],
+      "audit_sha256": "59734610d1c771210d1ee3ea34a5eaef3adcc94ea1aa8f0e47b494bdd375aec1",
+      "conditions": [
+        "retain_p2_preservation_warning_in_provenance",
+        "record_l2_effective_rank_caveat"
+      ],
+      "decision_authority": "project_owner",
+      "disposition": "ACCEPT_WITH_CONDITIONS",
+      "fold": 3,
+      "independent_review_waived": true,
+      "owner_waiver_sha256": "f864247da1317f42a29c5b949e2b0209bf41596369f7bf186b9f8ea0ab9382a7",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4",
+      "reviewed_at_utc": "2026-07-21T08:25:45Z",
+      "reviewer": null,
+      "schema_version": "stage2_decoder_entry_qa_v1",
+      "scope": "decoder_comparison",
+      "status": "PASS"
+    },
+    "quality_status": "WARN",
+    "stage2_training_evidence": {
+      "capacity_gate": {
+        "failed_runs": [
+          {
+            "arm": "plain_unet_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          },
+          {
+            "arm": "plain_prelu_style",
+            "failure_reasons": [
+              "overfit_dice_gate_failed"
+            ],
+            "subset": "subset_1_healthy"
+          }
+        ],
+        "override_applied": true,
+        "override_reason": "project_owner_authorized_final_training_evaluation",
+        "reported_pass": false
+      },
+      "capacity_summary_sha256": "595976f5ff0772450960626ae5f8b88c1e882f37123d7f83952838c62b0d1931",
+      "protocol_amendment_sha256": "ac9edb4774d5b441814b49037804624343046d9c9ca2aea0282954754f7449b4"
+    },
+    "warnings": [
+      "p2_preservation_warning"
+    ]
+  },
+  "residual": true,
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "shared_frontend_sha256": "ad149d2d657b33b4a7d89dee4965105460051f0b63c624f24b32f001d44416ab",
+  "shared_frontend_state_sha256": "965b202a447244e49a8d3b9d2abbc1d5963926e3b1c32eb7b332a073d4a301f6",
+  "shared_init_sha256": "69c0781d167afa8358d045fe2b6cf740899dee6c67437bec3eb39da2ea664ac0",
+  "stage": "controlled_decoder_cv",
+  "sweep": false
+}

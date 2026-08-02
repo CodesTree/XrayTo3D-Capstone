@@ -1,0 +1,17 @@
+bone,arm,arm_label,subjects,dice_mean,assd_mm_mean
+femur,plain_unet_style,"U (ReLU, plain)",43,0.5962841851397661,9.145564872825847
+femur,residual_vnet_style,"V (PReLU, residual)",43,0.6196399533304944,8.209327084979932
+femur,residual_relu_style,ReLU + residual,43,0.6305031791931117,7.933632781849761
+femur,plain_prelu_style,PReLU + plain,43,0.592793341167654,9.257895366529823
+tibia,plain_unet_style,"U (ReLU, plain)",43,0.5953825460300545,8.804694853427792
+tibia,residual_vnet_style,"V (PReLU, residual)",43,0.6163336603459495,7.93926617210775
+tibia,residual_relu_style,ReLU + residual,43,0.6270429702824839,7.714389467167204
+tibia,plain_prelu_style,PReLU + plain,43,0.5930258345035101,8.804061926574633
+patella,plain_unet_style,"U (ReLU, plain)",43,0.3281365853814129,11.63908631870866
+patella,residual_vnet_style,"V (PReLU, residual)",43,0.3674962356550619,12.725141196348424
+patella,residual_relu_style,ReLU + residual,43,0.3795513849280132,12.615262605471875
+patella,plain_prelu_style,PReLU + plain,43,0.3313503360950298,12.003090051437868
+fibula,plain_unet_style,"U (ReLU, plain)",43,0.10556884432326874,25.92937782389438
+fibula,residual_vnet_style,"V (PReLU, residual)",43,0.1784434289632867,17.83306272637102
+fibula,residual_relu_style,ReLU + residual,43,0.18262835631353275,17.50777446476347
+fibula,plain_prelu_style,PReLU + plain,43,0.10710222377992074,24.985953169617645

@@ -1,0 +1,5 @@
+arm,label,best_validation_subject_macro_dice,epochs_completed,encoder_gradient_confirmed,best_model
+plain_unet_style,"U (ReLU, plain)",0.41137468069791794,47,True,/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/plain_unet_style/best_model.pth
+plain_prelu_style,PReLU + plain,0.44796002097427845,49,True,/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/plain_prelu_style/best_model.pth
+residual_relu_style,ReLU + residual,0.46433806885033846,43,True,/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/residual_relu_style/best_model.pth
+residual_vnet_style,"V (PReLU, residual)",0.48320345114916563,43,True,/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/residual_vnet_style/best_model.pth

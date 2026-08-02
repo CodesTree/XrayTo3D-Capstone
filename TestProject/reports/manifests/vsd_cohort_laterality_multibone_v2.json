@@ -1,0 +1,27 @@
+{
+  "audit_version": "vsd_cohort_laterality_multibone_v2",
+  "method": "four_bone_local_chirality_stl_with_si_reflection_normalization",
+  "supersedes": "vsd_cohort_laterality_intrinsic_v1 (fibula-minus-tibia LPS X only)",
+  "total": 58,
+  "pass": 58,
+  "review_required": 0,
+  "focus_samples": [
+    {
+      "sample_id": "VSD_z023_Left",
+      "status": "PASS"
+    },
+    {
+      "sample_id": "VSD_z023_Right",
+      "status": "PASS"
+    },
+    {
+      "sample_id": "VSD_z036_Left",
+      "status": "PASS"
+    },
+    {
+      "sample_id": "VSD_z036_Right",
+      "status": "PASS"
+    }
+  ],
+  "limitation": "Computed from current STL and legacy target evidence; final target certification waits for versioned LPS replay."
+}

@@ -1,0 +1,7 @@
+dataset,fracture_status,status,exclusion_reason,n
+Ruikar,fractured,excluded,fracture_fixation_implant,1
+Ruikar,fractured,excluded,scout_localizer,2
+Ruikar,fractured,ready,,13
+VSD,healthy,excluded,metal_artifact,2
+VSD,healthy,excluded,tkr_metal_artifact_lps_centroid,2
+VSD,healthy,ready,,58

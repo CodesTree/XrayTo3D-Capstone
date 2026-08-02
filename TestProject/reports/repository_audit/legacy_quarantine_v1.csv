@@ -1,0 +1,35 @@
+path,artifact_type,classification,reason,item_count,bytes_total,final_selectable
+TestProject/data/interim/DRRs,output_collection,legacy,unversioned preprocessing output,287.0,42893972.0,False
+TestProject/data/interim/gt_per_bone_256,output_collection,legacy,legacy TSDF or unversioned target path,579.0,136061875.0,False
+TestProject/data/interim/gt_per_bone_tsdf_64,output_collection,legacy,legacy TSDF or unversioned target path,9.0,37749888.0,False
+TestProject/data/interim/predrr,output_collection,legacy,unversioned preprocessing output,73.0,976838839.0,False
+TestProject/models/decoders/neutral_fold5/neutral_best.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/decoders/neutral_fold5/neutral_epoch000.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/decoders/neutral_fold5/neutral_epoch001.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/decoders/neutral_fold5/neutral_last.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/models/front_end_fold5.pth,checkpoint,legacy,forbidden fold-5 or neutral-smoke artifact,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold0/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold1/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold2/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold3/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/curves.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/gate_metrics.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/history.csv,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/recon_preview.png,report,legacy,legacy TSDF or unversioned target path,,,False
+TestProject/reports/frontend_gate/tsdf-frozen-noaux/fold4/summary.json,report,legacy,legacy TSDF or unversioned target path,,,False

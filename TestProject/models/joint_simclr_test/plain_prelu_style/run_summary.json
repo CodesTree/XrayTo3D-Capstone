@@ -1,0 +1,8 @@
+{
+  "arm": "plain_prelu_style",
+  "label": "PReLU + plain",
+  "best_validation_subject_macro_dice": 0.44796002097427845,
+  "epochs_completed": 49,
+  "encoder_gradient_confirmed": true,
+  "best_model": "/home/project/xray2mesh/Marcus_Chan_Zheng_Shao_CP2_24020059/models/joint_simclr_test/plain_prelu_style/best_model.pth"
+}

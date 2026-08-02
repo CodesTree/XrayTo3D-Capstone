@@ -1,0 +1,356 @@
+{
+  "analysis": "controlled_decoder_factorial_oof_comparison",
+  "arms": [
+    "plain_unet_style",
+    "residual_vnet_style",
+    "residual_relu_style",
+    "plain_prelu_style"
+  ],
+  "co_primary_contrasts": [
+    "residual_main",
+    "activation_main"
+  ],
+  "co_primary_metrics": [
+    "dice_macro",
+    "assd_mm_macro"
+  ],
+  "decision_rule": "both Holm-corrected co-primary p-values < 0.05 in the same direction on both endpoints, with a non-significant residual x activation interaction",
+  "fractured_subjects": 13,
+  "healthy_subjects": 30,
+  "limitations": [
+    "one training seed per fold (fold-0 variance band only)",
+    "fractured subgroup is descriptive",
+    "fixed-front-end conditional inference",
+    "fold 4 has pre-declared front-end collapse evidence and is tested by mandatory sensitivity analysis",
+    "the 2x2 estimates residual and activation main effects but power is limited",
+    "logits computed at 128^3 then upsampled",
+    "no clinical-utility claim"
+  ],
+  "pathology_interaction": [
+    {
+      "cohort_difference": -0.009965386438610821,
+      "contrast": "residual_main",
+      "fractured_median_favourable": 0.04173273549895157,
+      "healthy_median_favourable": 0.05169812193756239,
+      "metric": "dice_macro",
+      "note": "descriptive_only_n_fractured_13"
+    },
+    {
+      "cohort_difference": -0.013314524458632376,
+      "contrast": "decoder_family_V_minus_U",
+      "fractured_median_favourable": 0.03615457124809163,
+      "healthy_median_favourable": 0.049469095706724,
+      "metric": "dice_macro",
+      "note": "descriptive_only_n_fractured_13"
+    },
+    {
+      "cohort_difference": -0.19851527428546545,
+      "contrast": "residual_main",
+      "fractured_median_favourable": 3.1423772651443667,
+      "healthy_median_favourable": 3.340892539429832,
+      "metric": "assd_mm_macro",
+      "note": "descriptive_only_n_fractured_13"
+    },
+    {
+      "cohort_difference": -0.4509062922731708,
+      "contrast": "decoder_family_V_minus_U",
+      "fractured_median_favourable": 2.5524964033363666,
+      "healthy_median_favourable": 3.0034026956095374,
+      "metric": "assd_mm_macro",
+      "note": "descriptive_only_n_fractured_13"
+    }
+  ],
+  "primary": {
+    "contrasts": [
+      {
+        "ci95_high": 0.04732780468450895,
+        "ci95_low": 0.030685801889235545,
+        "co_primary": false,
+        "contrast": "decoder_family_V_minus_U",
+        "favourable_effect_mean": 0.03913527935507256,
+        "favourable_effect_median": 0.045577713665078345,
+        "mean_favourable_effect": 0.03912478497340294,
+        "metric": "dice_macro",
+        "p_holm": NaN,
+        "p_raw": 1.724401954561472e-09,
+        "raw_effect_mean": 0.03913527935507256,
+        "resamples": 10000,
+        "wilcoxon_statistic": 39.0
+      },
+      {
+        "ci95_high": 0.052766067307505396,
+        "ci95_low": 0.03496227217261391,
+        "co_primary": true,
+        "contrast": "residual_main",
+        "favourable_effect_mean": 0.043999409073914676,
+        "favourable_effect_median": 0.04894162781638767,
+        "mean_favourable_effect": 0.04397797365011637,
+        "metric": "dice_macro",
+        "p_holm": 2.1600499167107046e-09,
+        "p_raw": 5.400124791776761e-10,
+        "raw_effect_mean": 0.043999409073914676,
+        "resamples": 10000,
+        "wilcoxon_statistic": 31.0
+      },
+      {
+        "ci95_high": -0.0015481205869716933,
+        "ci95_low": -0.00771598019334638,
+        "co_primary": true,
+        "contrast": "activation_main",
+        "favourable_effect_mean": -0.004864129718842116,
+        "favourable_effect_median": -0.005631291152298934,
+        "mean_favourable_effect": -0.004853188676713423,
+        "metric": "dice_macro",
+        "p_holm": 0.0015176115402937285,
+        "p_raw": 0.0007588057701468642,
+        "raw_effect_mean": -0.004864129718842116,
+        "resamples": 10000,
+        "wilcoxon_statistic": 202.0
+      },
+      {
+        "ci95_high": -0.0027324608312541796,
+        "ci95_low": -0.014850952196459228,
+        "co_primary": false,
+        "contrast": "residual_activation_interaction",
+        "favourable_effect_mean": -0.009178046773490491,
+        "favourable_effect_median": -0.011762463377573695,
+        "mean_favourable_effect": -0.009204300735128223,
+        "metric": "dice_macro",
+        "p_holm": NaN,
+        "p_raw": 9.687860028861905e-05,
+        "raw_effect_mean": -0.009178046773490491,
+        "resamples": 10000,
+        "wilcoxon_statistic": 164.0
+      },
+      {
+        "ci95_high": 3.390098519752634,
+        "ci95_low": 0.16139710879835265,
+        "co_primary": false,
+        "contrast": "decoder_family_V_minus_U",
+        "favourable_effect_mean": 2.202981672262388,
+        "favourable_effect_median": 2.974588074440602,
+        "mean_favourable_effect": 2.194311776993249,
+        "metric": "assd_mm_macro",
+        "p_holm": NaN,
+        "p_raw": 2.954266165033914e-09,
+        "raw_effect_mean": -2.202981672262388,
+        "resamples": 10000,
+        "wilcoxon_statistic": 43.0
+      },
+      {
+        "ci95_high": 3.455071721183017,
+        "ci95_low": 0.19947119910158054,
+        "co_primary": true,
+        "contrast": "residual_main",
+        "favourable_effect_mean": 2.2614834854946513,
+        "favourable_effect_median": 3.194654283643361,
+        "mean_favourable_effect": 2.252300256691034,
+        "metric": "assd_mm_macro",
+        "p_holm": 8.862798495101742e-09,
+        "p_raw": 2.954266165033914e-09,
+        "raw_effect_mean": -2.2614834854946513,
+        "resamples": 10000,
+        "wilcoxon_statistic": 43.0
+      },
+      {
+        "ci95_high": 0.038538124293596016,
+        "ci95_low": -0.15091951021172662,
+        "co_primary": true,
+        "contrast": "activation_main",
+        "favourable_effect_mean": -0.05850181323226307,
+        "favourable_effect_median": -0.16427503264674037,
+        "mean_favourable_effect": -0.057988479697784735,
+        "metric": "assd_mm_macro",
+        "p_holm": 0.2618015658863442,
+        "p_raw": 0.2618015658863442,
+        "raw_effect_mean": 0.05850181323226307,
+        "resamples": 10000,
+        "wilcoxon_statistic": 379.0
+      },
+      {
+        "ci95_high": -0.1002048264904412,
+        "ci95_low": -0.569531757798056,
+        "co_primary": false,
+        "contrast": "residual_activation_interaction",
+        "favourable_effect_mean": -0.350865303812881,
+        "favourable_effect_median": -0.3045041811722946,
+        "mean_favourable_effect": -0.351341874211374,
+        "metric": "assd_mm_macro",
+        "p_holm": NaN,
+        "p_raw": 0.029184181094933592,
+        "raw_effect_mean": 0.350865303812881,
+        "resamples": 10000,
+        "wilcoxon_statistic": 293.0
+      }
+    ],
+    "decisions": {
+      "activation_main": "INCONCLUSIVE",
+      "interaction_significant": true,
+      "residual_main": "INCONCLUSIVE"
+    },
+    "knees": 71,
+    "subjects": 43
+  },
+  "regen": {
+    "status": "NOT_PROVIDED",
+    "used_for_winner": false
+  },
+  "robustness_interpretation": {
+    "factors": {
+      "activation_main": {
+        "primary": "INCONCLUSIVE",
+        "robustness": "CONSISTENTLY_INCONCLUSIVE",
+        "sensitivity": "INCONCLUSIVE"
+      },
+      "residual_main": {
+        "primary": "INCONCLUSIVE",
+        "robustness": "CONSISTENTLY_INCONCLUSIVE",
+        "sensitivity": "INCONCLUSIVE"
+      }
+    },
+    "overall": "ROBUST"
+  },
+  "schema_version": "foundation_stage2_v1",
+  "seed": 42,
+  "sensitivity_fold4_excluded": {
+    "cannot_select_winner": true,
+    "contrasts": [
+      {
+        "ci95_high": 0.04612150620223953,
+        "ci95_low": 0.02596906054352206,
+        "co_primary": false,
+        "contrast": "decoder_family_V_minus_U",
+        "favourable_effect_mean": 0.036246056290555016,
+        "favourable_effect_median": 0.04463044632107563,
+        "mean_favourable_effect": 0.036239547223508764,
+        "metric": "dice_macro",
+        "p_holm": NaN,
+        "p_raw": 5.791662260890007e-07,
+        "raw_effect_mean": 0.036246056290555016,
+        "resamples": 10000,
+        "wilcoxon_statistic": 36.0
+      },
+      {
+        "ci95_high": 0.05384390816581108,
+        "ci95_low": 0.03260349913687734,
+        "co_primary": true,
+        "contrast": "residual_main",
+        "favourable_effect_mean": 0.043412447448734126,
+        "favourable_effect_median": 0.04855650694581372,
+        "mean_favourable_effect": 0.043386977232002105,
+        "metric": "dice_macro",
+        "p_holm": 6.905756890773773e-07,
+        "p_raw": 1.7264392226934433e-07,
+        "raw_effect_mean": 0.043412447448734126,
+        "resamples": 10000,
+        "wilcoxon_statistic": 28.0
+      },
+      {
+        "ci95_high": -0.0031302581735324956,
+        "ci95_low": -0.010681956338196016,
+        "co_primary": true,
+        "contrast": "activation_main",
+        "favourable_effect_mean": -0.007166391158179098,
+        "favourable_effect_median": -0.008072546054477409,
+        "mean_favourable_effect": -0.007147430008493345,
+        "metric": "dice_macro",
+        "p_holm": 3.821682184934616e-05,
+        "p_raw": 1.910841092467308e-05,
+        "raw_effect_mean": -0.007166391158179098,
+        "resamples": 10000,
+        "wilcoxon_statistic": 65.0
+      },
+      {
+        "ci95_high": 0.0006409867216644031,
+        "ci95_low": -0.014519179876047944,
+        "co_primary": false,
+        "contrast": "residual_activation_interaction",
+        "favourable_effect_mean": -0.007426660591743565,
+        "favourable_effect_median": -0.007009231703363206,
+        "mean_favourable_effect": -0.00745879938751665,
+        "metric": "dice_macro",
+        "p_holm": NaN,
+        "p_raw": 0.0045909188920632005,
+        "raw_effect_mean": -0.007426660591743565,
+        "resamples": 10000,
+        "wilcoxon_statistic": 135.0
+      },
+      {
+        "ci95_high": 3.191348785291883,
+        "ci95_low": -0.848451542800603,
+        "co_primary": false,
+        "contrast": "decoder_family_V_minus_U",
+        "favourable_effect_mean": 1.7124814534636463,
+        "favourable_effect_median": 2.7441114413419676,
+        "mean_favourable_effect": 1.7022525094299314,
+        "metric": "assd_mm_macro",
+        "p_holm": NaN,
+        "p_raw": 4.336470738053322e-07,
+        "raw_effect_mean": -1.7124814534636463,
+        "resamples": 10000,
+        "wilcoxon_statistic": 34.0
+      },
+      {
+        "ci95_high": 3.4729972539399645,
+        "ci95_low": -0.6308745613056903,
+        "co_primary": true,
+        "contrast": "residual_main",
+        "favourable_effect_mean": 1.9730139472479142,
+        "favourable_effect_median": 3.1586504427359756,
+        "mean_favourable_effect": 1.9622156343631045,
+        "metric": "assd_mm_macro",
+        "p_holm": 1.3009412214159966e-06,
+        "p_raw": 4.336470738053322e-07,
+        "raw_effect_mean": -1.9730139472479142,
+        "resamples": 10000,
+        "wilcoxon_statistic": 34.0
+      },
+      {
+        "ci95_high": -0.14952380569452256,
+        "ci95_low": -0.3629234162609161,
+        "co_primary": true,
+        "contrast": "activation_main",
+        "favourable_effect_mean": -0.2605324937842682,
+        "favourable_effect_median": -0.2792070127337536,
+        "mean_favourable_effect": -0.2599631249331732,
+        "metric": "assd_mm_macro",
+        "p_holm": 8.89236107468605e-05,
+        "p_raw": 8.89236107468605e-05,
+        "raw_effect_mean": 0.2605324937842682,
+        "resamples": 10000,
+        "wilcoxon_statistic": 81.0
+      },
+      {
+        "ci95_high": 0.33619305217155865,
+        "ci95_low": -0.22614234647472306,
+        "co_primary": false,
+        "contrast": "residual_activation_interaction",
+        "favourable_effect_mean": 0.03409525595224928,
+        "favourable_effect_median": -0.08590446499301585,
+        "mean_favourable_effect": 0.03307631968171841,
+        "metric": "assd_mm_macro",
+        "p_holm": NaN,
+        "p_raw": 0.6853143798653036,
+        "raw_effect_mean": -0.03409525595224928,
+        "resamples": 10000,
+        "wilcoxon_statistic": 273.0
+      }
+    ],
+    "decisions": {
+      "activation_main": "INCONCLUSIVE",
+      "interaction_significant": true,
+      "residual_main": "INCONCLUSIVE"
+    },
+    "knees": 57,
+    "selection_rule": "test_fold != 4",
+    "subjects": 34
+  },
+  "success": true,
+  "variance_band": {
+    "arms": 4,
+    "seeds": [
+      42
+    ],
+    "status": "AVAILABLE"
+  }
+}

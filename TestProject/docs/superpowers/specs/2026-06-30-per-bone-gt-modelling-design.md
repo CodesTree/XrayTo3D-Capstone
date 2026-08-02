@@ -94,7 +94,7 @@ New notebook `notebooks/modeling/gt_per_bone.ipynb`.
 
 ## Out of scope (this spec)
 
-- Full k-fold training, both front-end regimes, Wilcoxon comparison (later stage).
+- Full k-fold training, both front-end regimes, effect-size decoder comparison (later stage).
 - Building additional VSD ground-truth segmentations.
 - Modifying Lai's reference notebooks `01–10` (read-only).
 

@@ -1,0 +1,3 @@
+subject_id,surviving_file,surviving_inferred_side,excluded_tkr_inferred_side,fibula_minus_tibia_lps_x_mm,intrinsic_anatomy_pass,user_approved
+VSD_z050,data/raw/healthy/VSD.z050/VSD_z050_Right.nii.gz,Right,Left,-18.566581339171577,True,True
+VSD_z063,data/raw/healthy/VSD.z063/VSD_z063_Right.nii.gz,Right,Left,-17.676844578472142,True,True
